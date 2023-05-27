@@ -9,7 +9,7 @@ import type { Props as SearchbarProps } from "deco-sites/fashion/components/sear
 import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
 import { AvailableIcons } from "deco-sites/fashion/components/ui/Icon.tsx";
 
-function Navbar({ logo, navButtons, items, searchbar }: {
+function Navbar({ logo, navButtons, items, searchbar, alignment }: {
   logo: {
     srcMobile: LiveImage;
     srcDesktop: LiveImage;
@@ -21,9 +21,16 @@ function Navbar({ logo, navButtons, items, searchbar }: {
     login: AvailableIcons;
     mobileMenu: AvailableIcons;
   };
+  alignment: "left" | "center" | "right";
   items: INavItem[];
   searchbar: SearchbarProps;
 }) {
+  const getAlignment = (): string => {
+    if (alignment === 'center') return '0 auto';
+    if (alignment === 'right') return '0 0 0 auto';
+    return '0';
+  };
+
   return (
     <>
       {/* Mobile Version */}
@@ -53,7 +60,7 @@ function Navbar({ logo, navButtons, items, searchbar }: {
 
       {/* Desktop Version */}
       <div class="hidden relative lg:flex flex-row justify-between items-center border-b border-base-200 w-full px-[46px]">
-        <div class="flex items-center">
+        <div class="flex w-full items-center">
           <a href="/" aria-label="Store logo" class="block">
             <Image
               class="w-full sm:max-w-[70%] lg:max-w-[340px] mr-[30px]"
@@ -63,7 +70,12 @@ function Navbar({ logo, navButtons, items, searchbar }: {
               loading="eager"
             />
           </a>
-          <div class="flex-auto flex justify-center">
+          <div
+            class="flex justify-center"
+            style={{
+              margin: getAlignment(),
+            }}
+          >
             {items.map((item) => <NavItem item={item} />)}
           </div>
         </div>

@@ -8795,6 +8795,26 @@
           ],
           "title": "Nav Buttons"
         },
+        "navAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Navigation items alignment",
+          "description": "Where to display the navigation items on desktop",
+          "default": "left"
+        },
         "navItems": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]",
           "title": "Navigation items",
@@ -8812,7 +8832,8 @@
       },
       "required": [
         "logo",
-        "alerts"
+        "alerts",
+        "navAlignment"
       ],
       "title": "deco-sites/carolbassi/components/header/Header.tsx@Props"
     },

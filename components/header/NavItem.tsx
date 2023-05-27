@@ -21,9 +21,7 @@ function NavItem({ item }: { item: INavItem }) {
 
       {children && children.length > 0 &&
         (
-          <div
-            class="hidden absolute top-full left-0 hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen"
-          >
+          <div class="hidden absolute top-full left-0 hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen">
             {image?.src && (
               <Image
                 class="p-6"

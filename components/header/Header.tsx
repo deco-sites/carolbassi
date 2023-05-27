@@ -43,6 +43,12 @@ export interface Props {
     mobileMenu: AvailableIcons;
   };
   /**
+   * @title Navigation items alignment
+   * @description Where to display the navigation items on desktop
+   * @default left
+   */
+  navAlignment: "left" | "center" | "right";
+  /**
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
    */
@@ -67,6 +73,7 @@ function Header(
     alerts,
     searchbar: _searchbar,
     products,
+    navAlignment,
     navItems = [],
     suggestions,
   }: Props,
@@ -80,6 +87,7 @@ function Header(
       >
         <Alert alerts={alerts} />
         <Navbar
+          alignment={navAlignment}
           navButtons={navButtons}
           logo={logo}
           items={navItems}
