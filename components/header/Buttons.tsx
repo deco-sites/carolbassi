@@ -4,6 +4,7 @@ import { sendEvent } from "deco-sites/fashion/sdk/analytics.tsx";
 import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 import { useCart } from "deco-sites/std/packs/vtex/hooks/useCart.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
+import { AvailableIcons } from "deco-sites/fashion/components/ui/Icon.tsx";
 
 declare global {
   interface Window {
@@ -13,39 +14,44 @@ declare global {
   }
 }
 
-function SearchButton() {
+function SearchButton({ icon }: { icon?: AvailableIcons }) {
   const { displaySearchbar } = useUI();
 
   return (
     <Button
-      class="btn-square btn-ghost"
+      class="btn-square btn-ghost w-auto"
       aria-label="search icon button"
       onClick={() => {
         displaySearchbar.value = !displaySearchbar.peek();
       }}
     >
-      <Icon id="MagnifyingGlass" width={20} height={20} strokeWidth={0.1} />
+      <Icon
+        id={icon ?? "MagnifyingGlass"}
+        width={20}
+        height={19}
+        strokeWidth={0.1}
+      />
     </Button>
   );
 }
 
-function MenuButton() {
+function MenuButton({ icon }: { icon?: AvailableIcons }) {
   const { displayMenu } = useUI();
 
   return (
     <Button
-      class="btn-square btn-ghost"
+      class="btn-square btn-ghost w-auto"
       aria-label="open menu"
       onClick={() => {
         displayMenu.value = true;
       }}
     >
-      <Icon id="Bars3" width={20} height={20} strokeWidth={0.01} />
+      <Icon id={icon ?? "Bars3"} width={23} height={28} strokeWidth={0.01} />
     </Button>
   );
 }
 
-function CartButton() {
+function CartButton({ icon }: { icon?: AvailableIcons }) {
   const { displayCart } = useUI();
   const { loading, cart, mapItemsToAnalyticsItems } = useCart();
   const totalItems = cart.value?.items.length || null;
@@ -72,7 +78,7 @@ function CartButton() {
 
   return (
     <Button
-      class="btn-square btn-ghost relative"
+      class="btn-square btn-ghost relative w-auto"
       aria-label="open cart"
       data-deco={displayCart.value && "open-cart"}
       loading={loading.value}
@@ -84,23 +90,33 @@ function CartButton() {
             {totalItems > 9 ? "9+" : totalItems}
           </span>
         )}
-        <Icon id="ShoppingCart" width={20} height={20} strokeWidth={2} />
+        <Icon
+          id={icon ?? "ShoppingCart"}
+          width={20}
+          height={22}
+          strokeWidth={2}
+        />
       </div>
     </Button>
   );
 }
 
-function Buttons({ variant }: { variant: "cart" | "search" | "menu" }) {
+function Buttons(
+  { variant, icon }: {
+    variant: "cart" | "search" | "menu";
+    icon?: AvailableIcons;
+  },
+) {
   if (variant === "cart") {
-    return <CartButton />;
+    return <CartButton icon={icon} />;
   }
 
   if (variant === "search") {
-    return <SearchButton />;
+    return <SearchButton icon={icon} />;
   }
 
   if (variant === "menu") {
-    return <MenuButton />;
+    return <MenuButton icon={icon} />;
   }
 
   return null;
