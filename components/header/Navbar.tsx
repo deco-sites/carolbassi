@@ -26,9 +26,9 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
   searchbar: SearchbarProps;
 }) {
   const getAlignment = (): string => {
-    if (alignment === 'center') return '0 auto';
-    if (alignment === 'right') return '0 0 0 auto';
-    return '0';
+    if (alignment === "center") return "0 auto";
+    if (alignment === "right") return "0 0 0 auto";
+    return "0";
   };
 
   return (
@@ -59,7 +59,7 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden relative lg:flex flex-row justify-between items-center border-b border-base-200 w-full px-[46px]">
+      <div class="hidden relative lg:flex flex-row justify-between items-center w-full px-[46px]">
         <div class="flex w-full items-center">
           <a href="/" aria-label="Store logo" class="block">
             <Image

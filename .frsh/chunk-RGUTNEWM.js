@@ -1,0 +1,1 @@
+import{b as t}from"./chunk-G2WUBQOQ.js";import{g as r}from"./chunk-QSF6UWS7.js";function p({id:o,strokeWidth:s=16,size:e,width:i,height:n,...a}){return r("svg",{...a,width:i??e,height:n??e,strokeWidth:s,children:r("use",{href:t(`/sprites.svg#${o}`)})})}var c=p;export{c as a};
