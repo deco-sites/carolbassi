@@ -30,6 +30,9 @@ export default {
       center: true,
     },
     extend: {
+      gridTemplateRows: {
+        "8": "repeat(8, minmax(0, 1fr))",
+      },
       animation: {
         "slide-left": "slide-left-frame 0.4s ease normal",
         "slide-right": "slide-right-frame 0.4s ease normal",

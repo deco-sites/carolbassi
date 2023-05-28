@@ -17,15 +17,13 @@ export interface NavItem {
   children?: Array<{
     label: string;
     href: string;
-    children?: Array<{
-      label: string;
-      href: string;
-    }>;
   }>;
-  image?: {
+  images?: {
     src?: Image;
     alt?: string;
-  };
+    title?: string;
+    href?: string;
+  }[];
 }
 
 export interface Props {
@@ -174,7 +172,7 @@ function Header(
         }}
       />
       <header
-        class="fixed w-full z-50"
+        class="fixed w-full z-50 hover:bg-white"
         onMouseEnter={() => isHeaderHovered.value = true}
         onMouseLeave={() => isHeaderHovered.value = false}
       >

@@ -6701,27 +6701,6 @@
               "href": {
                 "type": "string",
                 "title": "Href"
-              },
-              "children": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "title": "Label"
-                    },
-                    "href": {
-                      "type": "string",
-                      "title": "Href"
-                    }
-                  },
-                  "required": [
-                    "label",
-                    "href"
-                  ]
-                },
-                "title": "Children"
               }
             },
             "required": [
@@ -6731,23 +6710,40 @@
           },
           "title": "Children"
         },
-        "image": {
-          "type": "object",
-          "properties": {
-            "src": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Src"
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+                "title": "Src"
+              },
+              "alt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Alt"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Title"
+              },
+              "href": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Href"
+              }
             },
-            "alt": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Alt"
-            }
+            "required": []
           },
-          "required": [],
-          "title": "Image"
+          "title": "Images"
         }
       },
       "required": [
