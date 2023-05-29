@@ -1,12 +1,18 @@
 import { useSignal } from "@preact/signals";
 import { Runtime } from "deco-sites/fashion/runtime.ts";
 import type { JSX } from "preact";
+import Quilltext from "deco-sites/std/components/QuillText.tsx";
+import type { HTML } from "deco-sites/std/components/types.ts";
+
+export interface Props {
+  title: HTML;
+}
 
 const subscribe = Runtime.create(
   "deco-sites/std/actions/vtex/newsletter/subscribe.ts",
 );
 
-function Newsletter() {
+function Newsletter({ title }: Props) {
   const loading = useSignal(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
@@ -26,26 +32,28 @@ function Newsletter() {
 
   return (
     <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-20">
-      <div class="flex flex-col gap-2 max-w-[400px]">
-        <span class="font-medium text-2xl text-primary-content">
-          Cadastre-se
+      <div class="flex px-2 flex-col gap-2 max-w-[400px]">
+        <span class="text-primary mt-[37px]">
+          <Quilltext html={title} />
         </span>
-        <span class="text-sm text-primary-content">
-          Fique por dentro das novidades e ganhe 15% de desconto na primeira
-          compra. Para mais informações clique aqui.
+        <span class="font-normal px-2 text-2xl text-primary text-[18px] mt-[36px]">
+          Newsletter
         </span>
       </div>
       <form
-        class="font-body text-body w-full sm:w-[408px] form-control"
+        class="px-4 font-body text-body w-full sm:w-[408px] form-control"
         onSubmit={handleSubmit}
       >
-        <div class="input-group">
+        <div class="flex flex-col w-full">
           <input
             name="email"
-            class="flex-grow input input-primary"
-            placeholder="Seu e-mail"
+            class="flex-grow border-[1px] border-solid border-black text-[15px] font-light rounded-[3px] bg-transparent pl-1.5 h-[53px]"
+            placeholder="Deixe seu e-mail aqui"
           />
-          <button class="btn disabled:loading" disabled={loading}>
+          <button
+            class="btn disabled:loading bg-transparent text-black mt-2.5 rounded-none font-normal capitalize border-[1px] border-solid border-black"
+            disabled={loading}
+          >
             Cadastrar
           </button>
         </div>
