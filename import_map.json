@@ -1,8 +1,9 @@
 {
   "imports": {
+    "deco-sites/carolbassi/": "./",
     "deco-sites/fashion/": "./",
-    "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.8.2/",
-    "$live/": "https://denopkg.com/deco-cx/live@1.5.0/",
+    "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.9.9/",
+    "$live/": "https://denopkg.com/deco-cx/live@1.7.2/",
     "$fresh/": "https://denopkg.com/deco-cx/fresh@1.1.7/",
     "preact": "https://esm.sh/preact@10.13.2",
     "preact/": "https://esm.sh/preact@10.13.2/",

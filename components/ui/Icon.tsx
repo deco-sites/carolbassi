@@ -30,6 +30,7 @@ export type AvailableIcons =
   | "Return"
   | "CreditCard"
   | "Deco"
+  | "Mais"
   | "Discord"
   | "Trash"
   | "FilterList"
