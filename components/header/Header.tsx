@@ -187,7 +187,6 @@ function Header(
 
         <Modals
           menu={{ items: navItems }}
-          searchbar={searchbar}
         />
       </header>
     </>

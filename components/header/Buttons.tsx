@@ -19,7 +19,7 @@ function SearchButton({ icon }: { icon?: AvailableIcons }) {
 
   return (
     <Button
-      class="btn-square btn-ghost w-auto"
+      class="btn-square bg-transparent hover:bg-transparent border-none w-auto"
       aria-label="search icon button"
       onClick={() => {
         displaySearchbar.value = !displaySearchbar.peek();
@@ -40,7 +40,7 @@ function MenuButton({ icon }: { icon?: AvailableIcons }) {
 
   return (
     <Button
-      class="btn-square btn-ghost w-auto"
+      class="btn-square bg-transparent hover:bg-transparent border-none w-auto"
       aria-label="open menu"
       onClick={() => {
         displayMenu.value = true;
@@ -78,7 +78,7 @@ function CartButton({ icon }: { icon?: AvailableIcons }) {
 
   return (
     <Button
-      class="btn-square btn-ghost relative w-auto"
+      class="btn-square bg-transparent hover:bg-transparent border-none relative w-auto"
       aria-label="open cart"
       data-deco={displayCart.value && "open-cart"}
       loading={loading.value}

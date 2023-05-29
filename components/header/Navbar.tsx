@@ -52,6 +52,7 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
         </a>
 
         <div class="flex gap-4 w-full justify-center">
+          <Searchbar searchbar={searchbar} />
           <Buttons variant="search" icon={navButtons?.searchbar} />
           <Buttons variant="cart" icon={navButtons?.shoppingCart} />
           <Buttons variant="menu" icon={navButtons?.mobileMenu} />
@@ -79,11 +80,11 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
             {items.map((item) => <NavItem item={item} />)}
           </div>
         </div>
-        <div class="flex-none w-44 flex items-center justify-end gap-2">
-          <Buttons variant="search" icon={navButtons?.searchbar} />
+        <div class="flex-none w-44 flex items-center justify-end gap-2 relative">
           <Searchbar searchbar={searchbar} />
+          <Buttons variant="search" icon={navButtons?.searchbar} />
           <a
-            class="btn btn-square btn-ghost"
+            class="btn btn-square bg-transparent hover:bg-transparent border-none"
             href="/login"
             aria-label="Log in"
           >
