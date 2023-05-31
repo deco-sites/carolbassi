@@ -20,6 +20,7 @@ import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 import { sendEvent } from "deco-sites/fashion/sdk/analytics.tsx";
 import { headerHeight } from "deco-sites/fashion/components/header/constants.ts";
+import type { Product } from "deco-sites/std/commerce/types.ts";
 
 declare global {
   interface Window {
@@ -184,7 +185,10 @@ function Searchbar({
                   {loading.value && <Spinner />}
                 </div>
                 <Slider class="carousel">
-                  {suggestions.value!.products?.map((product, index) => (
+                  {suggestions.value!.products?.map((
+                    product: Product,
+                    index,
+                  ) => (
                     <Slider.Item
                       index={index}
                       class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"

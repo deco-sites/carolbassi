@@ -22,7 +22,7 @@ function Modals({ menu }: Props) {
   return (
     <>
       <Modal
-        title="Menu"
+        class="max-w-md"
         mode="sidebar-left"
         loading="lazy"
         open={displayMenu.value}

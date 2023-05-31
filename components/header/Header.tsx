@@ -14,6 +14,7 @@ import { headerHeight } from "./constants.ts";
 export interface NavItem {
   label: string;
   href: string;
+  highlight?: boolean;
   children?: Array<{
     label: string;
     href: string;
@@ -186,7 +187,11 @@ function Header(
         />
 
         <Modals
-          menu={{ items: navItems }}
+          menu={{
+            items: navItems,
+            loginIcon: navButtons?.login,
+            cartIcon: navButtons?.shoppingCart,
+          }}
         />
       </header>
     </>

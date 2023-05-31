@@ -3,6 +3,7 @@ import Image from "deco-sites/std/components/Image.tsx";
 export interface INavItem {
   label: string;
   href: string;
+  highlight?: boolean;
   children?: Array<{
     label: string;
     href: string;
@@ -16,12 +17,16 @@ export interface INavItem {
 }
 
 function NavItem({ item }: { item: INavItem }) {
-  const { href, label, children, images } = item;
+  const { href, label, children, images, highlight } = item;
 
   return (
     <li class="group flex items-center py-[34px]">
       <a href={href} class="px-4 py-3">
-        <span class="group-hover:underline group-hover:font-semibold text-lg">
+        <span
+          class={`group-hover:underline group-hover:font-semibold text-lg ${
+            highlight && "text-accent-content"
+          }`}
+        >
           {label}
         </span>
       </a>
