@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { getSetCookies, setCookie } from "std/http/mod.ts";
 
-const proxyTo = `https://bravtexfashionstore.vtexcommercestable.com.br/api`;
+const proxyTo = `https://carolbassi.vtexcommercestable.com.br/api`;
 
 const HOP_BY_HOP = [
   "Keep-Alive",

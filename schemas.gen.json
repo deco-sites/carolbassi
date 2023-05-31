@@ -1,7 +1,6 @@
 {
   "definitions": {
     "Resolvable": {
-      "$id": "Resolvable",
       "title": "Select from saved",
       "required": [
         "__resolveType"
@@ -44,6 +43,7 @@
               "deco-sites/std/accounts/vnda.ts",
               "deco-sites/std/accounts/vtex.ts",
               "deco-sites/std/accounts/yourViews.ts",
+              "$live/loaders/state.ts",
               "$live/loaders/workflows/events.ts",
               "$live/loaders/workflows/get.ts",
               "deco-sites/std/loaders/vtex/cart.ts",
@@ -59,6 +59,7 @@
               "deco-sites/std/loaders/vtex/user.ts",
               "deco-sites/std/loaders/vtex/wishlist.ts",
               "./islands/AddToCartButton.tsx",
+              "./islands/Header.tsx",
               "./islands/HeaderButton.tsx",
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchbar.tsx",
@@ -3387,6 +3388,91 @@
       ],
       "title": "deco-sites/std/commerce/yourViews/client.ts@ConfigYourViews"
     },
+    "ZGVjby1jeC9saXZlL3JvdXRlcy9fbWlkZGxld2FyZS50cw==@MiddlewareConfig": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Resolvable"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "state": {
+              "title": "State",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Resolvable"
+              },
+              "description": "Configure your loaders global state."
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "title": "deco-cx/live/routes/_middleware.ts@MiddlewareConfig",
+          "description": "Global configurations for ./routes/_middleware.ts route"
+        },
+        {
+          "title": "Shared application State Loader.",
+          "description": "Set the application state using resolvables.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@Props"
+            }
+          ],
+          "required": [
+            "__resolveType"
+          ],
+          "properties": {
+            "__resolveType": {
+              "type": "string",
+              "enum": [
+                "$live/loaders/state.ts"
+              ],
+              "default": "$live/loaders/state.ts"
+            }
+          }
+        }
+      ]
+    },
+    "ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@StateProp": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key"
+        },
+        "value": {
+          "$ref": "#/definitions/Resolvable",
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "StateProp"
+    },
+    "ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@StateProp[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@StateProp"
+      },
+      "title": "StateProp[]"
+    },
+    "ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@Props": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@StateProp[]",
+          "title": "State"
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "title": "deco-cx/live/loaders/state.ts@Props"
+    },
     "ZGVjby1jeC9kdXJhYmxlL2JhY2tlbmRzL2JhY2tlbmQudHM=@WorkflowExecution": {
       "anyOf": [
         {
@@ -6121,7 +6207,7 @@
         },
         "count": {
           "type": "number",
-          "description": "total number of items to display",
+          "description": "total number of items to display. Required for collection",
           "title": "Count"
         }
       },
@@ -6182,7 +6268,7 @@
         },
         "count": {
           "type": "number",
-          "description": "total number of items to display",
+          "description": "total number of items to display. Required for query",
           "title": "Count"
         }
       },
@@ -6483,6 +6569,14 @@
           ],
           "description": "ProductGroup ID",
           "title": "Id"
+        },
+        "hideUnavailableItems": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "remove unavailable items from result",
+          "title": "Hide Unavailable Items"
         }
       },
       "required": [
@@ -6631,6 +6725,846 @@
       ],
       "title": "deco-sites/std/packs/vtex/loaders/wishlist.ts@Props"
     },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image": {
+      "type": "string",
+      "format": "image-uri",
+      "title": "Image"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaGJhci50c3g=@EditableProps": {
+      "type": "object",
+      "properties": {
+        "placeholder": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Placeholder",
+          "description": "Search bar default placeholder message",
+          "default": "What are you looking for?"
+        },
+        "action": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Page path",
+          "description": "When user clicks on the search button, navigate it to",
+          "default": "/s"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Term name",
+          "description": "Querystring param used when navigating the user",
+          "default": "q"
+        },
+        "query": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Query"
+        }
+      },
+      "required": [],
+      "title": "EditableProps"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "title": "Label"
+        },
+        "href": {
+          "type": "string",
+          "title": "Href"
+        },
+        "highlight": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Highlight"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "title": "Label"
+              },
+              "href": {
+                "type": "string",
+                "title": "Href"
+              }
+            },
+            "required": [
+              "label",
+              "href"
+            ]
+          },
+          "title": "Children"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+                "title": "Src"
+              },
+              "alt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Alt"
+              },
+              "title": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Title"
+              },
+              "href": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "title": "Href"
+              }
+            },
+            "required": []
+          },
+          "title": "Images"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ],
+      "title": "NavItem"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem"
+      },
+      "title": "NavItem[]"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@Props": {
+      "type": "object",
+      "properties": {
+        "logo": {
+          "type": "object",
+          "properties": {
+            "srcMobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Src Mobile"
+            },
+            "srcDesktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Src Desktop"
+            },
+            "alt": {
+              "type": "string",
+              "title": "Alt"
+            }
+          },
+          "required": [
+            "srcMobile",
+            "srcDesktop",
+            "alt"
+          ],
+          "title": "Logo"
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Alerts"
+        },
+        "searchbar": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaGJhci50c3g=@EditableProps",
+          "title": "Search Bar"
+        },
+        "navButtons": {
+          "type": "object",
+          "properties": {
+            "searchbar": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "ChevronLeft"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronRight"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronUp"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronDown"
+                },
+                {
+                  "type": "string",
+                  "const": "QuestionMarkCircle"
+                },
+                {
+                  "type": "string",
+                  "const": "User"
+                },
+                {
+                  "type": "string",
+                  "const": "ShoppingCart"
+                },
+                {
+                  "type": "string",
+                  "const": "Bars3"
+                },
+                {
+                  "type": "string",
+                  "const": "Heart"
+                },
+                {
+                  "type": "string",
+                  "const": "MagnifyingGlass"
+                },
+                {
+                  "type": "string",
+                  "const": "XMark"
+                },
+                {
+                  "type": "string",
+                  "const": "Plus"
+                },
+                {
+                  "type": "string",
+                  "const": "Minus"
+                },
+                {
+                  "type": "string",
+                  "const": "MapPin"
+                },
+                {
+                  "type": "string",
+                  "const": "Phone"
+                },
+                {
+                  "type": "string",
+                  "const": "Elo"
+                },
+                {
+                  "type": "string",
+                  "const": "Mastercard"
+                },
+                {
+                  "type": "string",
+                  "const": "Visa"
+                },
+                {
+                  "type": "string",
+                  "const": "Pix"
+                },
+                {
+                  "type": "string",
+                  "const": "Logo"
+                },
+                {
+                  "type": "string",
+                  "const": "Facebook"
+                },
+                {
+                  "type": "string",
+                  "const": "Instagram"
+                },
+                {
+                  "type": "string",
+                  "const": "Tiktok"
+                },
+                {
+                  "type": "string",
+                  "const": "Truck"
+                },
+                {
+                  "type": "string",
+                  "const": "Discount"
+                },
+                {
+                  "type": "string",
+                  "const": "Return"
+                },
+                {
+                  "type": "string",
+                  "const": "CreditCard"
+                },
+                {
+                  "type": "string",
+                  "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
+                  "const": "Discord"
+                },
+                {
+                  "type": "string",
+                  "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "FilterList"
+                },
+                {
+                  "type": "string",
+                  "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "ArrowsPointingOut"
+                }
+              ],
+              "type": "string",
+              "title": "Searchbar"
+            },
+            "shoppingCart": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "ChevronLeft"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronRight"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronUp"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronDown"
+                },
+                {
+                  "type": "string",
+                  "const": "QuestionMarkCircle"
+                },
+                {
+                  "type": "string",
+                  "const": "User"
+                },
+                {
+                  "type": "string",
+                  "const": "ShoppingCart"
+                },
+                {
+                  "type": "string",
+                  "const": "Bars3"
+                },
+                {
+                  "type": "string",
+                  "const": "Heart"
+                },
+                {
+                  "type": "string",
+                  "const": "MagnifyingGlass"
+                },
+                {
+                  "type": "string",
+                  "const": "XMark"
+                },
+                {
+                  "type": "string",
+                  "const": "Plus"
+                },
+                {
+                  "type": "string",
+                  "const": "Minus"
+                },
+                {
+                  "type": "string",
+                  "const": "MapPin"
+                },
+                {
+                  "type": "string",
+                  "const": "Phone"
+                },
+                {
+                  "type": "string",
+                  "const": "Elo"
+                },
+                {
+                  "type": "string",
+                  "const": "Mastercard"
+                },
+                {
+                  "type": "string",
+                  "const": "Visa"
+                },
+                {
+                  "type": "string",
+                  "const": "Pix"
+                },
+                {
+                  "type": "string",
+                  "const": "Logo"
+                },
+                {
+                  "type": "string",
+                  "const": "Facebook"
+                },
+                {
+                  "type": "string",
+                  "const": "Instagram"
+                },
+                {
+                  "type": "string",
+                  "const": "Tiktok"
+                },
+                {
+                  "type": "string",
+                  "const": "Truck"
+                },
+                {
+                  "type": "string",
+                  "const": "Discount"
+                },
+                {
+                  "type": "string",
+                  "const": "Return"
+                },
+                {
+                  "type": "string",
+                  "const": "CreditCard"
+                },
+                {
+                  "type": "string",
+                  "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
+                  "const": "Discord"
+                },
+                {
+                  "type": "string",
+                  "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "FilterList"
+                },
+                {
+                  "type": "string",
+                  "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "ArrowsPointingOut"
+                }
+              ],
+              "type": "string",
+              "title": "Shopping Cart"
+            },
+            "login": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "ChevronLeft"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronRight"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronUp"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronDown"
+                },
+                {
+                  "type": "string",
+                  "const": "QuestionMarkCircle"
+                },
+                {
+                  "type": "string",
+                  "const": "User"
+                },
+                {
+                  "type": "string",
+                  "const": "ShoppingCart"
+                },
+                {
+                  "type": "string",
+                  "const": "Bars3"
+                },
+                {
+                  "type": "string",
+                  "const": "Heart"
+                },
+                {
+                  "type": "string",
+                  "const": "MagnifyingGlass"
+                },
+                {
+                  "type": "string",
+                  "const": "XMark"
+                },
+                {
+                  "type": "string",
+                  "const": "Plus"
+                },
+                {
+                  "type": "string",
+                  "const": "Minus"
+                },
+                {
+                  "type": "string",
+                  "const": "MapPin"
+                },
+                {
+                  "type": "string",
+                  "const": "Phone"
+                },
+                {
+                  "type": "string",
+                  "const": "Elo"
+                },
+                {
+                  "type": "string",
+                  "const": "Mastercard"
+                },
+                {
+                  "type": "string",
+                  "const": "Visa"
+                },
+                {
+                  "type": "string",
+                  "const": "Pix"
+                },
+                {
+                  "type": "string",
+                  "const": "Logo"
+                },
+                {
+                  "type": "string",
+                  "const": "Facebook"
+                },
+                {
+                  "type": "string",
+                  "const": "Instagram"
+                },
+                {
+                  "type": "string",
+                  "const": "Tiktok"
+                },
+                {
+                  "type": "string",
+                  "const": "Truck"
+                },
+                {
+                  "type": "string",
+                  "const": "Discount"
+                },
+                {
+                  "type": "string",
+                  "const": "Return"
+                },
+                {
+                  "type": "string",
+                  "const": "CreditCard"
+                },
+                {
+                  "type": "string",
+                  "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
+                  "const": "Discord"
+                },
+                {
+                  "type": "string",
+                  "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "FilterList"
+                },
+                {
+                  "type": "string",
+                  "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "ArrowsPointingOut"
+                }
+              ],
+              "type": "string",
+              "title": "Login"
+            },
+            "mobileMenu": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "ChevronLeft"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronRight"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronUp"
+                },
+                {
+                  "type": "string",
+                  "const": "ChevronDown"
+                },
+                {
+                  "type": "string",
+                  "const": "QuestionMarkCircle"
+                },
+                {
+                  "type": "string",
+                  "const": "User"
+                },
+                {
+                  "type": "string",
+                  "const": "ShoppingCart"
+                },
+                {
+                  "type": "string",
+                  "const": "Bars3"
+                },
+                {
+                  "type": "string",
+                  "const": "Heart"
+                },
+                {
+                  "type": "string",
+                  "const": "MagnifyingGlass"
+                },
+                {
+                  "type": "string",
+                  "const": "XMark"
+                },
+                {
+                  "type": "string",
+                  "const": "Plus"
+                },
+                {
+                  "type": "string",
+                  "const": "Minus"
+                },
+                {
+                  "type": "string",
+                  "const": "MapPin"
+                },
+                {
+                  "type": "string",
+                  "const": "Phone"
+                },
+                {
+                  "type": "string",
+                  "const": "Elo"
+                },
+                {
+                  "type": "string",
+                  "const": "Mastercard"
+                },
+                {
+                  "type": "string",
+                  "const": "Visa"
+                },
+                {
+                  "type": "string",
+                  "const": "Pix"
+                },
+                {
+                  "type": "string",
+                  "const": "Logo"
+                },
+                {
+                  "type": "string",
+                  "const": "Facebook"
+                },
+                {
+                  "type": "string",
+                  "const": "Instagram"
+                },
+                {
+                  "type": "string",
+                  "const": "Tiktok"
+                },
+                {
+                  "type": "string",
+                  "const": "Truck"
+                },
+                {
+                  "type": "string",
+                  "const": "Discount"
+                },
+                {
+                  "type": "string",
+                  "const": "Return"
+                },
+                {
+                  "type": "string",
+                  "const": "CreditCard"
+                },
+                {
+                  "type": "string",
+                  "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
+                  "const": "Discord"
+                },
+                {
+                  "type": "string",
+                  "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "FilterList"
+                },
+                {
+                  "type": "string",
+                  "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "ArrowsPointingOut"
+                }
+              ],
+              "type": "string",
+              "title": "Mobile Menu"
+            }
+          },
+          "required": [
+            "searchbar",
+            "shoppingCart",
+            "login",
+            "mobileMenu"
+          ],
+          "title": "Header side buttons"
+        },
+        "navAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Navigation items alignment",
+          "description": "Where to display the navigation items on desktop",
+          "default": "left"
+        },
+        "navItems": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]",
+          "title": "Navigation items",
+          "description": "Navigation items used both on mobile and desktop menus"
+        },
+        "transparent": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Transparent",
+          "description": "Use transparency on desktop header",
+          "default": "false"
+        },
+        "transparencyLevel": {
+          "type": "object",
+          "properties": {
+            "mobile": {
+              "type": "number",
+              "title": "Mobile"
+            },
+            "desktop": {
+              "type": "number",
+              "title": "Desktop"
+            }
+          },
+          "required": [
+            "mobile",
+            "desktop"
+          ],
+          "title": "Transparency Level",
+          "description": "If transparent is active, set transparency level from 0 to 100%"
+        },
+        "onScrollTransparencyLevel": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "number",
+              "title": "Desktop"
+            },
+            "mobile": {
+              "type": "number",
+              "title": "Mobile"
+            }
+          },
+          "required": [
+            "desktop",
+            "mobile"
+          ],
+          "title": "On Scroll Transparency Level",
+          "description": "Set transparency level from 0 to 100% when user scroll the page down"
+        },
+        "products": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
+          "title": "Product suggestions",
+          "description": "Product suggestions displayed on search"
+        },
+        "suggestions": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Suggestion|null",
+          "title": "Enable Top Search terms"
+        }
+      },
+      "required": [
+        "logo",
+        "alerts",
+        "navAlignment"
+      ],
+      "title": "deco-sites/carolbassi/components/header/Header.tsx@Props"
+    },
     "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKU": {
       "type": "object",
       "properties": {
@@ -6728,6 +7662,20 @@
         "to": {
           "type": "string",
           "title": "To"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "permanent"
+            },
+            {
+              "type": "string",
+              "const": "temporary"
+            }
+          ],
+          "type": "string",
+          "title": "Type"
         }
       },
       "required": [
@@ -6745,6 +7693,14 @@
         "pathTemplate": {
           "type": "string",
           "title": "Path Template"
+        },
+        "isHref": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "if true so the path will be checked agaisnt the coming from request instead of using urlpattern.",
+          "title": "Is Href"
         },
         "handler": {
           "type": "object",
@@ -6850,6 +7806,13 @@
         "name": {
           "type": "string",
           "title": "Name"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Path"
         },
         "layout": {
           "$ref": "#/definitions/ZGVjby1jeC9saXZlL2Jsb2Nrcy9wYWdlLnRz@Page",
@@ -6985,11 +7948,6 @@
         "sections"
       ],
       "title": "deco-cx/live/sections/UseSlot.tsx@Props"
-    },
-    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image": {
-      "type": "string",
-      "format": "image-uri",
-      "title": "Image"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyR3JpZC50c3g=@Banner": {
       "type": "object",
@@ -8099,166 +9057,6 @@
       ],
       "title": "deco-sites/carolbassi/components/footer/Footer.tsx@Props"
     },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaGJhci50c3g=@EditableProps": {
-      "type": "object",
-      "properties": {
-        "placeholder": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Placeholder",
-          "description": "Search bar default placeholder message",
-          "default": "What are you looking for?"
-        },
-        "action": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Page path",
-          "description": "When user clicks on the search button, navigate it to",
-          "default": "/s"
-        },
-        "name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Term name",
-          "description": "Querystring param used when navigating the user",
-          "default": "q"
-        },
-        "query": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Query"
-        }
-      },
-      "required": [],
-      "title": "EditableProps"
-    },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string",
-          "title": "Label"
-        },
-        "href": {
-          "type": "string",
-          "title": "Href"
-        },
-        "children": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "label": {
-                "type": "string",
-                "title": "Label"
-              },
-              "href": {
-                "type": "string",
-                "title": "Href"
-              },
-              "children": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "title": "Label"
-                    },
-                    "href": {
-                      "type": "string",
-                      "title": "Href"
-                    }
-                  },
-                  "required": [
-                    "label",
-                    "href"
-                  ]
-                },
-                "title": "Children"
-              }
-            },
-            "required": [
-              "label",
-              "href"
-            ]
-          },
-          "title": "Children"
-        },
-        "image": {
-          "type": "object",
-          "properties": {
-            "src": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Src"
-            },
-            "alt": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Alt"
-            }
-          },
-          "required": [],
-          "title": "Image"
-        }
-      },
-      "required": [
-        "label",
-        "href"
-      ],
-      "title": "NavItem"
-    },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem"
-      },
-      "title": "NavItem[]"
-    },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@Props": {
-      "type": "object",
-      "properties": {
-        "alerts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Alerts"
-        },
-        "searchbar": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaGJhci50c3g=@EditableProps",
-          "title": "Search Bar"
-        },
-        "navItems": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]",
-          "title": "Navigation items",
-          "description": "Navigation items used both on mobile and desktop menus"
-        },
-        "products": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
-          "title": "Product suggestions",
-          "description": "Product suggestions displayed on search"
-        },
-        "suggestions": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Suggestion|null",
-          "title": "Enable Top Search terms"
-        }
-      },
-      "required": [
-        "alerts"
-      ],
-      "title": "deco-sites/carolbassi/components/header/Header.tsx@Props"
-    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSGlnaGxpZ2h0cy50c3g=@Highlight": {
       "type": "object",
       "properties": {
@@ -8544,6 +9342,14 @@
           },
           "description": "google tag manager container id. For more info: https://developers.google.com/tag-platform/tag-manager/web#standard_web_page_installation .",
           "title": "Tracking Ids"
+        },
+        "src": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "custom url for serving google tag manager. Set either this url or the tracking id",
+          "title": "Src"
         }
       },
       "required": [],
@@ -8608,7 +9414,18 @@
       ],
       "title": "deco-sites/std/commerce/butterCMS/client.ts@ConfigButterCMS"
     },
-    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9zZW8vU0VPQmFzZS50c3g=@Props": {
+    "ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null|ProductListingPage|null": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductListingPage|null"
+        }
+      ],
+      "title": "ProductDetailsPage|null|ProductListingPage|null"
+    },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9zZW8vdHlwZXMudHM=@Props": {
       "type": "object",
       "properties": {
         "title": {
@@ -8618,6 +9435,15 @@
           ],
           "title": "Title"
         },
+        "titleTemplate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Title template",
+          "description": "add a %s whenever you want it to be replaced with the category name or search term",
+          "default": "%s | Deco.cx"
+        },
         "description": {
           "type": [
             "string",
@@ -8625,39 +9451,57 @@
           ],
           "title": "Description"
         },
-        "canonical": {
-          "type": [
-            "string",
-            "null"
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "website"
+            },
+            {
+              "type": "string",
+              "const": "article"
+            }
           ],
-          "title": "Canonical URL",
-          "default": "https://example.com"
+          "type": "string",
+          "default": "website",
+          "title": "Type"
         },
-        "imageUrl": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Image Url"
+        "image": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "Recommended: 1200 x 630 px (up to 5MB)",
+          "title": "Image"
+        },
+        "favicon": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "Recommended: 16 x 16 px",
+          "title": "Favicon"
         },
         "themeColor": {
           "type": [
             "string",
             "null"
           ],
+          "description": "Suggested color that browsers should use to customize the display of the page or of the surrounding user interface",
           "title": "Theme Color"
+        },
+        "canonical": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Canonical URL"
+        },
+        "context": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null|ProductListingPage|null",
+          "title": "Context"
         }
       },
       "required": [],
-      "title": "deco-sites/std/components/seo/SEOBase.tsx@Props"
+      "title": "deco-sites/std/components/seo/types.ts@Props"
     },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9zZW8vU0VPUERQLnRzeA==@Props": {
       "type": "object",
       "properties": {
-        "page": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null",
-          "title": "Page"
-        },
         "titleTemplate": {
           "type": [
             "string",
@@ -8680,6 +9524,10 @@
             "null"
           ],
           "title": "Meta tag description override"
+        },
+        "page": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null",
+          "title": "Page"
         }
       },
       "required": [
@@ -9073,7 +9921,7 @@
       ],
       "title": "WorkflowRef"
     },
-    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@142fbddade88bf9fad57aa7ece64475d|WorkflowRef": {
+    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@360775f5bf33a4c0b4cf37d564fe2671|WorkflowRef": {
       "anyOf": [
         {
           "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef"
@@ -9091,13 +9939,13 @@
           ]
         }
       ],
-      "title": "142fbddade88bf9fad57aa7ece64475d|WorkflowRef"
+      "title": "360775f5bf33a4c0b4cf37d564fe2671|WorkflowRef"
     },
     "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@Props": {
       "type": "object",
       "properties": {
         "workflow": {
-          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@142fbddade88bf9fad57aa7ece64475d|WorkflowRef",
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@360775f5bf33a4c0b4cf37d564fe2671|WorkflowRef",
           "title": "Workflow"
         },
         "id": {
@@ -10194,6 +11042,28 @@
         }
       }
     },
+    "JGxpdmUvbG9hZGVycy9zdGF0ZS50cw==": {
+      "title": "Shared application State Loader.",
+      "description": "Set the application state using resolvables.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2xvYWRlcnMvc3RhdGUudHM=@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "$live/loaders/state.ts"
+          ],
+          "default": "$live/loaders/state.ts"
+        }
+      }
+    },
     "JGxpdmUvbG9hZGVycy93b3JrZmxvd3MvZXZlbnRzLnRz": {
       "title": "$live/loaders/workflows/events.ts",
       "description": "Get the workflow execution events.",
@@ -10501,6 +11371,27 @@
             "./islands/AddToCartButton.tsx"
           ],
           "default": "./islands/AddToCartButton.tsx"
+        }
+      }
+    },
+    "Li9pc2xhbmRzL0hlYWRlci50c3g=": {
+      "title": "./islands/Header.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/Header.tsx"
+          ],
+          "default": "./islands/Header.tsx"
         }
       }
     },
@@ -11366,7 +12257,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9zZW8vU0VPQmFzZS50c3g=@Props"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9zZW8vdHlwZXMudHM=@Props"
         }
       ],
       "required": [
@@ -12098,24 +12989,6 @@
           "default": "deco-sites/std/actions/vtex/wishlist/removeItem.ts"
         }
       }
-    },
-    "ZGVjby1jeC9saXZlL3JvdXRlcy9fbWlkZGxld2FyZS50cw==@MiddlewareConfig": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "title": "State",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Resolvable"
-          },
-          "description": "Configure your loaders global state."
-        }
-      },
-      "required": [
-        "state"
-      ],
-      "title": "deco-cx/live/routes/_middleware.ts@MiddlewareConfig",
-      "description": "Global configurations for ./routes/_middleware.ts route"
     }
   },
   "root": {
@@ -12238,6 +13111,9 @@
           "$ref": "#/definitions/Resolvable"
         },
         {
+          "$ref": "#/definitions/JGxpdmUvbG9hZGVycy9zdGF0ZS50cw=="
+        },
+        {
           "$ref": "#/definitions/JGxpdmUvbG9hZGVycy93b3JrZmxvd3MvZXZlbnRzLnRz"
         },
         {
@@ -12293,6 +13169,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL0FkZFRvQ2FydEJ1dHRvbi50c3g="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlci50c3g="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlckJ1dHRvbi50c3g="
