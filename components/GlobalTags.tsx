@@ -28,6 +28,16 @@ function GlobalTags() {
         href={asset("/favicon-32x32.png")}
       />
 
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+.ql-editor {
+  padding: 0 !important;
+}
+`,
+        }}
+      />
+
       {/* Web Manifest */}
       <link rel="manifest" href={asset("/site.webmanifest")} />
     </Head>

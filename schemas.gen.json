@@ -7015,6 +7015,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
                   "const": "Discord"
                 },
                 {
@@ -7150,6 +7154,10 @@
                 {
                   "type": "string",
                   "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
                 },
                 {
                   "type": "string",
@@ -7291,6 +7299,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "Mais"
+                },
+                {
+                  "type": "string",
                   "const": "Discord"
                 },
                 {
@@ -7426,6 +7438,10 @@
                 {
                   "type": "string",
                   "const": "Deco"
+                },
+                {
+                  "type": "string",
+                  "const": "Mais"
                 },
                 {
                   "type": "string",
@@ -8730,6 +8746,10 @@
             },
             {
               "type": "string",
+              "const": "Mais"
+            },
+            {
+              "type": "string",
               "const": "Discord"
             },
             {
@@ -8928,6 +8948,10 @@
             },
             {
               "type": "string",
+              "const": "Mais"
+            },
+            {
+              "type": "string",
               "const": "Discord"
             },
             {
@@ -8999,15 +9023,38 @@
       },
       "title": "Section[]"
     },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image"
+      },
+      "title": "Image[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
+      "type": "string",
+      "format": "html",
+      "title": "HTML"
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Props": {
       "type": "object",
       "properties": {
         "sections": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Section[]",
           "title": "Sections"
+        },
+        "social": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image[]",
+          "title": "Social"
+        },
+        "title": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Title"
         }
       },
-      "required": [],
+      "required": [
+        "social",
+        "title"
+      ],
       "title": "deco-sites/carolbassi/components/footer/Footer.tsx@Props"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSGlnaGxpZ2h0cy50c3g=@Highlight": {

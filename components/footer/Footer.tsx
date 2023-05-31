@@ -3,6 +3,8 @@ import Icon, {
 } from "deco-sites/fashion/components/ui/Icon.tsx";
 import Newsletter from "deco-sites/fashion/islands/Newsletter.tsx";
 import type { ComponentChildren } from "preact";
+import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
+import type { HTML } from "deco-sites/std/components/types.ts";
 
 export type IconItem = { icon: AvailableIcons };
 export type StringItem = {
@@ -23,7 +25,7 @@ const isIcon = (item: Item): item is IconItem =>
 
 function SectionItem({ item }: { item: Item }) {
   return (
-    <span class="text-primary-content">
+    <span class="text-primary text-sm">
       {isIcon(item)
         ? (
           <div class="border-base-100 border border-solid py-1.5 px-2.5">
@@ -50,20 +52,26 @@ function FooterContainer(
     children: ComponentChildren;
   },
 ) {
-  return <div class={`py-6 px-4 sm:py-12 sm:px-0 ${_class}`}>{children}</div>;
+  return (
+    <div class={`border-t-0 border-b-0 py-6 sm:py-12 sm:px-0 ${_class}`}>
+      {children}
+    </div>
+  );
 }
 
 export interface Props {
   sections?: Section[];
+  social: LiveImage[];
+  title: HTML;
 }
 
-function Footer({ sections = [] }: Props) {
+function Footer({ sections = [], social, title }: Props) {
   return (
-    <footer class="w-full bg-primary flex flex-col divide-y divide-primary-content">
+    <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
       <div>
-        <div class="container w-full flex flex-col divide-y divide-primary-content">
+        <div class="container w-full flex flex-col">
           <FooterContainer>
-            <Newsletter />
+            <Newsletter title={title} />
           </FooterContainer>
 
           <FooterContainer>
@@ -93,13 +101,21 @@ function Footer({ sections = [] }: Props) {
             </ul>
 
             {/* Mobile view */}
-            <ul class="flex flex-col sm:hidden sm:flex-row gap-4">
+            <ul class="flex flex-col px-4 sm:hidden sm:flex-row gap-4">
               {sections.map((section) => (
                 <li>
-                  <span class="text-primary-content">
+                  <span class="text-black">
                     <details>
-                      <summary>
+                      <summary class="list-none flex items-center justify-between">
                         {section.label}
+                        <div class="flex justify-between">
+                          <Icon
+                            id="Mais"
+                            height={13}
+                            width={13}
+                            strokeWidth={0.01}
+                          />
+                        </div>
                       </summary>
 
                       <ul
@@ -118,12 +134,30 @@ function Footer({ sections = [] }: Props) {
                 </li>
               ))}
             </ul>
+
+            <div class="flex flex-col px-4 mt-3 h-[154px] border-b-[1px] border-solid border-[hsla(0,0%,40%,.4)]">
+              <span class="font-normal text-lg mb-[13px] text-primary">
+                Follow us
+              </span>
+              <div class="flex gap-5">
+                {social.map((socials) => <img src={socials} />)}
+              </div>
+            </div>
+
+            <div>
+              <p class="py-[5px] px-4 text-xs font-normal w-full text-primary leading-[19px]">
+                2022 Carol Bassi. Todos os direitos reservado. Guaraná Brasil
+                Difusão de moda LTDA | Rua Major Paladino, 128. Vila Ribeiro de
+                Barros - Galpão Modulo 10. CEP: 05307-000 - São Paulo/SP | CNPJ:
+                54.877.063/0001-50
+              </p>
+            </div>
           </FooterContainer>
         </div>
       </div>
 
       <div>
-        <div class="container w-full">
+        <div class="container w-full px-4">
           <FooterContainer class="flex justify-between w-full">
             <span class="flex items-center gap-1 text-primary-content">
               Powered by{" "}
