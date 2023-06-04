@@ -6766,6 +6766,14 @@
             "null"
           ],
           "title": "Query"
+        },
+        "topSearchs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Most searched terms",
+          "description": "Fast terms showed when user clicks the search-bar"
         }
       },
       "required": [],
