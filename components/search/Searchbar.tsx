@@ -88,6 +88,7 @@ function Searchbar({
   const hasProducts = Boolean(suggestions.value?.products?.length);
   const hasTerms = Boolean(suggestions.value?.searches?.length);
   const notFound = !hasProducts && !hasTerms;
+  const showTopSearch = Boolean(!searchInputRef?.current?.value?.length);
 
   useEffect(() => {
     if (!searchInputRef.current) {
@@ -155,11 +156,38 @@ function Searchbar({
       </div>
       <div
         style={{ marginTop: headerHeight }}
-        class="absolute right-0 top-0 z-50 bg-base-100 flex flex-col mt-6 py-5 px-2 w-full lg:w-[508px] empty:mt-0"
+        class="absolute right-0 top-0 z-50 bg-base-100 flex flex-col mt-6 py-5  w-full lg:w-[508px] empty:mt-0"
       >
-        {notFound
+        {showTopSearch
           ? (
-            <div class="py-16 md:py-6! flex flex-col gap-4 w-full">
+            <div class="flex flex-col gap-5">
+              <span
+                class="pl-5 text-base"
+                role="heading"
+                aria-level={3}
+              >
+                Termos Mais Buscados
+              </span>
+              <ol>
+                {topSearchs.map((topS, index) => (
+                  <li class="h-[35px] hover:bg-neutral">
+                    <a
+                      class="flex items-center w-full h-full px-5"
+                      href={`/s?q=${topS}`}
+                    >
+                      <span class="w-[27px] h-[27px] inline-flex justify-center items-center rounded-[1.5px] bg-neutral-content text-info-content text-xs font-semibold">
+                        {index + 1}º
+                      </span>
+                      <span class="text-xs pl-3 inline-flex">{topS}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )
+          : notFound
+          ? (
+            <div class="px-2 py-16 md:py-6! flex flex-col gap-4 w-full">
               <span
                 class="font-medium text-xl text-center"
                 role="heading"
@@ -175,7 +203,7 @@ function Searchbar({
           )
           : (
             <>
-              <div class="flex flex-col pl-3 gap-6 md:w-[15.25rem] md:max-w-[15.25rem]\">
+              <div class="flex flex-col px-2 pl-5 gap-6 md:w-[15.25rem] md:max-w-[15.25rem]\">
                 <div class="flex gap-2 items-center">
                   <span
                     class="text-base"
@@ -201,7 +229,7 @@ function Searchbar({
                   ))}
                 </ul>
               </div>
-              <div class="flex flex-col pt-5 gap-3 overflow-x-hidden">
+              <div class="flex flex-col px-2 pt-5 gap-3 overflow-x-hidden">
                 <div class="flex gap-2 items-center">
                   <span
                     class="text-base pl-3"

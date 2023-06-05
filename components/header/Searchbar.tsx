@@ -19,7 +19,9 @@ function Searchbar({ searchbar }: Props) {
   return (
     <>
       <div
-        class={`${open ? "block" : "hidden"} absolute top-0 left-0 w-full bg-white z-10 lg:static lg:bg-transparent`}
+        class={`${
+          open ? "block" : "hidden"
+        } absolute top-0 left-0 w-full bg-white z-10 lg:static lg:bg-transparent`}
       >
         {open && (
           <Suspense fallback={<Loading />}>
