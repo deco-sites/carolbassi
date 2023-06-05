@@ -15,7 +15,13 @@ function MenuItem({ item }: { item: INavItem }) {
       <input type="checkbox" class="min-h-0" />
 
       <div class="collapse-title h-auto min-h-0 p-0 flex justify-between">
-        <div class={`text-lg leading-base ${item.highlight && 'text-accent-content'}`}>{item.label}</div>
+        <div
+          class={`text-lg leading-base ${
+            item.highlight && "text-accent-content"
+          }`}
+        >
+          {item.label}
+        </div>
         {item.children && item.children.length > 0 && (
           <Icon id="ChevronRight" width={7} height={22} />
         )}
