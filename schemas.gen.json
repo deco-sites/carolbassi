@@ -69,6 +69,7 @@
               "./islands/OutOfStock.tsx",
               "./islands/ProductImageZoom.tsx",
               "./islands/SearchControls.tsx",
+              "./islands/SearchNotFound.tsx",
               "./islands/ShippingSimulation.tsx",
               "./islands/SliderJS.tsx",
               "./islands/WishlistButton.tsx",
@@ -9912,7 +9913,7 @@
           "type": "string",
           "title": "The audience name (will be used on cookies).",
           "description": "Add a meaningful short word for the audience name.",
-          "maxLength": 22,
+          "maxLength": 40,
           "minLength": 3,
           "pattern": "^[A-Za-z0-9_]+$"
         },
@@ -10030,7 +10031,7 @@
       ],
       "title": "WorkflowRef"
     },
-    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef|dd83f657b723ebb8e9d97470ddbe37de": {
+    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@2cf9aa699880ab31d05645e09a8b21b4|WorkflowRef": {
       "anyOf": [
         {
           "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef"
@@ -10048,13 +10049,13 @@
           ]
         }
       ],
-      "title": "WorkflowRef|dd83f657b723ebb8e9d97470ddbe37de"
+      "title": "2cf9aa699880ab31d05645e09a8b21b4|WorkflowRef"
     },
     "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@Props": {
       "type": "object",
       "properties": {
         "workflow": {
-          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef|dd83f657b723ebb8e9d97470ddbe37de",
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@2cf9aa699880ab31d05645e09a8b21b4|WorkflowRef",
           "title": "Workflow"
         },
         "id": {
@@ -11629,6 +11630,22 @@
             "./islands/SearchControls.tsx"
           ],
           "default": "./islands/SearchControls.tsx"
+        }
+      }
+    },
+    "Li9pc2xhbmRzL1NlYXJjaE5vdEZvdW5kLnRzeA==": {
+      "title": "./islands/SearchNotFound.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/SearchNotFound.tsx"
+          ],
+          "default": "./islands/SearchNotFound.tsx"
         }
       }
     },
@@ -13321,6 +13338,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1NlYXJjaENvbnRyb2xzLnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1NlYXJjaE5vdEZvdW5kLnRzeA=="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1NoaXBwaW5nU2ltdWxhdGlvbi50c3g="

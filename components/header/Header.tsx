@@ -108,6 +108,25 @@ function Header(
 ) {
   const isHeaderHovered = useSignal(false);
   const searchbar = { ..._searchbar, products, suggestions };
+  const isHomePage = globalThis?.location?.pathname === "/";
+
+  /* Set header position fixed on Home page */
+  const setHeaderPosition = () => {
+    const header = document.querySelector("header");
+
+    if (header) {
+      if (isHomePage) {
+        header.style.position = "fixed";
+      } else {
+        header.style.position = "relative";
+      }
+    }
+  };
+
+  useEffect(() => {
+    /* Set header position fixed on Home page */
+    setHeaderPosition();
+  }, []);
 
   useEffect(() => {
     const header = document.querySelector("header");
@@ -115,20 +134,25 @@ function Header(
     if (!header) return;
 
     const onScroll = () => {
-      if (globalThis.scrollY > 5) {
+      if (globalThis.scrollY > 32) {
         const isDesktop = window?.matchMedia("(min-width: 1024px)")?.matches;
 
-        if (isDesktop) {
-          header.style.backgroundColor = `rgba(255,255,255,${
-            (100 - (onScrollTransparencyLevel?.desktop ?? 100)) / 100
-          })`;
-        } else {
-          header.style.backgroundColor = `rgba(255,255,255,${
-            (100 - (onScrollTransparencyLevel?.mobile ?? 100)) / 100
-          })`;
+        header.style.position = "fixed";
+
+        if (isHomePage) {
+          if (isDesktop) {
+            header.style.backgroundColor = `rgba(255,255,255,${
+              (100 - (onScrollTransparencyLevel?.desktop ?? 100)) / 100
+            })`;
+          } else {
+            header.style.backgroundColor = `rgba(255,255,255,${
+              (100 - (onScrollTransparencyLevel?.mobile ?? 100)) / 100
+            })`;
+          }
         }
       } else {
         header.style.backgroundColor = isHeaderHovered.value ? "white" : "";
+        setHeaderPosition();
       }
     };
 
@@ -147,33 +171,47 @@ function Header(
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+      {isHomePage
+        ? (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
             header {
               min-height: ${headerHeight};
               background-color: ${
-            transparent
-              ? `rgba(255,255,255,${
-                (100 - (transparencyLevel?.mobile ?? 100)) / 100
-              })`
-              : "white"
-          };
+                transparent
+                  ? `rgba(255,255,255,${
+                    (100 - (transparencyLevel?.mobile ?? 100)) / 100
+                  })`
+                  : "white"
+              };
             }
             
             ${
-            transparent && `
+                transparent && `
             @media screen and (min-width: 1024px) {
               header {
                 background-color: rgba(255,255,255,${
-              (100 - (transparencyLevel?.desktop ?? 100)) / 100
-            })`
-          }
+                  (100 - (transparencyLevel?.desktop ?? 100)) / 100
+                })`
+              }
           `,
-        }}
-      />
+            }}
+          />
+        )
+        : (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                  header {
+                    background-color: white;
+                  }
+              `,
+            }}
+          />
+        )}
       <header
-        class="fixed w-full z-50 hover:bg-white"
+        class={`w-full z-50 hover:bg-white`}
         onMouseEnter={() => isHeaderHovered.value = true}
         onMouseLeave={() => isHeaderHovered.value = false}
       >

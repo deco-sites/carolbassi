@@ -5,6 +5,7 @@ import { SendEventOnLoad } from "deco-sites/fashion/sdk/analytics.tsx";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
+import NotFound from "deco-sites/fashion/islands/SearchNotFound.tsx";
 import type { LoaderReturnType } from "$live/types.ts";
 import type { ProductListingPage } from "deco-sites/std/commerce/types.ts";
 
@@ -18,14 +19,6 @@ export interface Props {
    * @description Number of products per line on grid
    */
   columns: Columns;
-}
-
-function NotFound() {
-  return (
-    <div class="w-full flex justify-center items-center py-10">
-      <span>Not Found!</span>
-    </div>
-  );
 }
 
 function Result({
@@ -106,7 +99,7 @@ function Result({
 }
 
 function SearchResult({ page, ...props }: Props) {
-  if (!page) {
+  if (!page || page.products.length === 0) {
     return <NotFound />;
   }
 
