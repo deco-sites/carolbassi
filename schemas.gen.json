@@ -7694,6 +7694,22 @@
       ],
       "title": "deco-sites/carolbassi/components/header/Header.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
+      "type": "string",
+      "format": "html",
+      "title": "HTML"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL05ld3NsZXR0ZXIudHN4@Props": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Title"
+        }
+      },
+      "required": [],
+      "title": "deco-sites/carolbassi/components/footer/Newsletter.tsx@Props"
+    },
     "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKU": {
       "type": "object",
       "properties": {
@@ -9124,11 +9140,6 @@
       },
       "title": "Image[]"
     },
-    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
-      "type": "string",
-      "format": "html",
-      "title": "HTML"
-    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Props": {
       "type": "object",
       "properties": {
@@ -9143,11 +9154,16 @@
         "title": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
           "title": "Title"
+        },
+        "titleDesktop": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Title Desktop"
         }
       },
       "required": [
         "social",
-        "title"
+        "title",
+        "titleDesktop"
       ],
       "title": "deco-sites/carolbassi/components/footer/Footer.tsx@Props"
     },
@@ -11571,6 +11587,11 @@
     "Li9pc2xhbmRzL05ld3NsZXR0ZXIudHN4": {
       "title": "./islands/Newsletter.tsx",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL05ld3NsZXR0ZXIudHN4@Props"
+        }
+      ],
       "required": [
         "__resolveType"
       ],
