@@ -13,12 +13,14 @@ import { useEffect, useRef } from "preact/compat";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Spinner from "deco-sites/fashion/components/ui/Spinner.tsx";
-import ProductCard from "deco-sites/fashion/components/product/ProductCard.tsx";
+import SearchbarProductCard from "deco-sites/fashion/components/product/SearchbarProductCard.tsx";
 import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
-import { useAutocomplete } from "deco-sites/std/packs/vtex/hooks/useAutocomplete.ts";
 import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 import { sendEvent } from "deco-sites/fashion/sdk/analytics.tsx";
+import { headerHeight } from "deco-sites/fashion/components/header/constants.ts";
+import type { Product } from "deco-sites/std/commerce/types.ts";
+import { useAutocomplete } from "../../sdk/useAutocomplete.ts";
 
 declare global {
   interface Window {
@@ -33,10 +35,10 @@ function CloseButton() {
 
   return (
     <Button
-      class="btn-ghost btn-circle"
+      class="btn-ghost btn-circle w-auto bg-transparent hover:bg-transparent lg:hidden"
       onClick={() => (displaySearchbar.value = false)}
     >
-      <Icon id="XMark" width={20} height={20} strokeWidth={2} />
+      <Icon id="XMark" width={20} height={20} strokeWidth={1} />
     </Button>
   );
 }
@@ -65,24 +67,28 @@ export interface EditableProps {
    * TODO: Receive querystring from parameter in the server-side
    */
   query?: string;
+  /**
+   * @title Most searched terms
+   * @description Fast terms showed when user clicks the search-bar
+   */
+  topSearchs?: string[];
 }
 
-export type Props = EditableProps & {
-  variant?: "desktop" | "mobile";
-};
+export type Props = EditableProps;
 
 function Searchbar({
   placeholder = "What are you looking for?",
   action = "/s",
   name = "q",
+  topSearchs = [],
   query,
-  variant = "mobile",
 }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { setSearch, suggestions, loading } = useAutocomplete();
   const hasProducts = Boolean(suggestions.value?.products?.length);
   const hasTerms = Boolean(suggestions.value?.searches?.length);
   const notFound = !hasProducts && !hasTerms;
+  const showTopSearch = Boolean(!searchInputRef?.current?.value?.length);
 
   useEffect(() => {
     if (!searchInputRef.current) {
@@ -93,30 +99,18 @@ function Searchbar({
   }, []);
 
   return (
-    <div class="flex flex-col p-4 md:py-6 md:px-20">
-      <div class="flex items-center gap-4">
+    <div class="flex flex-col">
+      <div class="flex items-center gap-4 px-4 lg:px-0">
+        <CloseButton />
         <form
           id="searchbar"
           action={action}
-          class="flex-grow flex gap-3 px-3 py-2 border border-base-200"
+          class="flex-grow flex gap-3"
         >
-          <Button
-            class="btn-ghost"
-            aria-label="Search"
-            htmlFor="searchbar"
-            tabIndex={-1}
-          >
-            <Icon
-              class="text-base-300"
-              id="MagnifyingGlass"
-              size={20}
-              strokeWidth={0.01}
-            />
-          </Button>
           <input
             ref={searchInputRef}
             id="search-input"
-            class="flex-grow outline-none placeholder-shown:sibling:hidden"
+            class="flex-grow outline-none placeholder-shown:sibling:hidden bg-transparent text-center lg:text-left text-secondary-content placeholder:text-primary"
             name={name}
             defaultValue={query}
             onInput={(e) => {
@@ -129,35 +123,71 @@ function Searchbar({
                 });
               }
 
-              setSearch(value);
+              setSearch(value, 3);
             }}
             placeholder={placeholder}
             role="combobox"
             aria-controls="search-suggestion"
             autocomplete="off"
           />
-          <button
-            type="button"
-            aria-label="Clean search"
-            class="focus:outline-none"
-            tabIndex={-1}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (searchInputRef.current === null) return;
-
-              searchInputRef.current.value = "";
-              setSearch("");
-            }}
-          >
-            <span class="text-sm">limpar</span>
-          </button>
         </form>
-        {variant === "desktop" && <CloseButton />}
+        <button
+          class="block lg:hidden"
+          onClick={() => {
+            const value = searchInputRef?.current?.value;
+
+            if (value) {
+              sendEvent({
+                name: "search",
+                params: { search_term: value },
+              });
+            }
+
+            setSearch(value ?? "", 3);
+          }}
+        >
+          <Icon
+            id="MagnifyingGlass"
+            width={20}
+            height={19}
+            strokeWidth={0.1}
+          />
+        </button>
       </div>
-      <div class="flex flex-col gap-6 divide-y divide-base-200 mt-6 empty:mt-0 md:flex-row md:divide-y-0">
-        {notFound
+      <div
+        style={{ marginTop: headerHeight }}
+        class="absolute right-0 top-0 z-50 bg-base-100 flex flex-col mt-6 py-5  w-full lg:w-[508px] empty:mt-0"
+      >
+        {showTopSearch
           ? (
-            <div class="py-16 md:py-6! flex flex-col gap-4 w-full">
+            <div class="flex flex-col gap-5">
+              <span
+                class="pl-5 text-base"
+                role="heading"
+                aria-level={3}
+              >
+                Termos Mais Buscados
+              </span>
+              <ol>
+                {topSearchs.map((topS, index) => (
+                  <li class="h-[35px] hover:bg-neutral">
+                    <a
+                      class="flex items-center w-full h-full px-5"
+                      href={`/s?q=${topS}`}
+                    >
+                      <span class="w-[27px] h-[27px] inline-flex justify-center items-center rounded-[1.5px] bg-neutral-content text-info-content text-xs font-semibold">
+                        {index + 1}º
+                      </span>
+                      <span class="text-xs pl-3 inline-flex">{topS}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )
+          : notFound
+          ? (
+            <div class="px-2 py-16 md:py-6! flex flex-col gap-4 w-full">
               <span
                 class="font-medium text-xl text-center"
                 role="heading"
@@ -173,10 +203,10 @@ function Searchbar({
           )
           : (
             <>
-              <div class="flex flex-col gap-6 md:w-[15.25rem] md:max-w-[15.25rem]\">
+              <div class="flex flex-col px-2 pl-5 gap-6 md:w-[15.25rem] md:max-w-[15.25rem]\">
                 <div class="flex gap-2 items-center">
                   <span
-                    class="font-medium text-xl"
+                    class="text-base"
                     role="heading"
                     aria-level={3}
                   >
@@ -184,17 +214,13 @@ function Searchbar({
                   </span>
                   {loading.value && <Spinner />}
                 </div>
-                <ul id="search-suggestion" class="flex flex-col gap-6">
+                <ul id="search-suggestion" class="flex flex-col pl-5">
                   {suggestions.value!.searches?.map(({ term }) => (
-                    <li>
-                      <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                        <span>
-                          <Icon
-                            id="MagnifyingGlass"
-                            size={20}
-                            strokeWidth={0.01}
-                          />
-                        </span>
+                    <li class="list-disc list-outside marker:text-info">
+                      <a
+                        href={`/s?q=${term}`}
+                        class="text-xs"
+                      >
                         <span>
                           {term}
                         </span>
@@ -203,24 +229,31 @@ function Searchbar({
                   ))}
                 </ul>
               </div>
-              <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
+              <div class="flex flex-col px-2 pt-5 gap-3 overflow-x-hidden">
                 <div class="flex gap-2 items-center">
                   <span
-                    class="font-medium text-xl"
+                    class="text-base pl-3"
                     role="heading"
                     aria-level={3}
                   >
-                    Produtos sugeridos
+                    Produtos sugeridos:
                   </span>
                   {loading.value && <Spinner />}
                 </div>
                 <Slider class="carousel">
-                  {suggestions.value!.products?.map((product, index) => (
+                  {suggestions.value!.products?.map((
+                    product: Product,
+                    index,
+                  ) => (
                     <Slider.Item
                       index={index}
-                      class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
+                      class="carousel-item w-[163px]"
                     >
-                      <ProductCard product={product} />
+                      <SearchbarProductCard
+                        product={product}
+                        width={163}
+                        height={244}
+                      />
                     </Slider.Item>
                   ))}
                 </Slider>

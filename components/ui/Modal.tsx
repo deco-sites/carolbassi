@@ -85,12 +85,17 @@ const Modal = ({
             containerStyles[mode]
           }`}
         >
-          <header class="flex px-4 py-6 justify-between items-center border-b border-base-200">
-            <h1>
-              <span class="font-medium text-2xl">{title}</span>
-            </h1>
-            <Button class="btn btn-ghost" onClick={onClose}>
-              <Icon id="XMark" width={20} height={20} strokeWidth={2} />
+          <header class="flex px-3 py-3 justify-between items-center">
+            {title && (
+              <h1>
+                <span class="font-medium text-2xl">{title}</span>
+              </h1>
+            )}
+            <Button
+              class="btn btn-ghost bg-transparent hover:bg-transparent ml-auto h-auto min-h-0 w-[34px] p-0"
+              onClick={onClose}
+            >
+              <Icon id="XMark" width={34} height={20} strokeWidth={1} />
             </Button>
           </header>
           <div class="overflow-y-auto flex-grow flex flex-col">

@@ -30,6 +30,15 @@ export default {
       center: true,
     },
     extend: {
+      gridTemplateRows: {
+        "8": "repeat(8, minmax(0, 1fr))",
+      },
+      borderColor: {
+        "light": "rgba(0,0,0,.2)",
+      },
+      lineHeight: {
+        "base": "1.15",
+      },
       animation: {
         "slide-left": "slide-left-frame 0.4s ease normal",
         "slide-right": "slide-right-frame 0.4s ease normal",
