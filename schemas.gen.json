@@ -8931,6 +8931,13 @@
         "href": {
           "type": "string",
           "title": "Href"
+        },
+        "targetOn": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Target On"
         }
       },
       "required": [
@@ -9152,6 +9159,13 @@
               "link": {
                 "type": "string",
                 "title": "Link"
+              },
+              "targetOn": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "title": "Target On"
               }
             },
             "required": [
