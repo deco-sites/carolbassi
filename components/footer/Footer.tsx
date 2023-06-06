@@ -64,7 +64,10 @@ function FooterContainer(
 
 export interface Props {
   sections?: Section[];
-  social: LiveImage[];
+  social: {
+    image: LiveImage;
+    link: string;
+  }[];
   title: HTML;
   titleDesktop: HTML;
 }
@@ -115,7 +118,11 @@ function Footer({ sections = [], social, title, titleDesktop }: Props) {
                     Follow us
                   </span>
                   <div class="flex gap-5">
-                    {social.map((socials) => <img src={socials} />)}
+                    {social.map((socials) => (
+                      <a href={socials.link}>
+                        <img src={socials.image} />
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -161,7 +168,11 @@ function Footer({ sections = [], social, title, titleDesktop }: Props) {
                 Follow us
               </span>
               <div class="flex gap-5">
-                {social.map((socials) => <img src={socials} />)}
+                {social.map((socials) => (
+                  <a href={socials.link}>
+                    <img src={socials.image} />
+                  </a>
+                ))}
               </div>
             </div>
 
