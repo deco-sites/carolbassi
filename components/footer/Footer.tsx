@@ -11,6 +11,8 @@ export type IconItem = { icon: AvailableIcons };
 export type StringItem = {
   label: string;
   href: string;
+  /** @description If checked opens another page */
+  targetOn?: boolean;
 };
 
 export type Item = StringItem | IconItem;
@@ -39,7 +41,11 @@ function SectionItem({ item }: { item: Item }) {
           </div>
         )
         : (
-          <a href={item.href}>
+          <a
+            rel="noreferrer noopener"
+            target={`${item.targetOn ? "_blank" : "_self"}`}
+            href={item.href}
+          >
             {item.label}
           </a>
         )}
@@ -64,12 +70,19 @@ function FooterContainer(
 
 export interface Props {
   sections?: Section[];
-  social: LiveImage[];
+  social: {
+    image: LiveImage;
+    link: string;
+    /** @description If checked opens another page */
+    targetOn?: boolean;
+  }[];
   title: HTML;
   titleDesktop: HTML;
 }
 
-function Footer({ sections = [], social, title, titleDesktop }: Props) {
+function Footer(
+  { sections = [], social, title, titleDesktop }: Props,
+) {
   return (
     <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
       <div>
@@ -115,7 +128,15 @@ function Footer({ sections = [], social, title, titleDesktop }: Props) {
                     Follow us
                   </span>
                   <div class="flex gap-5">
-                    {social.map((socials) => <img src={socials} />)}
+                    {social.map((socials) => (
+                      <a
+                        rel="noreferrer noopener"
+                        target={`${socials.targetOn ? "_blank" : "_self"}`}
+                        href={socials.link}
+                      >
+                        <img src={socials.image} />
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -161,7 +182,15 @@ function Footer({ sections = [], social, title, titleDesktop }: Props) {
                 Follow us
               </span>
               <div class="flex gap-5">
-                {social.map((socials) => <img src={socials} />)}
+                {social.map((socials) => (
+                  <a
+                    rel="noreferrer noopener"
+                    target={`${socials.targetOn ? "_blank" : "_self"}`}
+                    href={socials.link}
+                  >
+                    <img src={socials.image} />
+                  </a>
+                ))}
               </div>
             </div>
 

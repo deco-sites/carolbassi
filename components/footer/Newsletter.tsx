@@ -56,7 +56,7 @@ function Newsletter({ title }: Props) {
             placeholder="Deixe seu e-mail aqui"
           />
           <button
-            class="btn disabled:loading bg-transparent lg:bg-info text-black mt-2.5 rounded-none font-normal capitalize border-[1px] border-solid border-black lg:border-0 lg:absolute lg:bottom-1 lg:right-1 lg:min-h-0 lg:h-[44px] lg:w-[126px]"
+            class="btn disabled:loading bg-transparent lg:bg-info hover:bg-info text-black mt-2.5 rounded-none font-normal capitalize border-[1px] border-solid border-black lg:border-0 lg:absolute lg:bottom-1 lg:right-1 lg:min-h-0 lg:h-[44px] lg:w-[126px]"
             disabled={loading}
           >
             Cadastrar
