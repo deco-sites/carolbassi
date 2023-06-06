@@ -56,7 +56,6 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           <>
             <video
               class="lg:hidden pointer-events-none w-full "
-              controls
               autoPlay
               loop
               muted
@@ -67,7 +66,6 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
             </video>
             <video
               class="hidden lg:block pointer-events-none w-full"
-              controls
               autoPlay
               loop
               muted
