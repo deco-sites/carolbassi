@@ -94,6 +94,7 @@
               "deco-sites/carolbassi/sections/Footer.tsx",
               "deco-sites/carolbassi/sections/Header.tsx",
               "deco-sites/carolbassi/sections/Highlights.tsx",
+              "deco-sites/carolbassi/sections/ImageOrVideo.tsx",
               "deco-sites/carolbassi/sections/LinkTree.tsx",
               "deco-sites/carolbassi/sections/ProductDetails.tsx",
               "deco-sites/carolbassi/sections/ProductShelf.tsx",
@@ -9375,6 +9376,132 @@
       ],
       "title": "deco-sites/carolbassi/components/ui/Highlights.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            },
+            "isVideo": {
+              "type": "boolean",
+              "title": "Is Video"
+            }
+          },
+          "required": [
+            "source",
+            "isVideo"
+          ],
+          "title": "Desktop",
+          "description": "desktop optimized content"
+        },
+        "mobile": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            },
+            "isVideo": {
+              "type": "boolean",
+              "title": "Is Video"
+            }
+          },
+          "required": [
+            "source",
+            "isVideo"
+          ],
+          "title": "Mobile",
+          "description": "mobile optimized content"
+        },
+        "overContent": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Content"
+            },
+            "alignment": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "top-left"
+                },
+                {
+                  "type": "string",
+                  "const": "top-center"
+                },
+                {
+                  "type": "string",
+                  "const": "top-right"
+                },
+                {
+                  "type": "string",
+                  "const": "left-center"
+                },
+                {
+                  "type": "string",
+                  "const": "center"
+                },
+                {
+                  "type": "string",
+                  "const": "right-center"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-left"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-center"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-right"
+                }
+              ],
+              "type": "string",
+              "title": "Alignment"
+            }
+          },
+          "required": [
+            "content",
+            "alignment"
+          ],
+          "title": "Over-image content",
+          "description": "allows custom html content over the image (only works for images)"
+        },
+        "alt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Image's alt text",
+          "title": "Alt"
+        },
+        "href": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "when user clicks on the content, go to this link",
+          "title": "Href"
+        },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
+          "title": "Preload"
+        }
+      },
+      "required": [],
+      "title": "deco-sites/carolbassi/components/ui/ImageOrVideo.tsx@Props"
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvTGlua1RyZWUudHN4@Link": {
       "type": "object",
       "properties": {
@@ -12313,6 +12440,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0ltYWdlT3JWaWRlby50c3g=": {
+      "title": "deco-sites/carolbassi/sections/ImageOrVideo.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/sections/ImageOrVideo.tsx"
+          ],
+          "default": "deco-sites/carolbassi/sections/ImageOrVideo.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0xpbmtUcmVlLnRzeA==": {
       "title": "deco-sites/carolbassi/sections/LinkTree.tsx",
       "type": "object",
@@ -13629,6 +13777,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0hpZ2hsaWdodHMudHN4"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0ltYWdlT3JWaWRlby50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0xpbmtUcmVlLnRzeA=="
