@@ -5,11 +5,14 @@ import Newsletter from "deco-sites/fashion/islands/Newsletter.tsx";
 import type { ComponentChildren } from "preact";
 import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
 import type { HTML } from "deco-sites/std/components/types.ts";
+import Quilltext from "deco-sites/std/components/QuillText.tsx";
 
 export type IconItem = { icon: AvailableIcons };
 export type StringItem = {
   label: string;
   href: string;
+  /** @description If checked opens another page */
+  targetOn?: boolean;
 };
 
 export type Item = StringItem | IconItem;
@@ -25,7 +28,7 @@ const isIcon = (item: Item): item is IconItem =>
 
 function SectionItem({ item }: { item: Item }) {
   return (
-    <span class="text-primary text-sm">
+    <span class="text-primary text-sm lg:text-secondary">
       {isIcon(item)
         ? (
           <div class="border-base-100 border border-solid py-1.5 px-2.5">
@@ -38,7 +41,11 @@ function SectionItem({ item }: { item: Item }) {
           </div>
         )
         : (
-          <a href={item.href}>
+          <a
+            rel="noreferrer noopener"
+            target={`${item.targetOn ? "_blank" : "_self"}`}
+            href={item.href}
+          >
             {item.label}
           </a>
         )}
@@ -53,7 +60,9 @@ function FooterContainer(
   },
 ) {
   return (
-    <div class={`border-t-0 border-b-0 py-6 sm:py-12 sm:px-0 ${_class}`}>
+    <div
+      class={`border-t-0 border-b-0 py-6 sm:py-12 sm:px-0 lg:pt-7 lg:pb-[25px] lg:px-[70px] ${_class}`}
+    >
       {children}
     </div>
   );
@@ -61,47 +70,80 @@ function FooterContainer(
 
 export interface Props {
   sections?: Section[];
-  social: LiveImage[];
+  social: {
+    image: LiveImage;
+    link: string;
+    /** @description If checked opens another page */
+    targetOn?: boolean;
+  }[];
   title: HTML;
+  titleDesktop: HTML;
 }
 
-function Footer({ sections = [], social, title }: Props) {
+function Footer(
+  { sections = [], social, title, titleDesktop }: Props,
+) {
   return (
     <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
       <div>
-        <div class="container w-full flex flex-col">
-          <FooterContainer>
+        <div class="max-w-[unset] container w-full flex flex-col">
+          <FooterContainer class="lg:hidden">
             <Newsletter title={title} />
           </FooterContainer>
 
-          <FooterContainer>
+          <FooterContainer class="xl:px-0 xl:flex xl:justify-center">
             {/* Desktop view */}
-            <ul class="hidden sm:flex flex-row gap-20">
-              {sections.map((section) => (
-                <li>
-                  <div>
-                    <span class="font-medium text-xl text-primary-content">
-                      {section.label}
-                    </span>
+            <div class="hidden lg:flex flex-wrap">
+              <span class="2xl:mr-[102px] max-w-[250px] self-center xl:mr-[35px] lg:mr-[60px]">
+                <Quilltext html={titleDesktop} />
+              </span>
+              <ul class="hidden sm:flex flex-row lg:gap-[50px] 2xl:gap-[102px] xl:gap-[50px] 2xl:mr-[102px] xl:mr-[35px] lg:mr-[35px]">
+                {sections.map((section) => (
+                  <li>
+                    <div>
+                      <span class="font-normal text-base text-primary">
+                        {section.label}
+                      </span>
 
-                    <ul
-                      class={`flex ${
-                        isIcon(section.children[0]) ? "flex-row" : "flex-col"
-                      } gap-2 pt-2 flex-wrap`}
-                    >
-                      {section.children.map((item) => (
-                        <li>
-                          <SectionItem item={item} />
-                        </li>
-                      ))}
-                    </ul>
+                      <ul
+                        class={`flex ${
+                          isIcon(section.children[0]) ? "flex-row" : "flex-col"
+                        } mt-[23px] flex-wrap`}
+                      >
+                        {section.children.map((item) => (
+                          <li class="mb-[13px] leading-[16px]">
+                            <SectionItem item={item} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div class="flex flex-col">
+                <Newsletter />
+
+                <div class="hidden lg:flex flex-col mt-[22px]">
+                  <span class="font-normal text-lg mb-[13px] text-primary">
+                    Follow us
+                  </span>
+                  <div class="flex gap-5">
+                    {social.map((socials) => (
+                      <a
+                        rel="noreferrer noopener"
+                        target={`${socials.targetOn ? "_blank" : "_self"}`}
+                        href={socials.link}
+                      >
+                        <img src={socials.image} />
+                      </a>
+                    ))}
                   </div>
-                </li>
-              ))}
-            </ul>
+                </div>
+              </div>
+            </div>
 
             {/* Mobile view */}
-            <ul class="flex flex-col px-4 sm:hidden sm:flex-row gap-4">
+            <ul class="flex flex-col px-4 lg:hidden lg:flex-row gap-4">
               {sections.map((section) => (
                 <li>
                   <span class="text-black">
@@ -135,17 +177,25 @@ function Footer({ sections = [], social, title }: Props) {
               ))}
             </ul>
 
-            <div class="flex flex-col px-4 mt-3 h-[154px] border-b-[1px] border-solid border-[hsla(0,0%,40%,.4)]">
+            <div class="lg:hidden flex flex-col px-4 sm:px-8 mt-3 h-[154px] border-b-[1px] border-solid border-[hsla(0,0%,40%,.4)]">
               <span class="font-normal text-lg mb-[13px] text-primary">
                 Follow us
               </span>
               <div class="flex gap-5">
-                {social.map((socials) => <img src={socials} />)}
+                {social.map((socials) => (
+                  <a
+                    rel="noreferrer noopener"
+                    target={`${socials.targetOn ? "_blank" : "_self"}`}
+                    href={socials.link}
+                  >
+                    <img src={socials.image} />
+                  </a>
+                ))}
               </div>
             </div>
 
-            <div>
-              <p class="py-[5px] px-4 text-xs font-normal w-full text-primary leading-[19px]">
+            <div class="lg:hidden">
+              <p class="pt-[5px] pb-[66px] md:pb-0 px-4 text-xs font-normal w-full text-primary leading-[19px]">
                 2022 Carol Bassi. Todos os direitos reservado. Guaraná Brasil
                 Difusão de moda LTDA | Rua Major Paladino, 128. Vila Ribeiro de
                 Barros - Galpão Modulo 10. CEP: 05307-000 - São Paulo/SP | CNPJ:
@@ -153,57 +203,15 @@ function Footer({ sections = [], social, title }: Props) {
               </p>
             </div>
           </FooterContainer>
-        </div>
-      </div>
 
-      <div>
-        <div class="container w-full px-4">
-          <FooterContainer class="flex justify-between w-full">
-            <span class="flex items-center gap-1 text-primary-content">
-              Powered by{" "}
-              <a
-                href="https://www.deco.cx"
-                aria-label="powered by https://www.deco.cx"
-              >
-                <Icon id="Deco" height={20} width={60} strokeWidth={0.01} />
-              </a>
-            </span>
-
-            <ul class="flex items-center justify-center gap-2">
-              <li>
-                <a
-                  href="https://www.instagram.com/deco.cx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram logo"
-                >
-                  <Icon
-                    class="text-primary-content"
-                    width={32}
-                    height={32}
-                    id="Instagram"
-                    strokeWidth={1}
-                  />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://www.deco.cx/discord"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Discord logo"
-                >
-                  <Icon
-                    class="text-primary-content"
-                    width={32}
-                    height={32}
-                    id="Discord"
-                    strokeWidth={5}
-                  />
-                </a>
-              </li>
-            </ul>
-          </FooterContainer>
+          <div class="hidden lg:block py-[18px] px-[60px] border-t-[1px] border-solid border-[hsla(0,0%,40%,.4)]">
+            <p class="text-center text-xs font-normal w-full text-primary leading-[19px]">
+              2022 Carol Bassi. Todos os direitos reservado. Guaraná Brasil
+              Difusão de moda LTDA | Rua Major Paladino, 128. Vila Ribeiro de
+              Barros - Galpão Modulo 10. CEP: 05307-000 - São Paulo/SP | CNPJ:
+              54.877.063/0001-50
+            </p>
+          </div>
         </div>
       </div>
     </footer>
