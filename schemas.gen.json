@@ -86,6 +86,7 @@
               "$live/sections/UseSlot.tsx",
               "deco-sites/carolbassi/sections/BannerGrid.tsx",
               "deco-sites/carolbassi/sections/BannerPLP.tsx",
+              "deco-sites/carolbassi/sections/Blocks.tsx",
               "deco-sites/carolbassi/sections/Carousel.tsx",
               "deco-sites/carolbassi/sections/CookieConsent.tsx",
               "deco-sites/carolbassi/sections/DesignSystem.tsx",
@@ -8311,6 +8312,153 @@
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/BannerPLP.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
+      "type": "string",
+      "format": "html",
+      "title": "HTML"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "image"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            }
+          ],
+          "type": "string",
+          "title": "Style"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "flex-start"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "flex-end"
+            }
+          ],
+          "type": "string",
+          "description": "Block alignment",
+          "title": "Alignment"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "full"
+            },
+            {
+              "type": "string",
+              "const": "large"
+            },
+            {
+              "type": "string",
+              "const": "small"
+            }
+          ],
+          "type": "string",
+          "description": "Block sizing",
+          "default": "full",
+          "title": "Size"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "mobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Mobile"
+            },
+            "desktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Desktop"
+            },
+            "alt": {
+              "type": "string",
+              "title": "Alt"
+            },
+            "href": {
+              "type": "string",
+              "title": "Href"
+            },
+            "maxHeight": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Max Height"
+            }
+          },
+          "required": [
+            "alt",
+            "href"
+          ],
+          "title": "Image"
+        },
+        "text": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "description": "Content for text-styled block",
+          "title": "Text"
+        },
+        "visibility": {
+          "type": "object",
+          "properties": {
+            "mobile": {
+              "type": "boolean",
+              "title": "Mobile"
+            },
+            "desktop": {
+              "type": "boolean",
+              "title": "Desktop"
+            }
+          },
+          "required": [
+            "mobile",
+            "desktop"
+          ],
+          "title": "Visibility",
+          "description": "Hide or show block by screen size"
+        }
+      },
+      "required": [
+        "style",
+        "alignment",
+        "size",
+        "visibility"
+      ],
+      "title": "Block"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block"
+      },
+      "title": "Block[]"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block[]",
+          "title": "Blocks"
+        }
+      },
+      "required": [
+        "blocks"
+      ],
+      "title": "deco-sites/carolbassi/components/ui/Blocks.tsx@Props"
+    },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video": {
       "type": "string",
       "format": "video-uri",
@@ -9123,11 +9271,6 @@
         "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image"
       },
       "title": "Image[]"
-    },
-    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
-      "type": "string",
-      "format": "html",
-      "title": "HTML"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Props": {
       "type": "object",
@@ -11978,6 +12121,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jsb2Nrcy50c3g=": {
+      "title": "deco-sites/carolbassi/sections/Blocks.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/sections/Blocks.tsx"
+          ],
+          "default": "deco-sites/carolbassi/sections/Blocks.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Nhcm91c2VsLnRzeA==": {
       "title": "deco-sites/carolbassi/sections/Carousel.tsx",
       "type": "object",
@@ -13412,6 +13576,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jhbm5lclBMUC50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jsb2Nrcy50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Nhcm91c2VsLnRzeA=="
