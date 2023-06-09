@@ -124,7 +124,7 @@ function ImageOrVideo(
                     (
                       <div
                         style={getContentAlignment()}
-                        class="absolute top-0 left-0"
+                        class="absolute"
                       >
                         <Quilltext html={overContent.content} />
                       </div>
@@ -178,7 +178,7 @@ function ImageOrVideo(
                     (
                       <div
                         style={getContentAlignment()}
-                        class="absolute top-0 left-0"
+                        class="absolute"
                       >
                         <Quilltext html={overContent.content} />
                       </div>

@@ -9328,7 +9328,21 @@
       "type": "object",
       "properties": {
         "src": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "type": "object",
+          "properties": {
+            "mobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Mobile"
+            },
+            "desktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Desktop"
+            }
+          },
+          "required": [
+            "mobile",
+            "desktop"
+          ],
           "title": "Src"
         },
         "alt": {
@@ -9342,6 +9356,63 @@
         "label": {
           "type": "string",
           "title": "Label"
+        },
+        "overContent": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Content"
+            },
+            "alignment": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "top-left"
+                },
+                {
+                  "type": "string",
+                  "const": "top-center"
+                },
+                {
+                  "type": "string",
+                  "const": "top-right"
+                },
+                {
+                  "type": "string",
+                  "const": "left-center"
+                },
+                {
+                  "type": "string",
+                  "const": "center"
+                },
+                {
+                  "type": "string",
+                  "const": "right-center"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-left"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-center"
+                },
+                {
+                  "type": "string",
+                  "const": "bottom-right"
+                }
+              ],
+              "type": "string",
+              "title": "Alignment"
+            }
+          },
+          "required": [
+            "content",
+            "alignment"
+          ],
+          "title": "Over-image content",
+          "description": "allows custom html content over the image (only works for images)"
         }
       },
       "required": [
@@ -9366,14 +9437,22 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSGlnaGxpZ2h0cy50c3g=@Highlight[]",
           "title": "Highlights"
         },
-        "title": {
-          "type": "string",
-          "title": "Title"
+        "desktopTitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Desktop Title"
+        },
+        "mobileTitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Mobile Title"
         }
       },
-      "required": [
-        "title"
-      ],
+      "required": [],
       "title": "deco-sites/carolbassi/components/ui/Highlights.tsx@Props"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@Props": {
