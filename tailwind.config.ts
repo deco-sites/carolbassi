@@ -30,6 +30,9 @@ export default {
       center: true,
     },
     extend: {
+      screens: {
+        lg2: "1180px",
+      },
       gridTemplateRows: {
         "8": "repeat(8, minmax(0, 1fr))",
       },
