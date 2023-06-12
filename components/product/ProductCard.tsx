@@ -18,6 +18,12 @@ interface Props {
 
   width?: number;
   height?: number;
+
+  hideProps?: {
+    hideName?: boolean;
+    hidePrice?: boolean;
+    hideListPrice?: boolean;
+  };
 }
 
 const relative = (url: string) => {
@@ -26,7 +32,8 @@ const relative = (url: string) => {
 };
 
 function ProductCard(
-  { product, preload, itemListName, width = 200, height = 279 }: Props,
+  { product, preload, itemListName, width = 309, height = 464, hideProps }:
+    Props,
 ) {
   const {
     url,
@@ -57,12 +64,15 @@ function ProductCard(
 
   return (
     <div
-      class="card card-compact group w-full rounded-none"
+      class="card card-compact group w-full rounded-none max-w-[433px] mx-auto lg:mx-0"
       data-deco="view-product"
       id={`product-card-${productID}`}
       {...sendEventOnClick(clickEvent)}
     >
-      <figure class="relative " style={{ aspectRatio: `${width} / ${height}` }}>
+      <figure
+        class="relative rounded-lg"
+        style={{ aspectRatio: `${width} / ${height}` }}
+      >
         {/* Wishlist button */}
         {
           /* <div class="absolute top-0 right-0 z-10">
@@ -115,12 +125,26 @@ function ProductCard(
       </figure>
       {/* Prices & Name */}
       <div class="card-body">
-        <h2 class="card-title whitespace-nowrap overflow-hidden">{name}</h2>
+        <h2
+          class={`${
+            hideProps?.hideName ? "hidden" : "block"
+          } card-title whitespace-nowrap overflow-hidden`}
+        >
+          {name}
+        </h2>
         <div class="flex items-end gap-2">
-          <span class="line-through text-base-300 text-xs">
+          <span
+            class={`${
+              hideProps?.hideListPrice ? "hidden" : "block"
+            } line-through text-base-300 text-xs`}
+          >
             {formatPrice(listPrice, offers!.priceCurrency!)}
           </span>
-          <span class="text-secondary">
+          <span
+            class={`${
+              hideProps?.hidePrice ? "hidden" : "block"
+            } text-secondary`}
+          >
             {formatPrice(price, offers!.priceCurrency!)}
           </span>
         </div>
