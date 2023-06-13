@@ -21,7 +21,7 @@ function Searchbar({ searchbar }: Props) {
       <div
         class={`${
           open ? "block" : "hidden"
-        } absolute top-0 left-0 w-full bg-white z-10 lg:static lg:bg-transparent`}
+        } absolute top-0 left-0 w-full bg-white z-10 lg:static lg:bg-transparent lg:mr-[17px]`}
       >
         {open && (
           <Suspense fallback={<Loading />}>
