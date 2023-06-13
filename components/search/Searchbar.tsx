@@ -90,8 +90,6 @@ function Searchbar({
     Boolean(!searchInputRef?.current?.value?.length) &&
     focused.value;
 
-  console.log(suggestions.value?.searches, "suggestions.value?.searches");
-
   useEffect(() => {
     setSearch("", MAX_TOP_SEARCHS);
   }, []);
@@ -131,7 +129,10 @@ function Searchbar({
                 });
               }
 
-              setSearch(value, value.length ? MAX_SUGGESTIONS_RESULT : MAX_TOP_SEARCHS);
+              setSearch(
+                value,
+                value.length ? MAX_SUGGESTIONS_RESULT : MAX_TOP_SEARCHS,
+              );
             }}
             placeholder={placeholder}
             role="combobox"
@@ -151,7 +152,10 @@ function Searchbar({
               });
             }
 
-            setSearch(value ?? "", value ? MAX_SUGGESTIONS_RESULT : MAX_TOP_SEARCHS);
+            setSearch(
+              value ?? "",
+              value ? MAX_SUGGESTIONS_RESULT : MAX_TOP_SEARCHS,
+            );
           }}
         >
           <Icon
