@@ -7707,6 +7707,48 @@
         "title": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
           "title": "Title"
+        },
+        "placeholderEmail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Placeholder Email"
+        },
+        "colorButton": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Color Button"
+        },
+        "colorButtonMobile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Color Button Mobile"
+        },
+        "textSubmitButton": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Text Submit Button"
+        },
+        "successText": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Success Text"
+        },
+        "errorText": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Error Text"
         }
       },
       "required": [],
@@ -9319,19 +9361,62 @@
           },
           "title": "Social"
         },
-        "title": {
+        "titleMobile": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-          "title": "Title"
+          "title": "Title Mobile"
         },
         "titleDesktop": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
           "title": "Title Desktop"
+        },
+        "newsletter": {
+          "type": "object",
+          "properties": {
+            "placeholderEmail": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Placeholder Email"
+            },
+            "colorButton": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Color Button"
+            },
+            "textSubmitButton": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Text Submit Button"
+            },
+            "successText": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Success Text"
+            },
+            "errorText": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Error Text"
+            }
+          },
+          "required": [],
+          "title": "Newsletter"
         }
       },
       "required": [
         "social",
-        "title",
-        "titleDesktop"
+        "titleMobile",
+        "titleDesktop",
+        "newsletter"
       ],
       "title": "deco-sites/carolbassi/components/footer/Footer.tsx@Props"
     },

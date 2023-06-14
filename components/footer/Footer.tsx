@@ -76,19 +76,26 @@ export interface Props {
     /** @description If checked opens another page */
     targetOn?: boolean;
   }[];
-  title: HTML;
+  titleMobile: HTML;
   titleDesktop: HTML;
+  newsletter: {
+    placeholderEmail?: string;
+    colorButton?: string;
+    textSubmitButton?: string;
+    successText?: string;
+    errorText?: string;
+  };
 }
 
 function Footer(
-  { sections = [], social, title, titleDesktop }: Props,
+  { sections = [], social, titleMobile, titleDesktop, newsletter }: Props,
 ) {
   return (
     <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
       <div>
         <div class="max-w-[unset] container w-full flex flex-col">
           <FooterContainer class="lg:hidden">
-            <Newsletter title={title} />
+            <Newsletter title={titleMobile} {...newsletter} />
           </FooterContainer>
 
           <FooterContainer class="xl:px-0 xl:flex xl:justify-center">
