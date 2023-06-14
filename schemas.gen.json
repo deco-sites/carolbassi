@@ -9118,12 +9118,12 @@
           "type": "string",
           "title": "Href"
         },
-        "targetOn": {
+        "openLinkInNewTab": {
           "type": [
             "boolean",
             "null"
           ],
-          "title": "Target On"
+          "title": "Open Link In New Tab"
         }
       },
       "required": [
@@ -9346,12 +9346,12 @@
                 "type": "string",
                 "title": "Link"
               },
-              "targetOn": {
+              "openLinkInNewTab": {
                 "type": [
                   "boolean",
                   "null"
                 ],
-                "title": "Target On"
+                "title": "Open Link In New Tab"
               }
             },
             "required": [

@@ -11,8 +11,7 @@ export type IconItem = { icon: AvailableIcons };
 export type StringItem = {
   label: string;
   href: string;
-  /** @description If checked opens another page */
-  targetOn?: boolean;
+  openLinkInNewTab?: boolean;
 };
 
 export type Item = StringItem | IconItem;
@@ -43,7 +42,7 @@ function SectionItem({ item }: { item: Item }) {
         : (
           <a
             rel="noreferrer noopener"
-            target={`${item.targetOn ? "_blank" : "_self"}`}
+            target={`${item.openLinkInNewTab ? "_blank" : "_self"}`}
             href={item.href}
           >
             {item.label}
@@ -74,7 +73,7 @@ export interface Props {
     image: LiveImage;
     link: string;
     /** @description If checked opens another page */
-    targetOn?: boolean;
+    openLinkInNewTab?: boolean;
   }[];
   titleMobile: HTML;
   titleDesktop: HTML;
@@ -138,7 +137,9 @@ function Footer(
                     {social.map((socials) => (
                       <a
                         rel="noreferrer noopener"
-                        target={`${socials.targetOn ? "_blank" : "_self"}`}
+                        target={`${
+                          socials.openLinkInNewTab ? "_blank" : "_self"
+                        }`}
                         href={socials.link}
                       >
                         <img src={socials.image} />
@@ -192,7 +193,7 @@ function Footer(
                 {social.map((socials) => (
                   <a
                     rel="noreferrer noopener"
-                    target={`${socials.targetOn ? "_blank" : "_self"}`}
+                    target={`${socials.openLinkInNewTab ? "_blank" : "_self"}`}
                     href={socials.link}
                   >
                     <img src={socials.image} />
