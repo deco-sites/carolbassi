@@ -11,8 +11,7 @@ export type IconItem = { icon: AvailableIcons };
 export type StringItem = {
   label: string;
   href: string;
-  /** @description If checked opens another page */
-  targetOn?: boolean;
+  openLinkInNewTab?: boolean;
 };
 
 export type Item = StringItem | IconItem;
@@ -43,7 +42,7 @@ function SectionItem({ item }: { item: Item }) {
         : (
           <a
             rel="noreferrer noopener"
-            target={`${item.targetOn ? "_blank" : "_self"}`}
+            target={`${item.openLinkInNewTab ? "_blank" : "_self"}`}
             href={item.href}
           >
             {item.label}
@@ -74,21 +73,28 @@ export interface Props {
     image: LiveImage;
     link: string;
     /** @description If checked opens another page */
-    targetOn?: boolean;
+    openLinkInNewTab?: boolean;
   }[];
-  title: HTML;
+  titleMobile: HTML;
   titleDesktop: HTML;
+  newsletter: {
+    placeholderEmail?: string;
+    colorButton?: string;
+    textSubmitButton?: string;
+    successText?: string;
+    errorText?: string;
+  };
 }
 
 function Footer(
-  { sections = [], social, title, titleDesktop }: Props,
+  { sections = [], social, titleMobile, titleDesktop, newsletter }: Props,
 ) {
   return (
     <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
       <div>
         <div class="max-w-[unset] container w-full flex flex-col">
           <FooterContainer class="lg:hidden">
-            <Newsletter title={title} />
+            <Newsletter title={titleMobile} {...newsletter} />
           </FooterContainer>
 
           <FooterContainer class="xl:px-0 xl:flex xl:justify-center">
@@ -131,7 +137,9 @@ function Footer(
                     {social.map((socials) => (
                       <a
                         rel="noreferrer noopener"
-                        target={`${socials.targetOn ? "_blank" : "_self"}`}
+                        target={`${
+                          socials.openLinkInNewTab ? "_blank" : "_self"
+                        }`}
                         href={socials.link}
                       >
                         <img src={socials.image} />
@@ -185,7 +193,7 @@ function Footer(
                 {social.map((socials) => (
                   <a
                     rel="noreferrer noopener"
-                    target={`${socials.targetOn ? "_blank" : "_self"}`}
+                    target={`${socials.openLinkInNewTab ? "_blank" : "_self"}`}
                     href={socials.link}
                   >
                     <img src={socials.image} />
