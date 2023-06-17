@@ -176,7 +176,7 @@ function Header(
           <style
             dangerouslySetInnerHTML={{
               __html: `
-            header {
+            header#main-header {
               min-height: ${headerHeight};
               background-color: ${
                 transparent
@@ -190,7 +190,7 @@ function Header(
             ${
                 transparent && `
             @media screen and (min-width: 1024px) {
-              header {
+              header#main-header {
                 background-color: rgba(255,255,255,${
                   (100 - (transparencyLevel?.desktop ?? 100)) / 100
                 })`
@@ -203,7 +203,7 @@ function Header(
           <style
             dangerouslySetInnerHTML={{
               __html: `
-                  header {
+                  header#main-header {
                     background-color: white;
                   }
               `,
@@ -211,6 +211,7 @@ function Header(
           />
         )}
       <header
+        id="main-header"
         class={`w-full z-50 hover:bg-white`}
         onMouseEnter={() => isHeaderHovered.value = true}
         onMouseLeave={() => isHeaderHovered.value = false}

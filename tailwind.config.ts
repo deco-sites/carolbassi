@@ -31,6 +31,7 @@ export default {
     },
     extend: {
       screens: {
+        xs: "415px",
         lg2: "1180px",
       },
       gridTemplateRows: {

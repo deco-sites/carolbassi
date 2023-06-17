@@ -1,3 +1,4 @@
+import { useSignal } from "@preact/signals";
 import Buttons from "deco-sites/fashion/islands/HeaderButton.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import type { INavItem } from "./NavItem.tsx";
@@ -9,12 +10,19 @@ export interface Props {
   cartIcon?: AvailableIcons;
 }
 
-function MenuItem({ item }: { item: INavItem }) {
-  return (
-    <div class="collapse">
-      <input type="checkbox" class="min-h-0" />
+function MenuItemChild({ item }: { item: INavItem }) {
+  return <div class="text-base leading-base">{item.label}</div>;
+}
 
-      <div class="collapse-title h-auto min-h-0 p-0 flex justify-between">
+function MenuItem({ item }: { item: INavItem }) {
+  const menuOpened = useSignal(false);
+
+  return (
+    <div class="flex flex-col">
+      <div
+        onClick={() => menuOpened.value = true}
+        class="h-auto min-h-0 p-0 flex justify-between"
+      >
         <div
           class={`text-lg leading-base ${
             item.highlight && "text-accent-content"
@@ -27,23 +35,36 @@ function MenuItem({ item }: { item: INavItem }) {
         )}
       </div>
 
-      <div class="collapse-content">
-        <ul class="flex flex-col gap-3 mt-3">
-          {item.children?.map((node) => (
-            <li>
-              <MenuItem item={node} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function MenuItemChilds({ item }: { item: INavItem }) {
-  return (
-    <div class="absolute top-0 left-0 z-50 flex flex-col bg-white">
-      <div class="text-lg leading-base text-center">{item.label}</div>
+      {menuOpened.value && (
+        <div class="fixed w-full h-full top-0 left-0 z-50 flex flex-col bg-white">
+          <div
+            onClick={() => menuOpened.value = false}
+            class="h-12 px-6 flex justify-center items-end text-2xl font-normal"
+          >
+            <Icon
+              class="absolute left-[27px] top-[18px]"
+              id="ChevronLeft"
+              width={7}
+              height={22}
+            />
+            {item.label}
+            <Icon
+              class="absolute right-[9px] top-3"
+              id="XMark"
+              width={34}
+              height={20}
+              strokeWidth={1}
+            />
+          </div>
+          <ul class="flex flex-wrap justify-start w-[390px] gap-4 mt-7 pl-5">
+            {item.children?.map((node) => (
+              <li class="w-[41%]">
+                <MenuItemChild item={node} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
