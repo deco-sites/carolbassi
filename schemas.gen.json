@@ -87,6 +87,7 @@
               "deco-sites/carolbassi/sections/BannerGrid.tsx",
               "deco-sites/carolbassi/sections/BannerPLP.tsx",
               "deco-sites/carolbassi/sections/Blocks.tsx",
+              "deco-sites/carolbassi/sections/CardsWithAction.tsx",
               "deco-sites/carolbassi/sections/Carousel.tsx",
               "deco-sites/carolbassi/sections/CookieConsent.tsx",
               "deco-sites/carolbassi/sections/DesignSystem.tsx",
@@ -7960,10 +7961,6 @@
           ],
           "title": "Path"
         },
-        "layout": {
-          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2Jsb2Nrcy9wYWdlLnRz@Page",
-          "title": "Layout"
-        },
         "sections": {
           "$ref": "#/definitions/ZGVjby1jeC9saXZlL2Jsb2Nrcy9zZWN0aW9uLnRz@Section[]",
           "title": "Sections"
@@ -8504,6 +8501,98 @@
         "blocks"
       ],
       "title": "deco-sites/carolbassi/components/ui/Blocks.tsx@Props"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Card": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "object",
+          "properties": {
+            "mobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Mobile"
+            },
+            "desktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Desktop"
+            },
+            "alt": {
+              "type": "string",
+              "title": "Alt"
+            }
+          },
+          "required": [
+            "mobile",
+            "desktop",
+            "alt"
+          ],
+          "title": "Image"
+        },
+        "href": {
+          "type": "string",
+          "description": "When user clicks on the card, go to this link",
+          "title": "Href"
+        }
+      },
+      "required": [
+        "image",
+        "href"
+      ],
+      "title": "Card"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Card[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Card"
+      },
+      "title": "Card[]"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Section title",
+          "title": "Title"
+        },
+        "subTitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Section sub-title",
+          "title": "Sub Title"
+        },
+        "cards": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Card[]",
+          "title": "Cards"
+        },
+        "actionButton": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "title": "Label"
+            },
+            "href": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Href"
+            }
+          },
+          "required": [
+            "label"
+          ],
+          "title": "Action Button"
+        }
+      },
+      "required": [
+        "title",
+        "cards"
+      ],
+      "title": "deco-sites/carolbassi/components/ui/CardsWithAction.tsx@Props"
     },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video": {
       "type": "string",
@@ -10530,7 +10619,7 @@
       ],
       "title": "WorkflowRef"
     },
-    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@2dc3ea494e366f0c07f2bf4cd27907ef|WorkflowRef": {
+    "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef|bfe6ccba30e7af0b18b9e42b06cabfe4": {
       "anyOf": [
         {
           "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef"
@@ -10548,13 +10637,13 @@
           ]
         }
       ],
-      "title": "2dc3ea494e366f0c07f2bf4cd27907ef|WorkflowRef"
+      "title": "WorkflowRef|bfe6ccba30e7af0b18b9e42b06cabfe4"
     },
     "ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@Props": {
       "type": "object",
       "properties": {
         "workflow": {
-          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@2dc3ea494e366f0c07f2bf4cd27907ef|WorkflowRef",
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2FjdGlvbnMvd29ya2Zsb3dzL3N0YXJ0LnRz@WorkflowRef|bfe6ccba30e7af0b18b9e42b06cabfe4",
           "title": "Workflow"
         },
         "id": {
@@ -12504,6 +12593,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0NhcmRzV2l0aEFjdGlvbi50c3g=": {
+      "title": "deco-sites/carolbassi/sections/CardsWithAction.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQ2FyZHNXaXRoQWN0aW9uLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/sections/CardsWithAction.tsx"
+          ],
+          "default": "deco-sites/carolbassi/sections/CardsWithAction.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Nhcm91c2VsLnRzeA==": {
       "title": "deco-sites/carolbassi/sections/Carousel.tsx",
       "type": "object",
@@ -13964,6 +14074,9 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jsb2Nrcy50c3g="
         },
         {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0NhcmRzV2l0aEFjdGlvbi50c3g="
+        },
+        {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Nhcm91c2VsLnRzeA=="
         },
         {
@@ -14166,7 +14279,8 @@
       "required": [
         "./routes/_middleware.ts",
         "./routes/[...catchall].tsx",
-        "./routes/index.tsx"
+        "./routes/index.tsx",
+        "./routes/live/previews/index.tsx"
       ],
       "properties": {
         "./routes/_middleware.ts": {
@@ -14187,6 +14301,13 @@
           "anyOf": [
             {
               "$ref": "#/definitions/ZGVjby1jeC9saXZlL2Jsb2Nrcy9oYW5kbGVyLnRz@Handler"
+            }
+          ]
+        },
+        "./routes/live/previews/index.tsx": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ZGVjby1jeC9saXZlL2Jsb2Nrcy9wYWdlLnRz@Page"
             }
           ]
         }
