@@ -51,7 +51,7 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
           />
         </a>
 
-        <div class="flex gap-4 w-full justify-center">
+        <div class="flex gap-4 w-full justify-end pr-3 xs:justify-center xs:pr-0">
           <Searchbar searchbar={searchbar} />
           <Buttons variant="search" icon={navButtons?.searchbar} />
           <Buttons variant="cart" icon={navButtons?.shoppingCart} />
