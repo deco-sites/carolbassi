@@ -66,28 +66,42 @@ function FooterContainer(
     </div>
   );
 }
+export interface Newsletter {
+  placeholderEmail?: string;
+  /**
+   * @format color
+   * @description Button desktop background-color
+   */
+  colorButton?: string;
+  /**
+   * @format color
+   * @description Button mobile background-color
+   */
+  colorButtonMobile?: string;
+  /** @description Button text */
+  textSubmitButton?: string;
+  /** @description Message when the user succesfully registers */
+  successText?: string;
+  /** @description Message when registers fails */
+  errorText?: string;
+}
 
 export interface Props {
   sections?: Section[];
+  titleSocial: string;
   social: {
     image: LiveImage;
     link: string;
-    /** @description If checked opens another page */
     openLinkInNewTab?: boolean;
   }[];
   titleMobile: HTML;
   titleDesktop: HTML;
-  newsletter: {
-    placeholderEmail?: string;
-    colorButton?: string;
-    textSubmitButton?: string;
-    successText?: string;
-    errorText?: string;
-  };
+  newsletter: Newsletter;
 }
 
 function Footer(
-  { sections = [], social, titleMobile, titleDesktop, newsletter }: Props,
+  { sections = [], social, titleSocial, titleMobile, titleDesktop, newsletter }:
+    Props,
 ) {
   return (
     <footer class="w-full bg-neutral flex flex-col divide-y divide-primary-content">
@@ -131,7 +145,7 @@ function Footer(
 
                 <div class="hidden lg:flex flex-col mt-[22px]">
                   <span class="font-normal text-lg mb-[13px] text-primary">
-                    Follow us
+                    {titleSocial ? titleSocial : "Follow us"}
                   </span>
                   <div class="flex gap-5">
                     {social.map((socials) => (
@@ -187,7 +201,7 @@ function Footer(
 
             <div class="lg:hidden flex flex-col px-4 sm:px-8 mt-3 h-[154px] border-b-[1px] border-solid border-[hsla(0,0%,40%,.4)]">
               <span class="font-normal text-lg mb-[13px] text-primary">
-                Follow us
+                {titleSocial ? titleSocial : "Follow us"}
               </span>
               <div class="flex gap-5">
                 {social.map((socials) => (

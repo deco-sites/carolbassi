@@ -9318,12 +9318,72 @@
       },
       "title": "Section[]"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Newsletter": {
+      "type": "object",
+      "properties": {
+        "placeholderEmail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Placeholder Email"
+        },
+        "colorButton": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "color",
+          "description": "Button desktop background-color",
+          "title": "Color Button"
+        },
+        "colorButtonMobile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "color",
+          "description": "Button mobile background-color",
+          "title": "Color Button Mobile"
+        },
+        "textSubmitButton": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Button text",
+          "title": "Text Submit Button"
+        },
+        "successText": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Message when the user succesfully registers",
+          "title": "Success Text"
+        },
+        "errorText": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Message when registers fails",
+          "title": "Error Text"
+        }
+      },
+      "required": [],
+      "title": "Newsletter"
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Props": {
       "type": "object",
       "properties": {
         "sections": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Section[]",
           "title": "Sections"
+        },
+        "titleSocial": {
+          "type": "string",
+          "title": "Title Social"
         },
         "social": {
           "type": "array",
@@ -9362,49 +9422,12 @@
           "title": "Title Desktop"
         },
         "newsletter": {
-          "type": "object",
-          "properties": {
-            "placeholderEmail": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Placeholder Email"
-            },
-            "colorButton": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Color Button"
-            },
-            "textSubmitButton": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Text Submit Button"
-            },
-            "successText": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Success Text"
-            },
-            "errorText": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Error Text"
-            }
-          },
-          "required": [],
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@Newsletter",
           "title": "Newsletter"
         }
       },
       "required": [
+        "titleSocial",
         "social",
         "titleMobile",
         "titleDesktop",
