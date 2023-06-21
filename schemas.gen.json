@@ -84,6 +84,7 @@
               "$live/sections/PageInclude.tsx",
               "$live/sections/Slot.tsx",
               "$live/sections/UseSlot.tsx",
+              "deco-sites/carolbassi/sections/Alerts.tsx",
               "deco-sites/carolbassi/sections/BannerGrid.tsx",
               "deco-sites/carolbassi/sections/BannerPLP.tsx",
               "deco-sites/carolbassi/sections/Blocks.tsx",
@@ -7009,13 +7010,6 @@
           ],
           "title": "Logo"
         },
-        "alerts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "Alerts"
-        },
         "searchbar": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaGJhci50c3g=@EditableProps",
           "title": "Search Bar"
@@ -7684,7 +7678,6 @@
       },
       "required": [
         "logo",
-        "alerts",
         "navAlignment"
       ],
       "title": "deco-sites/carolbassi/components/header/Header.tsx@Props"
@@ -8091,6 +8084,42 @@
         "sections"
       ],
       "title": "deco-cx/live/sections/UseSlot.tsx@Props"
+    },
+    "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML"
+      },
+      "title": "HTML[]"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQWxlcnRzLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML[]",
+          "title": "Alerts"
+        },
+        "interval": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Autoplay interval",
+          "description": "time (in seconds) to start the carousel autoplay"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "format": "color",
+          "description": "Alerts bar background color",
+          "default": "#c4c4c4",
+          "title": "Background Color"
+        }
+      },
+      "required": [
+        "alerts",
+        "backgroundColor"
+      ],
+      "title": "deco-sites/carolbassi/components/ui/Alerts.tsx@Props"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyR3JpZC50c3g=@Banner": {
       "type": "object",
@@ -12553,6 +12582,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0FsZXJ0cy50c3g=": {
+      "title": "deco-sites/carolbassi/sections/Alerts.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQWxlcnRzLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/sections/Alerts.tsx"
+          ],
+          "default": "deco-sites/carolbassi/sections/Alerts.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jhbm5lckdyaWQudHN4": {
       "title": "deco-sites/carolbassi/sections/BannerGrid.tsx",
       "type": "object",
@@ -14086,6 +14136,9 @@
         },
         {
           "$ref": "#/definitions/JGxpdmUvc2VjdGlvbnMvVXNlU2xvdC50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0FsZXJ0cy50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0Jhbm5lckdyaWQudHN4"
