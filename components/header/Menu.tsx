@@ -35,36 +35,42 @@ function MenuItem({ item }: { item: INavItem }) {
         )}
       </div>
 
-      {menuOpened.value && (
-        <div class="fixed w-full h-full top-0 left-0 z-50 flex flex-col bg-white">
-          <div
-            onClick={() => menuOpened.value = false}
-            class="h-12 px-6 flex justify-center items-end text-2xl font-normal"
-          >
-            <Icon
-              class="absolute left-[27px] top-[18px]"
-              id="ChevronLeft"
-              width={7}
-              height={22}
-            />
-            {item.label}
-            <Icon
-              class="absolute right-[9px] top-3"
-              id="XMark"
-              width={34}
-              height={20}
-              strokeWidth={1}
-            />
-          </div>
-          <ul class="flex flex-wrap justify-start w-[390px] gap-4 mt-7 pl-5">
-            {item.children?.map((node) => (
-              <li class="w-[41%]">
-                <MenuItemChild item={node} />
-              </li>
-            ))}
-          </ul>
+      <div
+        class={`fixed w-full h-full top-0 left-0 z-50 flex flex-col bg-white ${
+          menuOpened.value ? "opacity-1" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          onClick={() => menuOpened.value = false}
+          class="h-12 px-6 flex justify-center items-end text-2xl font-normal"
+        >
+          <Icon
+            class="absolute left-[27px] top-[18px]"
+            id="ChevronLeft"
+            width={7}
+            height={22}
+          />
+          {item.label}
+          <Icon
+            class="absolute right-[9px] top-3"
+            id="XMark"
+            width={34}
+            height={20}
+            strokeWidth={1}
+          />
         </div>
-      )}
+        <ul
+          class={`flex flex-wrap justify-start w-[390px] gap-4 mt-7 pl-5 overflow-hidden transition-all duration-300 ease-in-out h-max ${
+            menuOpened.value ? "max-h-full" : "max-h-0"
+          }`}
+        >
+          {item.children?.map((node) => (
+            <li class="w-[41%]">
+              <MenuItemChild item={node} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

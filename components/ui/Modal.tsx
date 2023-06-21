@@ -24,6 +24,9 @@ const dialogStyles = {
   "sidebar-right": "animate-slide-left",
   "sidebar-left": "animate-slide-right",
   center: "animate-fade-in",
+  "sidebar-left-close": "-translate-x-full",
+  "sidebar-right-close": "translate-x-full",
+  "center-close": "",
 };
 
 const sectionStyles = {
@@ -55,7 +58,6 @@ const Modal = ({
       document.getElementsByTagName("body").item(0)?.classList.remove(
         "no-scroll",
       );
-      ref.current?.open === true && ref.current.close();
     } else if (open === true) {
       document.getElementsByTagName("body").item(0)?.classList.add(
         "no-scroll",
@@ -65,17 +67,26 @@ const Modal = ({
     }
   }, [open]);
 
+  const handleCloseDialog = () => {
+    ref.current?.classList.add(dialogStyles[`${mode}-close`]);
+    setTimeout(() => {
+      ref.current?.classList.remove(dialogStyles[`${mode}-close`]);
+      onClose?.(); 
+      ref.current?.close();
+    }, 200);
+  };
+
   return (
     <dialog
       {...props}
       ref={ref}
-      class={`bg-transparent p-0 m-0 max-w-full w-full max-h-full h-full backdrop-opacity-50 ${
+      class={`bg-transparent p-0 m-0 max-w-full w-full max-h-full h-full backdrop-opacity-50 transition-transform duration-200 ${
         dialogStyles[mode]
       } ${props.class ?? ""}`}
       onClick={(e) =>
         (e.target as HTMLDialogElement).tagName === "SECTION" && onClose?.()}
       // @ts-expect-error - This is a bug in types.
-      onClose={onClose}
+      onClose={handleCloseDialog}
     >
       <section
         class={`w-full h-full flex bg-transparent ${sectionStyles[mode]}`}
@@ -93,7 +104,7 @@ const Modal = ({
             )}
             <Button
               class="btn btn-ghost bg-transparent hover:bg-transparent ml-auto h-auto min-h-0 w-[34px] p-0"
-              onClick={onClose}
+              onClick={handleCloseDialog}
             >
               <Icon id="XMark" width={34} height={20} strokeWidth={1} />
             </Button>
