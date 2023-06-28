@@ -4,6 +4,7 @@ import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 import { sendEvent } from "deco-sites/fashion/sdk/analytics.tsx";
 import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
+import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import CartItem from "./CartItem.tsx";
 import Coupon from "./Coupon.tsx";
 
@@ -35,22 +36,29 @@ function Cart() {
   // Empty State
   if (isCartEmpty) {
     return (
-      <div class="flex flex-col justify-center items-center h-full gap-6">
-        <span class="font-medium text-2xl">Sua sacola está vazia</span>
-        <Button
-          class="btn-outline"
-          onClick={() => {
-            displayCart.value = false;
-          }}
-        >
-          Escolher produtos
-        </Button>
+      <div class="flex flex-col justify-center items-center h-full gap-6 border-t border-[rgba(0,0,0,.13)]">
+        <span class="hidden lg:block font-normal text-base">
+          Seu carrinho está vazio {":("}
+        </span>
+        <span class="block lg:hidden text-warning-content">
+          <Icon id="FilledCart" width={64} height={64} />
+        </span>
       </div>
     );
   }
 
   return (
-    <>
+    <div class="flex flex-col h-full w-full border-t border-info">
+      <div class="absolute top-3 left-3">
+        <Icon
+          id="ShoppingCart"
+          width={30}
+          height={30}
+        />
+        <span class="absolute -top-2 left-5 bg-info rounded-full text-white w-[22px] h-[22px] grid place-items-center text-[13px] font-normal">
+          {cart.value.items.length.toString()}
+        </span>
+      </div>
       {/* Cart Items */}
       <ul
         role="list"
@@ -75,7 +83,7 @@ function Cart() {
               </span>
             </div>
           )}
-          <Coupon />
+          {/* <Coupon /> */}
         </div>
         {/* Total */}
         {total?.value && (
@@ -123,7 +131,7 @@ function Cart() {
           </a>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

@@ -7153,6 +7153,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "FilledCart"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut"
                 }
               ],
@@ -7292,6 +7296,10 @@
                 {
                   "type": "string",
                   "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "FilledCart"
                 },
                 {
                   "type": "string",
@@ -7437,6 +7445,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "FilledCart"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut"
                 }
               ],
@@ -7576,6 +7588,10 @@
                 {
                   "type": "string",
                   "const": "WhatsApp"
+                },
+                {
+                  "type": "string",
+                  "const": "FilledCart"
                 },
                 {
                   "type": "string",
@@ -9172,6 +9188,10 @@
             },
             {
               "type": "string",
+              "const": "FilledCart"
+            },
+            {
+              "type": "string",
               "const": "ArrowsPointingOut"
             }
           ],
@@ -9378,6 +9398,10 @@
             {
               "type": "string",
               "const": "WhatsApp"
+            },
+            {
+              "type": "string",
+              "const": "FilledCart"
             },
             {
               "type": "string",

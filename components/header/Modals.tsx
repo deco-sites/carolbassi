@@ -22,7 +22,6 @@ function Modals({ menu }: Props) {
   return (
     <>
       <Modal
-        class="max-w-md"
         mode="sidebar-left"
         loading="lazy"
         open={displayMenu.value}
@@ -36,8 +35,8 @@ function Modals({ menu }: Props) {
       </Modal>
 
       <Modal
-        title="Minha sacola"
-        mode="sidebar-right"
+        title="Sacola"
+        mode="side-minicart"
         loading="lazy"
         open={displayCart.value}
         onClose={() => {
