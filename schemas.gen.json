@@ -8628,13 +8628,26 @@
       "format": "video-uri",
       "title": "Video"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@Video": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video",
+          "title": "Source"
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "title": "Video"
+    },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video": {
       "anyOf": [
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image"
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@Video"
         }
       ],
       "title": "Image|Video"
@@ -8643,19 +8656,134 @@
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
-          "description": "desktop otimized image",
-          "title": "Desktop"
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+                  "title": "Content"
+                },
+                "verticalAlignment": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "top"
+                    },
+                    {
+                      "type": "string",
+                      "const": "center"
+                    },
+                    {
+                      "type": "string",
+                      "const": "bottom"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Vertical Alignment"
+                },
+                "horizontalAlignment": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "left"
+                    },
+                    {
+                      "type": "string",
+                      "const": "center"
+                    },
+                    {
+                      "type": "string",
+                      "const": "right"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Horizontal Alignment"
+                }
+              },
+              "required": [
+                "content",
+                "verticalAlignment",
+                "horizontalAlignment"
+              ],
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Desktop",
+          "description": "desktop optimized source"
         },
         "mobile": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
-          "description": "mobile otimized image",
-          "title": "Mobile"
-        },
-        "isVideo": {
-          "type": "boolean",
-          "description": "Check this if this is a video",
-          "title": "Is Video"
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+                  "title": "Content"
+                },
+                "verticalAlignment": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "top"
+                    },
+                    {
+                      "type": "string",
+                      "const": "center"
+                    },
+                    {
+                      "type": "string",
+                      "const": "bottom"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Vertical Alignment"
+                },
+                "horizontalAlignment": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "left"
+                    },
+                    {
+                      "type": "string",
+                      "const": "center"
+                    },
+                    {
+                      "type": "string",
+                      "const": "right"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Horizontal Alignment"
+                }
+              },
+              "required": [
+                "content",
+                "verticalAlignment",
+                "horizontalAlignment"
+              ],
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Mobile",
+          "description": "mobile optimized source"
         },
         "alt": {
           "type": "string",
@@ -8671,7 +8799,6 @@
       "required": [
         "desktop",
         "mobile",
-        "isVideo",
         "alt",
         "href"
       ],
