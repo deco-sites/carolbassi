@@ -20,6 +20,12 @@ export type SourceItem = LiveImage | Video;
 export type VerticalAlignment = "top" | "center" | "bottom";
 export type HorizontalAlignment = "left" | "center" | "right";
 
+export type OverContent = {
+  content: HTML;
+  verticalAlignment: VerticalAlignment;
+  horizontalAlignment: HorizontalAlignment;
+};
+
 export interface Banner {
   /** @description desktop optimized source */
   desktop: {
@@ -27,11 +33,7 @@ export interface Banner {
      * @title Over-image content
      * @description allows custom html content over the image (only works for images)
      */
-    overContent?: {
-      content: HTML;
-      verticalAlignment: VerticalAlignment;
-      horizontalAlignment: HorizontalAlignment;
-    };
+    overContent?: OverContent[];
     source: SourceItem;
   };
   /** @description mobile optimized source */
@@ -40,11 +42,7 @@ export interface Banner {
      * @title Over-image content
      * @description allows custom html content over the image (only works for images)
      */
-    overContent?: {
-      content: HTML;
-      verticalAlignment: VerticalAlignment;
-      horizontalAlignment: HorizontalAlignment;
-    };
+    overContent?: OverContent[];
     source: SourceItem;
   };
   /** @description Image's alt text */
@@ -152,17 +150,17 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
                 />
               </Picture>
               {desktop.overContent &&
-                (
+                desktop.overContent.map((overContent) => (
                   <div
                     style={getContentAlignment(
-                      desktop.overContent.verticalAlignment,
-                      desktop.overContent.horizontalAlignment,
+                      overContent.verticalAlignment,
+                      overContent.horizontalAlignment,
                     )}
                     class="absolute w-max"
                   >
-                    <Quilltext html={desktop.overContent.content} />
+                    <Quilltext html={overContent.content} />
                   </div>
-                )}
+                ))}
             </>
           )}
       </a>
@@ -201,17 +199,17 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
                 />
               </Picture>
               {mobile.overContent &&
-                (
+                mobile.overContent.map((overContent) => (
                   <div
                     style={getContentAlignment(
-                      mobile.overContent.verticalAlignment,
-                      mobile.overContent.horizontalAlignment,
+                      overContent.verticalAlignment,
+                      overContent.horizontalAlignment,
                     )}
                     class="absolute w-max"
                   >
-                    <Quilltext html={mobile.overContent.content} />
+                    <Quilltext html={overContent.content} />
                   </div>
-                )}
+                ))}
             </>
           )}
       </a>
