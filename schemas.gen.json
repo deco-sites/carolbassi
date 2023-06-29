@@ -9897,6 +9897,64 @@
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/Highlights.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        },
+        "verticalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent"
+      },
+      "title": "OverContent[]"
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@Props": {
       "type": "object",
       "properties": {
@@ -9907,15 +9965,12 @@
               "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
               "title": "Source"
             },
-            "isVideo": {
-              "type": "boolean",
-              "title": "Is Video"
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]",
+              "title": "Over Content"
             }
           },
-          "required": [
-            "source",
-            "isVideo"
-          ],
+          "required": [],
           "title": "Desktop",
           "description": "desktop optimized content"
         },
@@ -9926,74 +9981,14 @@
               "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
               "title": "Source"
             },
-            "isVideo": {
-              "type": "boolean",
-              "title": "Is Video"
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]",
+              "title": "Over Content"
             }
           },
-          "required": [
-            "source",
-            "isVideo"
-          ],
+          "required": [],
           "title": "Mobile",
           "description": "mobile optimized content"
-        },
-        "overContent": {
-          "type": "object",
-          "properties": {
-            "content": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-              "title": "Content"
-            },
-            "alignment": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "top-left"
-                },
-                {
-                  "type": "string",
-                  "const": "top-center"
-                },
-                {
-                  "type": "string",
-                  "const": "top-right"
-                },
-                {
-                  "type": "string",
-                  "const": "left-center"
-                },
-                {
-                  "type": "string",
-                  "const": "center"
-                },
-                {
-                  "type": "string",
-                  "const": "right-center"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-left"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-center"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-right"
-                }
-              ],
-              "type": "string",
-              "title": "Alignment"
-            }
-          },
-          "required": [
-            "content",
-            "alignment"
-          ],
-          "title": "Over-image content",
-          "description": "allows custom html content over the image (only works for images)"
         },
         "alt": {
           "type": [
