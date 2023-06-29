@@ -8709,6 +8709,64 @@
       ],
       "title": "deco-sites/carolbassi/components/ui/CardsWithAction.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        },
+        "verticalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent"
+      },
+      "title": "OverContent[]"
+    },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video": {
       "type": "string",
       "format": "video-uri",
@@ -8745,54 +8803,7 @@
           "type": "object",
           "properties": {
             "overContent": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-                  "title": "Content"
-                },
-                "verticalAlignment": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "const": "top"
-                    },
-                    {
-                      "type": "string",
-                      "const": "center"
-                    },
-                    {
-                      "type": "string",
-                      "const": "bottom"
-                    }
-                  ],
-                  "type": "string",
-                  "title": "Vertical Alignment"
-                },
-                "horizontalAlignment": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "const": "left"
-                    },
-                    {
-                      "type": "string",
-                      "const": "center"
-                    },
-                    {
-                      "type": "string",
-                      "const": "right"
-                    }
-                  ],
-                  "type": "string",
-                  "title": "Horizontal Alignment"
-                }
-              },
-              "required": [
-                "content",
-                "verticalAlignment",
-                "horizontalAlignment"
-              ],
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]",
               "title": "Over Content"
             },
             "source": {
@@ -8810,54 +8821,7 @@
           "type": "object",
           "properties": {
             "overContent": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-                  "title": "Content"
-                },
-                "verticalAlignment": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "const": "top"
-                    },
-                    {
-                      "type": "string",
-                      "const": "center"
-                    },
-                    {
-                      "type": "string",
-                      "const": "bottom"
-                    }
-                  ],
-                  "type": "string",
-                  "title": "Vertical Alignment"
-                },
-                "horizontalAlignment": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "const": "left"
-                    },
-                    {
-                      "type": "string",
-                      "const": "center"
-                    },
-                    {
-                      "type": "string",
-                      "const": "right"
-                    }
-                  ],
-                  "type": "string",
-                  "title": "Horizontal Alignment"
-                }
-              },
-              "required": [
-                "content",
-                "verticalAlignment",
-                "horizontalAlignment"
-              ],
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]",
               "title": "Over Content"
             },
             "source": {
