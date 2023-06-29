@@ -8389,28 +8389,18 @@
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/BannerPLP.tsx@Props"
     },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block": {
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent": {
       "type": "object",
       "properties": {
-        "style": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "image"
-            },
-            {
-              "type": "string",
-              "const": "text"
-            }
-          ],
-          "type": "string",
-          "title": "Style"
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
         },
-        "alignment": {
+        "verticalAlignment": {
           "anyOf": [
             {
               "type": "string",
-              "const": "flex-start"
+              "const": "top"
             },
             {
               "type": "string",
@@ -8418,7 +8408,137 @@
             },
             {
               "type": "string",
-              "const": "flex-end"
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Mobile"
+        },
+        "desktop": {
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Desktop"
+        },
+        "alt": {
+          "type": "string",
+          "title": "Alt"
+        },
+        "href": {
+          "type": "string",
+          "title": "Href"
+        },
+        "maxHeight": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Max Height"
+        }
+      },
+      "required": [
+        "alt",
+        "href"
+      ],
+      "title": "Image"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Text": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "title": "Text"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image|Text": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Text"
+        }
+      ],
+      "title": "Image|Text"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block": {
+      "type": "object",
+      "properties": {
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
             }
           ],
           "type": "string",
@@ -8445,43 +8565,9 @@
           "default": "full",
           "title": "Size"
         },
-        "image": {
-          "type": "object",
-          "properties": {
-            "mobile": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Mobile"
-            },
-            "desktop": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Desktop"
-            },
-            "alt": {
-              "type": "string",
-              "title": "Alt"
-            },
-            "href": {
-              "type": "string",
-              "title": "Href"
-            },
-            "maxHeight": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Max Height"
-            }
-          },
-          "required": [
-            "alt",
-            "href"
-          ],
-          "title": "Image"
-        },
-        "text": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-          "description": "Content for text-styled block",
-          "title": "Text"
+        "style": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image|Text",
+          "title": "Style"
         },
         "visibility": {
           "type": "object",
@@ -8504,9 +8590,9 @@
         }
       },
       "required": [
-        "style",
         "alignment",
         "size",
+        "style",
         "visibility"
       ],
       "title": "Block"
