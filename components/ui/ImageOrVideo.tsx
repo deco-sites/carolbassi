@@ -7,35 +7,31 @@ import type {
   Video as LiveVideo,
 } from "deco-sites/std/components/types.ts";
 
+export type Video = {
+  source: LiveVideo;
+};
+
+export type SourceItem = LiveImage | Video;
+
+export type VerticalAlignment = "top" | "center" | "bottom";
+export type HorizontalAlignment = "left" | "center" | "right";
+
+export type OverContent = {
+  content: HTML;
+  verticalAlignment: VerticalAlignment;
+  horizontalAlignment: HorizontalAlignment;
+};
+
 export interface Props {
   /** @description desktop optimized content */
   desktop?: {
-    source: LiveImage | LiveVideo;
-    /** @description Check this if this is a video */
-    isVideo: boolean;
+    source?: SourceItem;
+    overContent?: OverContent[];
   };
   /** @description mobile optimized content */
   mobile?: {
-    source: LiveImage | LiveVideo;
-    /** @description Check this if this is a video */
-    isVideo: boolean;
-  };
-  /**
-   * @title Over-image content
-   * @description allows custom html content over the image (only works for images)
-   */
-  overContent?: {
-    content: HTML;
-    alignment:
-      | "top-left"
-      | "top-center"
-      | "top-right"
-      | "left-center"
-      | "center"
-      | "right-center"
-      | "bottom-left"
-      | "bottom-center"
-      | "bottom-right";
+    source?: SourceItem;
+    overContent?: OverContent[];
   };
   /** @description Image's alt text */
   alt?: string;
@@ -47,41 +43,54 @@ export interface Props {
   preload?: boolean;
 }
 
-function ImageOrVideo(
-  { desktop, mobile, alt = "", href = "#!", preload = false, overContent }:
-    Props,
+const isVideo = (item: SourceItem): item is Video =>
+  // deno-lint-ignore no-explicit-any
+  typeof (item as any).source === "string";
+
+function getContentAlignment(
+  vertical: VerticalAlignment,
+  horizontal: HorizontalAlignment,
 ) {
-  const getContentAlignment = () => {
-    switch (overContent?.alignment) {
-      case "top-left":
-        return { top: 0, left: 0 };
-      case "top-center":
-        return { top: 0, left: "50%", transform: "translateX(-50%)" };
-      case "top-right":
-        return { top: 0, right: 0 };
-      case "left-center":
-        return { top: "50%", transform: "translateY(-50%)" };
-      case "center":
-        return { top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
-      case "right-center":
-        return { top: "50%", right: 0, transform: "translateY(-50%)" };
-      case "bottom-left":
-        return { bottom: 0, left: 0 };
-      case "bottom-center":
-        return { bottom: 0, left: "50%", transform: "translateX(-50%)" };
-      case "bottom-right":
-        return { bottom: 0, right: 0 };
-      default:
-        return {
-          top: 0,
-          left: 0,
-        };
-    }
-  };
+  let top = "0";
+  let left = "0";
+  let transform = "none";
+
+  switch (vertical) {
+    case "top":
+      break;
+    case "center":
+      top = "50%";
+      transform = "translateY(-50%)";
+      break;
+    case "bottom":
+      top = "100%";
+      transform = "translateY(-100%)";
+      break;
+  }
+
+  switch (horizontal) {
+    case "left":
+      break;
+    case "center":
+      left = "50%";
+      transform += " translateX(-50%)";
+      break;
+    case "right":
+      left = "100%";
+      transform += " translateX(-100%)";
+      break;
+  }
+
+  return { left, top, transform };
+}
+
+function ImageOrVideo(
+  { desktop, mobile, alt = "", href = "#!", preload = false }: Props,
+) {
   return (
     <>
       {/* Mobile view */}
-      {mobile && (
+      {mobile && mobile.source && (
         <div class="block lg:hidden mt-[60px] relative">
           <a
             href={href}
@@ -89,7 +98,7 @@ function ImageOrVideo(
             style={{ cursor: href === "#!" ? "auto" : "pointer" }}
             class="relative overflow-y-hidden w-full hover:opacity-95"
           >
-            {mobile.isVideo
+            {isVideo(mobile.source)
               ? (
                 <>
                   <video
@@ -99,7 +108,7 @@ function ImageOrVideo(
                     muted
                     preload={preload ? "auto" : "none"}
                   >
-                    <source src={mobile.source} type="video/mp4" />
+                    <source src={mobile.source.source} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </>
@@ -120,22 +129,25 @@ function ImageOrVideo(
                       alt={alt}
                     />
                   </Picture>
-                  {overContent &&
-                    (
+                  {mobile.overContent &&
+                    mobile.overContent.map((overContent) => (
                       <div
-                        style={getContentAlignment()}
+                        style={getContentAlignment(
+                          overContent.verticalAlignment,
+                          overContent.horizontalAlignment,
+                        )}
                         class="absolute"
                       >
                         <Quilltext html={overContent.content} />
                       </div>
-                    )}
+                    ))}
                 </>
               )}
           </a>
         </div>
       )}
       {/* Desktop View */}
-      {desktop && (
+      {desktop && desktop.source && (
         <div class="hidden lg:block mt-[67px] relative">
           <a
             href={href}
@@ -143,7 +155,7 @@ function ImageOrVideo(
             style={{ cursor: href === "#!" ? "auto" : "pointer" }}
             class="relative overflow-y-hidden w-full hover:opacity-95"
           >
-            {desktop.isVideo
+            {isVideo(desktop.source)
               ? (
                 <>
                   <video
@@ -153,7 +165,7 @@ function ImageOrVideo(
                     muted
                     preload={preload ? "auto" : "none"}
                   >
-                    <source src={desktop.source} type="video/mp4" />
+                    <source src={desktop.source.source} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </>
@@ -174,15 +186,18 @@ function ImageOrVideo(
                       alt={alt}
                     />
                   </Picture>
-                  {overContent &&
-                    (
+                  {desktop.overContent &&
+                    desktop.overContent.map((overContent) => (
                       <div
-                        style={getContentAlignment()}
+                        style={getContentAlignment(
+                          overContent.verticalAlignment,
+                          overContent.horizontalAlignment,
+                        )}
                         class="absolute"
                       >
                         <Quilltext html={overContent.content} />
                       </div>
-                    )}
+                    ))}
                 </>
               )}
           </a>

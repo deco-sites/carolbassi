@@ -8405,28 +8405,18 @@
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/BannerPLP.tsx@Props"
     },
-    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block": {
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent": {
       "type": "object",
       "properties": {
-        "style": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "image"
-            },
-            {
-              "type": "string",
-              "const": "text"
-            }
-          ],
-          "type": "string",
-          "title": "Style"
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
         },
-        "alignment": {
+        "verticalAlignment": {
           "anyOf": [
             {
               "type": "string",
-              "const": "flex-start"
+              "const": "top"
             },
             {
               "type": "string",
@@ -8434,7 +8424,137 @@
             },
             {
               "type": "string",
-              "const": "flex-end"
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Mobile"
+        },
+        "desktop": {
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@OverContent",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Desktop"
+        },
+        "alt": {
+          "type": "string",
+          "title": "Alt"
+        },
+        "href": {
+          "type": "string",
+          "title": "Href"
+        },
+        "maxHeight": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Max Height"
+        }
+      },
+      "required": [
+        "alt",
+        "href"
+      ],
+      "title": "Image"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Text": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "title": "Text"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image|Text": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Text"
+        }
+      ],
+      "title": "Image|Text"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Block": {
+      "type": "object",
+      "properties": {
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
             }
           ],
           "type": "string",
@@ -8461,43 +8581,9 @@
           "default": "full",
           "title": "Size"
         },
-        "image": {
-          "type": "object",
-          "properties": {
-            "mobile": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Mobile"
-            },
-            "desktop": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
-              "title": "Desktop"
-            },
-            "alt": {
-              "type": "string",
-              "title": "Alt"
-            },
-            "href": {
-              "type": "string",
-              "title": "Href"
-            },
-            "maxHeight": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "title": "Max Height"
-            }
-          },
-          "required": [
-            "alt",
-            "href"
-          ],
-          "title": "Image"
-        },
-        "text": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-          "description": "Content for text-styled block",
-          "title": "Text"
+        "style": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmxvY2tzLnRzeA==@Image|Text",
+          "title": "Style"
         },
         "visibility": {
           "type": "object",
@@ -8520,9 +8606,9 @@
         }
       },
       "required": [
-        "style",
         "alignment",
         "size",
+        "style",
         "visibility"
       ],
       "title": "Block"
@@ -8639,9 +8725,80 @@
       ],
       "title": "deco-sites/carolbassi/components/ui/CardsWithAction.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        },
+        "verticalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent"
+      },
+      "title": "OverContent[]"
+    },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video": {
       "type": "string",
       "format": "video-uri",
+      "title": "Video"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@Video": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video",
+          "title": "Source"
+        }
+      },
+      "required": [
+        "source"
+      ],
       "title": "Video"
     },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video": {
@@ -8650,7 +8807,7 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image"
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Video"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@Video"
         }
       ],
       "title": "Image|Video"
@@ -8659,19 +8816,40 @@
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
-          "description": "desktop otimized image",
-          "title": "Desktop"
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Desktop",
+          "description": "desktop optimized source"
         },
         "mobile": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
-          "description": "mobile otimized image",
-          "title": "Mobile"
-        },
-        "isVideo": {
-          "type": "boolean",
-          "description": "Check this if this is a video",
-          "title": "Is Video"
+          "type": "object",
+          "properties": {
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@OverContent[]",
+              "title": "Over Content"
+            },
+            "source": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
+              "title": "Source"
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "title": "Mobile",
+          "description": "mobile optimized source"
         },
         "alt": {
           "type": "string",
@@ -8687,7 +8865,6 @@
       "required": [
         "desktop",
         "mobile",
-        "isVideo",
         "alt",
         "href"
       ],
@@ -9708,6 +9885,64 @@
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/Highlights.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Content"
+        },
+        "verticalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "top"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "bottom"
+            }
+          ],
+          "type": "string",
+          "title": "Vertical Alignment"
+        },
+        "horizontalAlignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            }
+          ],
+          "type": "string",
+          "title": "Horizontal Alignment"
+        }
+      },
+      "required": [
+        "content",
+        "verticalAlignment",
+        "horizontalAlignment"
+      ],
+      "title": "OverContent"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent"
+      },
+      "title": "OverContent[]"
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@Props": {
       "type": "object",
       "properties": {
@@ -9718,15 +9953,12 @@
               "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
               "title": "Source"
             },
-            "isVideo": {
-              "type": "boolean",
-              "title": "Is Video"
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]",
+              "title": "Over Content"
             }
           },
-          "required": [
-            "source",
-            "isVideo"
-          ],
+          "required": [],
           "title": "Desktop",
           "description": "desktop optimized content"
         },
@@ -9737,74 +9969,14 @@
               "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image|Video",
               "title": "Source"
             },
-            "isVideo": {
-              "type": "boolean",
-              "title": "Is Video"
+            "overContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvSW1hZ2VPclZpZGVvLnRzeA==@OverContent[]",
+              "title": "Over Content"
             }
           },
-          "required": [
-            "source",
-            "isVideo"
-          ],
+          "required": [],
           "title": "Mobile",
           "description": "mobile optimized content"
-        },
-        "overContent": {
-          "type": "object",
-          "properties": {
-            "content": {
-              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
-              "title": "Content"
-            },
-            "alignment": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "top-left"
-                },
-                {
-                  "type": "string",
-                  "const": "top-center"
-                },
-                {
-                  "type": "string",
-                  "const": "top-right"
-                },
-                {
-                  "type": "string",
-                  "const": "left-center"
-                },
-                {
-                  "type": "string",
-                  "const": "center"
-                },
-                {
-                  "type": "string",
-                  "const": "right-center"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-left"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-center"
-                },
-                {
-                  "type": "string",
-                  "const": "bottom-right"
-                }
-              ],
-              "type": "string",
-              "title": "Alignment"
-            }
-          },
-          "required": [
-            "content",
-            "alignment"
-          ],
-          "title": "Over-image content",
-          "description": "allows custom html content over the image (only works for images)"
         },
         "alt": {
           "type": [
