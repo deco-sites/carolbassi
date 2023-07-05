@@ -4,6 +4,7 @@
 
 import config from "./deno.json" assert { type: "json" };
 import { DecoManifest } from "$live/types.ts";
+import * as $$$0 from "./loaders/customFilterSearch.ts";
 import * as $$$$0 from "./routes/api/[...catchall].tsx";
 import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/AddToCartButton.tsx";
@@ -152,6 +153,27 @@ import * as i2$$$$$18 from "deco-sites/std/actions/vtex/wishlist/addItem.ts";
 import * as i2$$$$$19 from "deco-sites/std/actions/vtex/wishlist/removeItem.ts";
 
 const manifest = {
+  "loaders": {
+    "$live/loaders/state.ts": i2$$$0,
+    "$live/loaders/workflows/events.ts": i2$$$1,
+    "$live/loaders/workflows/get.ts": i2$$$2,
+    "deco-sites/carolbassi/loaders/customFilterSearch.ts": $$$0,
+    "deco-sites/std/loaders/vtex/cart.ts": i2$$$3,
+    "deco-sites/std/loaders/vtex/intelligentSearch/productDetailsPage.ts":
+      i2$$$4,
+    "deco-sites/std/loaders/vtex/intelligentSearch/productList.ts": i2$$$5,
+    "deco-sites/std/loaders/vtex/intelligentSearch/productListingPage.ts":
+      i2$$$6,
+    "deco-sites/std/loaders/vtex/intelligentSearch/suggestions.ts": i2$$$7,
+    "deco-sites/std/loaders/vtex/legacy/productDetailsPage.ts": i2$$$8,
+    "deco-sites/std/loaders/vtex/legacy/productList.ts": i2$$$9,
+    "deco-sites/std/loaders/vtex/legacy/productListingPage.ts": i2$$$10,
+    "deco-sites/std/loaders/vtex/legacy/relatedProductsLoader.ts": i2$$$11,
+    "deco-sites/std/loaders/vtex/navbar.ts": i2$$$12,
+    "deco-sites/std/loaders/vtex/proxy.ts": i2$$$13,
+    "deco-sites/std/loaders/vtex/user.ts": i2$$$14,
+    "deco-sites/std/loaders/vtex/wishlist.ts": i2$$$15,
+  },
   "routes": {
     "./routes/_app.tsx": $$$$1,
     "./routes/_middleware.ts": $live_middleware,
@@ -217,26 +239,6 @@ const manifest = {
     "deco-sites/std/sections/SEOPDP.tsx": i2$$$$11,
     "deco-sites/std/sections/SEOPLP.tsx": i2$$$$12,
     "deco-sites/std/sections/VTEXPortalDataLayerCompatibility.tsx": i2$$$$13,
-  },
-  "loaders": {
-    "$live/loaders/state.ts": i2$$$0,
-    "$live/loaders/workflows/events.ts": i2$$$1,
-    "$live/loaders/workflows/get.ts": i2$$$2,
-    "deco-sites/std/loaders/vtex/cart.ts": i2$$$3,
-    "deco-sites/std/loaders/vtex/intelligentSearch/productDetailsPage.ts":
-      i2$$$4,
-    "deco-sites/std/loaders/vtex/intelligentSearch/productList.ts": i2$$$5,
-    "deco-sites/std/loaders/vtex/intelligentSearch/productListingPage.ts":
-      i2$$$6,
-    "deco-sites/std/loaders/vtex/intelligentSearch/suggestions.ts": i2$$$7,
-    "deco-sites/std/loaders/vtex/legacy/productDetailsPage.ts": i2$$$8,
-    "deco-sites/std/loaders/vtex/legacy/productList.ts": i2$$$9,
-    "deco-sites/std/loaders/vtex/legacy/productListingPage.ts": i2$$$10,
-    "deco-sites/std/loaders/vtex/legacy/relatedProductsLoader.ts": i2$$$11,
-    "deco-sites/std/loaders/vtex/navbar.ts": i2$$$12,
-    "deco-sites/std/loaders/vtex/proxy.ts": i2$$$13,
-    "deco-sites/std/loaders/vtex/user.ts": i2$$$14,
-    "deco-sites/std/loaders/vtex/wishlist.ts": i2$$$15,
   },
   "handlers": {
     "$live/handlers/devPage.ts": i2$$$$$$0,

@@ -23,16 +23,44 @@ input[type="number"] {
 }
 `;
 
+const opts = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
   const decrement = () => onChange?.(Math.max(0, quantity - 1));
 
   const increment = () =>
     onChange?.(Math.min(quantity + 1, QUANTITY_MAX_VALUE));
 
+  const handleRemove = () => {
+    console.log("oi");
+    onChange?.(0);
+  };
+
   return (
     <div class="form-control">
       <div class="input-group">
-        <Button
+        <select
+          class={`h-10 border-[#e3e4e6] border-[.125rem] rounded-[.25rem] text-base ${
+            loading ? "loading" : ""
+          }`}
+          disabled={disabled}
+        >
+          <option disabled></option>
+          <option
+            value="0"
+            onSelect={handleRemove}
+          >
+            0 - Remover
+          </option>
+          {opts.map((opt) => (
+            <option key={opt} value={opt} selected={quantity === +opt}>
+              {opt}
+            </option>
+          ))}
+          <option value="10" selected={quantity >= 10}>10 +</option>
+        </select>
+        {
+          /* <Button
           class="btn-square btn-outline"
           onClick={decrement}
           disabled={disabled}
@@ -58,7 +86,8 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
           loading={loading}
         >
           +
-        </Button>
+        </Button> */
+        }
       </div>
     </div>
   );

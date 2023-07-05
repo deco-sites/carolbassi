@@ -47,6 +47,7 @@
               "$live/loaders/state.ts",
               "$live/loaders/workflows/events.ts",
               "$live/loaders/workflows/get.ts",
+              "deco-sites/carolbassi/loaders/customFilterSearch.ts",
               "deco-sites/std/loaders/vtex/cart.ts",
               "deco-sites/std/loaders/vtex/intelligentSearch/productDetailsPage.ts",
               "deco-sites/std/loaders/vtex/intelligentSearch/productList.ts",
@@ -3719,6 +3720,735 @@
       ],
       "title": "deco-cx/live/loaders/workflows/get.ts@Props"
     },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "originalName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Original Name"
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Id"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SKUSpecificationField"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Id"
+        },
+        "fieldId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Field Id"
+        },
+        "originalName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Original Name"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SKUSpecificationValue"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationValue[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationValue"
+      },
+      "title": "SKUSpecificationValue[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SkuSpecification": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationField",
+          "title": "Field"
+        },
+        "values": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SKUSpecificationValue[]",
+          "title": "Values"
+        }
+      },
+      "required": [
+        "field",
+        "values"
+      ],
+      "title": "SkuSpecification"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SkuSpecification[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SkuSpecification"
+      },
+      "title": "SkuSpecification[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Price": {
+      "type": "object",
+      "properties": {
+        "highPrice": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "High Price"
+        },
+        "lowPrice": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Low Price"
+        }
+      },
+      "required": [
+        "highPrice",
+        "lowPrice"
+      ],
+      "title": "Price"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@PriceRange": {
+      "type": "object",
+      "properties": {
+        "sellingPrice": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Price",
+          "title": "Selling Price"
+        },
+        "listPrice": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Price",
+          "title": "List Price"
+        }
+      },
+      "required": [
+        "sellingPrice",
+        "listPrice"
+      ],
+      "title": "PriceRange"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SpecificationGroup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "originalName": {
+          "type": "string",
+          "title": "Original Name"
+        },
+        "specifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Name"
+              },
+              "originalName": {
+                "type": "string",
+                "title": "Original Name"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Values"
+              }
+            },
+            "required": [
+              "name",
+              "originalName",
+              "values"
+            ]
+          },
+          "title": "Specifications"
+        }
+      },
+      "required": [
+        "name",
+        "originalName",
+        "specifications"
+      ],
+      "title": "SpecificationGroup"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SpecificationGroup[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SpecificationGroup"
+      },
+      "title": "SpecificationGroup[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "title": "Product Id"
+        },
+        "productName": {
+          "type": "string",
+          "title": "Product Name"
+        },
+        "brand": {
+          "type": "string",
+          "title": "Brand"
+        },
+        "brandId": {
+          "type": "number",
+          "title": "Brand Id"
+        },
+        "cacheId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Cache Id"
+        },
+        "linkText": {
+          "type": "string",
+          "title": "Link Text"
+        },
+        "productReference": {
+          "type": "string",
+          "title": "Product Reference"
+        },
+        "categoryId": {
+          "type": "string",
+          "title": "Category Id"
+        },
+        "clusterHighlights": {
+          "title": "Cluster Highlights",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "productClusters": {
+          "title": "Product Clusters",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Categories"
+        },
+        "categoriesIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Categories Ids"
+        },
+        "link": {
+          "type": "string",
+          "title": "Link"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description"
+        },
+        "skuSpecifications": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SkuSpecification[]",
+          "title": "Sku Specifications"
+        },
+        "priceRange": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@PriceRange",
+          "title": "Price Range"
+        },
+        "specificationGroups": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@SpecificationGroup[]",
+          "title": "Specification Groups"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Name"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Values"
+              }
+            },
+            "required": [
+              "name",
+              "values"
+            ]
+          },
+          "title": "Properties"
+        },
+        "selectedProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "title": "Key"
+              },
+              "value": {
+                "type": "string",
+                "title": "Value"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ]
+          },
+          "title": "Selected Properties"
+        },
+        "releaseDate": {
+          "type": "string",
+          "title": "Release Date"
+        },
+        "origin": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Origin"
+        }
+      },
+      "required": [
+        "productId",
+        "productName",
+        "brand",
+        "brandId",
+        "linkText",
+        "productReference",
+        "categoryId",
+        "clusterHighlights",
+        "productClusters",
+        "categories",
+        "categoriesIds",
+        "link",
+        "description",
+        "priceRange",
+        "specificationGroups",
+        "properties",
+        "selectedProperties",
+        "releaseDate"
+      ],
+      "title": "IProduct"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Image": {
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "title": "Image Id"
+        },
+        "imageLabel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Image Label"
+        },
+        "imageTag": {
+          "type": "string",
+          "title": "Image Tag"
+        },
+        "imageUrl": {
+          "type": "string",
+          "title": "Image Url"
+        },
+        "imageText": {
+          "type": "string",
+          "title": "Image Text"
+        }
+      },
+      "required": [
+        "imageId",
+        "imageLabel",
+        "imageTag",
+        "imageUrl",
+        "imageText"
+      ],
+      "title": "Image"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Image[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Image"
+      },
+      "title": "Image[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "logo": {
+          "type": "string",
+          "title": "Logo"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "logo"
+      ],
+      "title": "Seller"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller"
+      },
+      "title": "Seller[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@omitdmFyaWF0aW9ucw==Item": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "title": "Item Id"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "nameComplete": {
+          "type": "string",
+          "title": "Name Complete"
+        },
+        "complementName": {
+          "type": "string",
+          "title": "Complement Name"
+        },
+        "ean": {
+          "type": "string",
+          "title": "Ean"
+        },
+        "referenceId": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Key": {
+                "type": "string",
+                "title": " Key"
+              },
+              "Value": {
+                "type": "string",
+                "title": " Value"
+              }
+            },
+            "required": [
+              "Key",
+              "Value"
+            ]
+          },
+          "title": "Reference Id"
+        },
+        "measurementUnit": {
+          "type": "string",
+          "title": "Measurement Unit"
+        },
+        "unitMultiplier": {
+          "type": "number",
+          "title": "Unit Multiplier"
+        },
+        "modalType": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Modal Type"
+        },
+        "images": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Image[]",
+          "title": "Images"
+        },
+        "Videos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": " Videos"
+        },
+        "sellers": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller[]",
+          "title": "Sellers"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "title": "Id"
+              },
+              "name": {
+                "type": "string",
+                "title": "Name"
+              },
+              "required": {
+                "type": "boolean",
+                "title": "Required"
+              },
+              "domainValues": {
+                "type": "string",
+                "title": "Domain Values"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "required",
+              "domainValues"
+            ]
+          },
+          "title": "Attachments"
+        },
+        "isKit": {
+          "type": "boolean",
+          "title": "Is Kit"
+        },
+        "kitItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "itemId": {
+                "type": "string",
+                "title": "Item Id"
+              },
+              "amount": {
+                "type": "number",
+                "title": "Amount"
+              }
+            },
+            "required": [
+              "itemId",
+              "amount"
+            ]
+          },
+          "title": "Kit Items"
+        }
+      },
+      "required": [
+        "itemId",
+        "name",
+        "nameComplete",
+        "complementName",
+        "ean",
+        "referenceId",
+        "measurementUnit",
+        "unitMultiplier",
+        "modalType",
+        "images",
+        "Videos",
+        "sellers",
+        "attachments",
+        "isKit"
+      ],
+      "title": "omitdmFyaWF0aW9ucw==Item"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@omitdmFyaWF0aW9ucw==Item"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "variations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "title": "Variations"
+            }
+          },
+          "required": [
+            "variations"
+          ]
+        },
+        {
+          "title": "Unknown record",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "title": "317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item"
+      },
+      "title": "317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "metaTagDescription": {
+              "type": "string",
+              "title": "Meta Tag Description"
+            },
+            "productTitle": {
+              "type": "string",
+              "title": "Product Title"
+            },
+            "items": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item[]",
+              "title": "Items"
+            },
+            "allSpecifications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "title": "All Specifications"
+            }
+          },
+          "required": [
+            "metaTagDescription",
+            "productTitle",
+            "items",
+            "allSpecifications"
+          ]
+        }
+      ],
+      "title": "92100be21019d5c0aec367c6d4b4b608&IProduct"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct"
+      },
+      "title": "92100be21019d5c0aec367c6d4b4b608&IProduct[]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]|null": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Resolvable"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "title": "VTEX Catalog - Search Products",
+          "description": "Use it in Shelves and static Galleries.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3BhY2tzL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz@CustomFilterProps"
+            }
+          ],
+          "required": [
+            "__resolveType"
+          ],
+          "properties": {
+            "__resolveType": {
+              "type": "string",
+              "enum": [
+                "deco-sites/carolbassi/loaders/customFilterSearch.ts"
+              ],
+              "default": "deco-sites/carolbassi/loaders/customFilterSearch.ts"
+            }
+          }
+        }
+      ]
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3BhY2tzL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz@CustomFilterProps": {
+      "type": "object",
+      "properties": {
+        "fq": {
+          "type": "string",
+          "description": "custom filter",
+          "title": "Fq"
+        },
+        "count": {
+          "type": "number",
+          "description": "total number of items to display",
+          "title": "Count"
+        }
+      },
+      "required": [
+        "fq",
+        "count"
+      ],
+      "title": "deco-sites/carolbassi/packs/loaders/customFilterSearch.ts@CustomFilterProps"
+    },
     "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Fields": {
       "type": "object",
       "properties": {
@@ -5630,36 +6360,6 @@
         "marketingTags"
       ],
       "title": "MarketingData"
-    },
-    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "Id"
-        },
-        "name": {
-          "type": "string",
-          "title": "Name"
-        },
-        "logo": {
-          "type": "string",
-          "title": "Logo"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "logo"
-      ],
-      "title": "Seller"
-    },
-    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller[]": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@Seller"
-      },
-      "title": "Seller[]"
     },
     "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@ClientPreferencesData": {
       "type": "object",
@@ -12054,6 +12754,28 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz": {
+      "title": "VTEX Catalog - Search Products",
+      "description": "Use it in Shelves and static Galleries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3BhY2tzL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz@CustomFilterProps"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/loaders/customFilterSearch.ts"
+          ],
+          "default": "deco-sites/carolbassi/loaders/customFilterSearch.ts"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9zdGQvbG9hZGVycy92dGV4L2NhcnQudHM=": {
       "title": "deco-sites/std/loaders/vtex/cart.ts",
       "docs": "https://developers.vtex.com/docs/api-reference/checkout-api#get-/api/checkout/pub/orderForm",
@@ -14185,6 +14907,9 @@
         },
         {
           "$ref": "#/definitions/JGxpdmUvbG9hZGVycy93b3JrZmxvd3MvZ2V0LnRz"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz"
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvbG9hZGVycy92dGV4L2NhcnQudHM="

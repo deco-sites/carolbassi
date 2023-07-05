@@ -40,6 +40,9 @@ export default {
       borderColor: {
         "light": "rgba(0,0,0,.2)",
       },
+      boxShadow: {
+        "minicart-footer": "0 0 12px rgba(0,0,0,.15)",
+      },
       lineHeight: {
         "base": "1.15",
       },
