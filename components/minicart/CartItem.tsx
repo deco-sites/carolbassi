@@ -107,11 +107,11 @@ function CartItem({ index, realSku }: Props) {
         )}
       </a>
       <div class="flex-grow">
-        <span class="uppercase text-xs font-semibold text-secondary-content">
+        <span class="uppercase block lg:hidden text-xs font-semibold text-secondary-content">
           {item.additionalInfo.brandName}
         </span>
         <a
-          class="block text-primary text-base lg:text-[15px] font-semibold lg:font-normal lg:min-h-[39px]"
+          class="block text-primary text-base lg:text-[15px] font-semibold lg:font-normal lg:min-h-[39px] max-w-[209px]"
           href={detailUrl}
         >
           <span>{realSku?.productName || name}</span>
@@ -197,7 +197,12 @@ function CartItem({ index, realSku }: Props) {
         class="btn btn-ghost min-h-0 h-auto hover:bg-transparent p-0"
       >
         <Icon class="hidden lg:block" id="Trash" width={19} height={18} />
-        <Icon class="block lg:hidden text-secondary-content" id="TrashRetro" width={16} height={16} />
+        <Icon
+          class="block lg:hidden text-secondary-content"
+          id="TrashRetro"
+          width={16}
+          height={16}
+        />
       </Button>
     </div>
   );
