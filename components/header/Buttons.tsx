@@ -86,7 +86,7 @@ function CartButton({ icon }: { icon?: AvailableIcons }) {
     >
       <div class="indicator">
         {totalItems && (
-          <span class="indicator-item badge badge-secondary badge-sm">
+          <span class="indicator-item badge badge-info w-4 h-4 text-white text-xs p-[2px] -top-[3px] left-0">
             {totalItems > 9 ? "9+" : totalItems}
           </span>
         )}
