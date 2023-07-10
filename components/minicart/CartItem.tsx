@@ -3,6 +3,7 @@ import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import QuantitySelector from "deco-sites/fashion/components/ui/QuantitySelector.tsx";
 import { useCart } from "deco-sites/std/packs/vtex/hooks/useCart.ts";
+import { useToast } from "deco-sites/fashion/sdk/useToast.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 import { sendEvent } from "deco-sites/fashion/sdk/analytics.tsx";
@@ -10,7 +11,7 @@ import type {
   Item as SkuVTEX,
   LegacyItem as LegacySkuVTEX,
 } from "deco-sites/std/packs/vtex/types.ts";
-import { useCallback } from "preact/hooks";
+import { useCallback, useEffect } from "preact/hooks";
 
 declare global {
   interface Window {
@@ -43,9 +44,12 @@ const IMAGE_HEIGHT = "auto";
 
 function CartItem({ index, realSku }: Props) {
   const { loading, cart, updateItems, mapItemsToAnalyticsItems } = useCart();
+  const { createToast } = useToast();
   const item = cart.value!.items[index];
   const locale = cart.value?.clientPreferencesData.locale;
   const currencyCode = cart.value?.storePreferencesData.currencyCode;
+  const AvailableQuantity =
+    realSku?.sellers[0].commertialOffer.AvailableQuantity || 0;
 
   const {
     skuName,
@@ -63,9 +67,6 @@ function CartItem({ index, realSku }: Props) {
   const imageUrl = `${ASSETS_URL}/ids/${
     realSku?.images[0].imageId
   }-${IMAGE_WIDTH}-${IMAGE_HEIGHT}`;
-
-  console.log(item, "item");
-  console.log(realSku, "realSku");
 
   const withLoading = useCallback(
     <A,>(cb: (args: A) => void) => async (e: A) => {
@@ -131,14 +132,21 @@ function CartItem({ index, realSku }: Props) {
             <QuantitySelector
               disabled={loading.value || isGift}
               quantity={quantity}
-              onChange={withLoading(async (quantity) => {
-                console.log(quantity, "quantity");
-                await updateItems({ orderItems: [{ index, quantity }] });
-                const quantityDiff = quantity - item.quantity;
+              onChange={withLoading(async (_quantity) => {
+                if (_quantity > AvailableQuantity) {
+                  createToast(
+                    `A quantidade desejada para o item ${name} não está disponível`,
+                  );
+                  return;
+                }
+
+                await updateItems({
+                  orderItems: [{ index, quantity: _quantity }],
+                });
+
+                const quantityDiff = _quantity - item.quantity;
 
                 if (!cart.value) return;
-
-                console.log(quantityDiff, "quantityDiff");
 
                 sendEvent({
                   name: quantityDiff < 0 ? "remove_from_cart" : "add_to_cart",
@@ -162,9 +170,11 @@ function CartItem({ index, realSku }: Props) {
             </span>
           )}
           <span class="text-primary-content text-base">
-            {isGift
-              ? "Grátis"
-              : formatPrice(sellingPrice / 100, currencyCode!, locale)}
+            {isGift ? "Grátis" : formatPrice(
+              (sellingPrice / 100) * quantity,
+              currencyCode!,
+              locale,
+            )}
           </span>
         </div>
       </div>

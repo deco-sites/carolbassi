@@ -4,6 +4,7 @@ import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 
 import type { Props as MenuProps } from "deco-sites/fashion/components/header/Menu.tsx";
 import Loading from "deco-sites/fashion/components/ui/Loading.tsx";
+import ToastContainer from "deco-sites/fashion/components/ui/ToastContainer.tsx";
 
 const Menu = lazy(() =>
   import("deco-sites/fashion/components/header/Menu.tsx")

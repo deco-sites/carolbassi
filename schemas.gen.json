@@ -4406,8 +4406,7 @@
           "type": "null"
         },
         {
-          "title": "VTEX Catalog - Search Products",
-          "description": "Use it in Shelves and static Galleries.",
+          "title": "deco-sites/carolbassi/loaders/customFilterSearch.ts",
           "type": "object",
           "allOf": [
             {
@@ -12755,8 +12754,7 @@
       }
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2xvYWRlcnMvY3VzdG9tRmlsdGVyU2VhcmNoLnRz": {
-      "title": "VTEX Catalog - Search Products",
-      "description": "Use it in Shelves and static Galleries.",
+      "title": "deco-sites/carolbassi/loaders/customFilterSearch.ts",
       "type": "object",
       "allOf": [
         {

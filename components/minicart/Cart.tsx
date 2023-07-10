@@ -10,6 +10,7 @@ import { Runtime } from "../../runtime.ts";
 import { useCallback, useEffect, useState } from "preact/hooks";
 import { pickSku } from "deco-sites/std/packs/vtex/utils/transform.ts";
 import type { LegacyProduct } from "deco-sites/std/packs/vtex/types.ts";
+import ToastContainer from "deco-sites/fashion/components/ui/ToastContainer.tsx";
 
 declare global {
   interface Window {
@@ -201,6 +202,7 @@ function Cart() {
           </a>
         </div>
       </footer>
+      <ToastContainer />
     </div>
   );
 }

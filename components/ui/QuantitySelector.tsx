@@ -1,4 +1,5 @@
 import Button from "../ui/Button.tsx";
+import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 
 interface Props {
   quantity: number;
@@ -26,41 +27,40 @@ input[type="number"] {
 const opts = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
-  const decrement = () => onChange?.(Math.max(0, quantity - 1));
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // deno-lint-ignore no-explicit-any
+    const { target } = event as any;
+    const { value } = target;
 
-  const increment = () =>
-    onChange?.(Math.min(quantity + 1, QUANTITY_MAX_VALUE));
-
-  const handleRemove = () => {
-    console.log("oi");
-    onChange?.(0);
+    onChange?.(+value);
   };
 
   return (
-    <div class="form-control">
-      <div class="input-group">
-        <select
-          class={`h-10 border-[#e3e4e6] border-[.125rem] rounded-[.25rem] text-base ${
-            loading ? "loading" : ""
-          }`}
-          disabled={disabled}
-        >
-          <option disabled></option>
-          <option
-            value="0"
-            onSelect={handleRemove}
-          >
-            0 - Remover
+    <div class="form-control relative">
+      <select
+        class={`h-8 w-[70px] pl-4 pr-2 border-[#e3e4e6] border-[.125rem] rounded-[.25rem] text-base appearance-none ${
+          loading ? "loading" : ""
+        }`}
+        disabled={disabled}
+        onChange={handleChange}
+        value={quantity.toString()}
+      >
+        <option disabled></option>
+        <option value="0">
+          0 - Remover
+        </option>
+        {opts.map((opt) => (
+          <option key={opt} value={opt} selected={+opt === quantity}>
+            {opt}
           </option>
-          {opts.map((opt) => (
-            <option key={opt} value={opt} selected={quantity === +opt}>
-              {opt}
-            </option>
-          ))}
-          <option value="10" selected={quantity >= 10}>10 +</option>
-        </select>
-        {
-          /* <Button
+        ))}
+        <option value="10" selected={quantity === 10}>10 +</option>
+      </select>
+      <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+        <Icon id="ChevronDown" width={18} height={18} strokeWidth={1} />
+      </div>
+      {
+        /* <Button
           class="btn-square btn-outline"
           onClick={decrement}
           disabled={disabled}
@@ -87,8 +87,7 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
         >
           +
         </Button> */
-        }
-      </div>
+      }
     </div>
   );
 }
