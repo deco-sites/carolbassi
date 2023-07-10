@@ -196,7 +196,8 @@ function CartItem({ index, realSku }: Props) {
         loading={loading.value}
         class="btn btn-ghost min-h-0 h-auto hover:bg-transparent p-0"
       >
-        <Icon id="Trash" width={19} height={18} />
+        <Icon class="hidden lg:block" id="Trash" width={19} height={18} />
+        <Icon class="block lg:hidden text-secondary-content" id="TrashRetro" width={16} height={16} />
       </Button>
     </div>
   );

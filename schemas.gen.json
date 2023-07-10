@@ -7844,6 +7844,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "TrashRetro"
+                },
+                {
+                  "type": "string",
                   "const": "FilterList"
                 },
                 {
@@ -7987,6 +7991,10 @@
                 {
                   "type": "string",
                   "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "TrashRetro"
                 },
                 {
                   "type": "string",
@@ -8136,6 +8144,10 @@
                 },
                 {
                   "type": "string",
+                  "const": "TrashRetro"
+                },
+                {
+                  "type": "string",
                   "const": "FilterList"
                 },
                 {
@@ -8279,6 +8291,10 @@
                 {
                   "type": "string",
                   "const": "Trash"
+                },
+                {
+                  "type": "string",
+                  "const": "TrashRetro"
                 },
                 {
                   "type": "string",
@@ -10056,6 +10072,10 @@
             },
             {
               "type": "string",
+              "const": "TrashRetro"
+            },
+            {
+              "type": "string",
               "const": "FilterList"
             },
             {
@@ -10266,6 +10286,10 @@
             {
               "type": "string",
               "const": "Trash"
+            },
+            {
+              "type": "string",
+              "const": "TrashRetro"
             },
             {
               "type": "string",
