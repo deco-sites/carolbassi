@@ -18,6 +18,10 @@ function ToastComponent({ toast }: { toast: Toast }) {
   useEffect(() => {
     if (ref.current) {
       ref.current.style.transform = "translateY(0)";
+
+      setTimeout(() => {
+        handleClose();
+      }, toast.duration);
     }
   }, [ref]);
 
