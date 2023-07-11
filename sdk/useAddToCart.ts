@@ -23,10 +23,19 @@ export interface Options {
    */
   name: string;
   productGroupId: string;
+  goCheckout?: boolean;
 }
 
 export const useAddToCart = (
-  { skuId, sellerId, price, discount, name, productGroupId }: Options,
+  {
+    skuId,
+    sellerId,
+    price,
+    discount,
+    name,
+    productGroupId,
+    goCheckout = false,
+  }: Options,
 ) => {
   const isAddingToCart = useSignal(false);
   const { displayCart } = useUI();
@@ -60,7 +69,12 @@ export const useAddToCart = (
         },
       });
 
-      displayCart.value = true;
+      if (goCheckout) {
+        window.location.href =
+          "https://carolbassi.vtexcommercestable.com.br/checkout";
+      } else {
+        displayCart.value = true;
+      }
     } finally {
       isAddingToCart.value = false;
     }

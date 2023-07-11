@@ -1,9 +1,11 @@
 import { useId } from "preact/hooks";
 import AddToCartButton from "deco-sites/fashion/islands/AddToCartButton.tsx";
+import GoCheckoutButton from "deco-sites/fashion/islands/GoCheckoutButton.tsx";
 import ShippingSimulation from "deco-sites/fashion/islands/ShippingSimulation.tsx";
 import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
+import TabLayout from "deco-sites/fashion/islands/TabLayout.tsx";
 import Image from "deco-sites/std/components/Image.tsx";
 import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/fashion/components/ui/SliderJS.tsx";
@@ -66,6 +68,9 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
   const { price, listPrice, seller, installments, availability } = useOffer(
     offers,
   );
+  const characteristics = isVariantOf?.additionalProperty?.find((prop) =>
+    prop.name === "Especificação"
+  )?.value;
 
   return (
     <>
@@ -74,29 +79,20 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
         itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
       />
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          <span class="text-sm text-base-300">
-            Cod. {gtin}
-          </span>
-        </div>
+      <div class="mt-4 sm:mt-1">
         <h1>
-          <span class="font-medium text-xl">{name}</span>
+          <span class="font-medium text-2xl md:text-[28px]">
+            {isVariantOf?.name || name}
+          </span>
         </h1>
       </div>
       {/* Prices */}
-      <div class="mt-4">
+      <div class="mt-2 px-1">
         <div class="flex flex-row gap-2 items-center">
-          <span class="line-through text-base-300 text-xs">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
-          <span class="font-medium text-xl text-secondary">
+          <span class="font-medium text-[26px] text-primary">
             {formatPrice(price, offers!.priceCurrency!)}
           </span>
         </div>
-        <span class="text-sm text-base-300">
-          {installments}
-        </span>
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
@@ -108,26 +104,32 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           ? (
             <>
               {seller && (
-                <AddToCartButton
-                  skuId={productID}
-                  sellerId={seller}
-                  price={price ?? 0}
-                  discount={price && listPrice ? listPrice - price : 0}
-                  name={product.name ?? ""}
-                  productGroupId={product.isVariantOf?.productGroupID ?? ""}
-                />
+                <>
+                  <GoCheckoutButton
+                    skuId={productID}
+                    sellerId={seller}
+                    price={price ?? 0}
+                    discount={price && listPrice ? listPrice - price : 0}
+                    name={product.name ?? ""}
+                    productGroupId={product.isVariantOf?.productGroupID ?? ""}
+                  />
+                  <AddToCartButton
+                    skuId={productID}
+                    sellerId={seller}
+                    price={price ?? 0}
+                    discount={price && listPrice ? listPrice - price : 0}
+                    name={product.name ?? ""}
+                    productGroupId={product.isVariantOf?.productGroupID ?? ""}
+                  />
+                </>
               )}
-              <WishlistButton
-                variant="full"
-                productGroupID={isVariantOf?.productGroupID}
-                productID={productID}
-              />
             </>
           )
           : <OutOfStock productID={productID} />}
       </div>
       {/* Shipping Simulation */}
-      <div class="mt-8">
+      {
+        /* <div class="mt-8">
         <ShippingSimulation
           items={[{
             id: Number(product.sku),
@@ -135,18 +137,15 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
             seller: seller ?? "1",
           }]}
         />
-      </div>
+      </div> */
+      }
       {/* Description card */}
-      <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div class="ml-2 mt-2">{description}</div>
-            </details>
-          )}
-        </span>
-      </div>
+
+      <TabLayout
+        description={description ?? ""}
+        characteristics={characteristics ?? ""}
+      />
+
       {/* Analytics Event */}
       <SendEventOnLoad
         event={{
@@ -249,11 +248,11 @@ function Details({
       <>
         <div
           id={id}
-          class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
+          class="grid grid-cols-1 lg2:ml-[55px]"
         >
           {/* Image Slider */}
           <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1">
-            <Slider class="carousel gap-6">
+            <Slider class="carousel gap-6 sm:hidden">
               {images.map((img, index) => (
                 <Slider.Item
                   index={index}
@@ -275,19 +274,25 @@ function Details({
               ))}
             </Slider>
 
-            <Slider.PrevButton
-              class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-              disabled
-            >
-              <Icon size={20} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
-
-            <Slider.NextButton
-              class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-              disabled={images.length < 2}
-            >
-              <Icon size={20} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
+            <div class="hidden sm:block">
+              <ul class="flex flex-wrap">
+                {images.map((img, index) => (
+                  <li class="max-w-[414px] m-1">
+                    <Image
+                      class="w-full"
+                      sizes="(max-width: 414px) 100vw, 40vw"
+                      style={{ aspectRatio: ASPECT_RATIO }}
+                      src={img.url!}
+                      alt={img.alternateName}
+                      width={WIDTH}
+                      height={HEIGHT}
+                      preload={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <div class="absolute top-2 right-2 bg-base-100 rounded-full">
               <ProductImageZoom
@@ -299,25 +304,20 @@ function Details({
           </div>
 
           {/* Dots */}
-          <ul class="flex gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1">
-            {images.map((img, index) => (
-              <li class="min-w-[63px] sm:min-w-[100px]">
+          <ul class="flex justify-center gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:hidden">
+            {images.map((_, index) => (
+              <li class="carousel-item">
                 <Slider.Dot index={index}>
-                  <Image
-                    style={{ aspectRatio: ASPECT_RATIO }}
-                    class="group-disabled:border-base-300 border rounded "
-                    width={63}
-                    height={87.5}
-                    src={img.url!}
-                    alt={img.alternateName}
-                  />
+                  <div class="pt-4">
+                    <div class="w-[10px] h-[10px] rounded-full bg-neutral group-disabled:bg-info" />
+                  </div>
                 </Slider.Dot>
               </li>
             ))}
           </ul>
 
           {/* Product Info */}
-          <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
+          <div class="max-w-[473px] w-full justify-self-center px-4 sm:px-[30px] sm:col-start-3 sm:col-span-1 sm:row-start-1">
             <ProductInfo page={page} />
           </div>
         </div>
@@ -374,7 +374,7 @@ function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
     : maybeVar;
 
   return (
-    <div class="container py-0 sm:py-10">
+    <div class="py-0 sm:py-10">
       {page ? <Details page={page} variant={variant} /> : <NotFound />}
     </div>
   );

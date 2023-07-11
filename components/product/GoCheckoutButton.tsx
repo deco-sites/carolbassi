@@ -11,7 +11,7 @@ interface Props extends UseAddToCartProps {
   sellerId: string;
 }
 
-function AddToCartButton(
+function GoCheckoutButton(
   { skuId, sellerId, discount, price, productGroupId, name }: Props,
 ) {
   const props = useAddToCart({
@@ -21,17 +21,18 @@ function AddToCartButton(
     price,
     productGroupId,
     name,
+    goCheckout: true,
   });
 
   return (
     <Button
       data-deco="add-to-cart"
       {...props}
-      class="w-full h-[59px] bg-base-100 text-primary text-lg font-normal normal-case rounded-none border-solid border-[1px] border-black"
+      class="w-full h-[59px] bg-info text-primary text-lg font-normal normal-case rounded-none"
     >
-      Adicionar ao carrinho
+      Comprar
     </Button>
   );
 }
 
-export default AddToCartButton;
+export default GoCheckoutButton;
