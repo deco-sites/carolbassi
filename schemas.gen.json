@@ -61,6 +61,7 @@
               "deco-sites/std/loaders/vtex/user.ts",
               "deco-sites/std/loaders/vtex/wishlist.ts",
               "./islands/AddToCartButton.tsx",
+              "./islands/GoCheckoutButton.tsx",
               "./islands/Header.tsx",
               "./islands/HeaderButton.tsx",
               "./islands/HeaderModals.tsx",
@@ -72,6 +73,7 @@
               "./islands/SearchNotFound.tsx",
               "./islands/ShippingSimulation.tsx",
               "./islands/SliderJS.tsx",
+              "./islands/TabLayout.tsx",
               "./islands/WishlistButton.tsx",
               "$live/handlers/devPage.ts",
               "$live/handlers/fresh.ts",
@@ -12111,6 +12113,22 @@
         }
       }
     },
+    "Li9pc2xhbmRzL0dvQ2hlY2tvdXRCdXR0b24udHN4": {
+      "title": "./islands/GoCheckoutButton.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/GoCheckoutButton.tsx"
+          ],
+          "default": "./islands/GoCheckoutButton.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL0hlYWRlci50c3g=": {
       "title": "./islands/Header.tsx",
       "type": "object",
@@ -12299,6 +12317,22 @@
             "./islands/SliderJS.tsx"
           ],
           "default": "./islands/SliderJS.tsx"
+        }
+      }
+    },
+    "Li9pc2xhbmRzL1RhYkxheW91dC50c3g=": {
+      "title": "./islands/TabLayout.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/TabLayout.tsx"
+          ],
+          "default": "./islands/TabLayout.tsx"
         }
       }
     },
@@ -13995,6 +14029,9 @@
           "$ref": "#/definitions/Li9pc2xhbmRzL0FkZFRvQ2FydEJ1dHRvbi50c3g="
         },
         {
+          "$ref": "#/definitions/Li9pc2xhbmRzL0dvQ2hlY2tvdXRCdXR0b24udHN4"
+        },
+        {
           "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlci50c3g="
         },
         {
@@ -14026,6 +14063,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1NsaWRlckpTLnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1RhYkxheW91dC50c3g="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1dpc2hsaXN0QnV0dG9uLnRzeA=="

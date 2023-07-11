@@ -16,9 +16,10 @@ const colors: Record<string, string> = {
   "vermelha": "bg-[#FF0000] ring-[#FF0000]",
 
   // Color variants - only applied when no color as content is passed
-  "active": "bg-neutral-focus text-neutral-content ring-neutral-focus ",
+  "active":
+    "bg-base-100 text-primary ring-neutral-focus border-2 border-solid border-primary",
   "disabled": "bg-neutral-content text-neutral",
-  "default": "bg-neutral text-neutral-content",
+  "default": "bg-base-100 text-neutral-content",
 };
 
 interface Props {
@@ -27,7 +28,7 @@ interface Props {
 }
 
 const variants = {
-  active: "ring ring-1 ring-offset-base-100 ring-offset-2",
+  active: "",
   disabled:
     `relative after:absolute after:left-0 after:top-1/2 after:h-[1px] after:bg-red-800 after:w-full after:block after:-rotate-45 after:content-[""]`,
   default: "",
@@ -35,15 +36,17 @@ const variants = {
 
 function Avatar({ content, variant = "default" }: Props) {
   return (
-    <div class="avatar placeholder">
+    <div class="">
       <div
-        class={`rounded-full w-8  ${colors[content] ?? colors[variant]} ${
-          variants[variant]
-        }`}
+        class={`relative rounded-lg w-full h-[36px] px-4 flex items-center border-[1px] border-solid border-[#e3e4e6]${
+          colors[content] ?? colors[variant]
+        } ${variants[variant]}`}
       >
-        <span class="text-caption font-caption uppercase">
-          {colors[content] ? "" : content.substring(0, 2)}
+        <span class="text-base text-primary font-normal">
+          {colors[content] ? "" : content}
         </span>
+        <div class={"rounded-lg border-1 border-solid border-primary absolute"}>
+        </div>
       </div>
     </div>
   );
