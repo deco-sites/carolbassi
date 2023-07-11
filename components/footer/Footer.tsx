@@ -155,8 +155,13 @@ function Footer(
                           socials.openLinkInNewTab ? "_blank" : "_self"
                         }`}
                         href={socials.link}
+                        aria-label={`Go to ${socials.link}`}
                       >
-                        <img src={socials.image} />
+                        <img
+                          loading="lazy"
+                          alt="Social Media Logo"
+                          src={socials.image}
+                        />
                       </a>
                     ))}
                   </div>
@@ -209,11 +214,11 @@ function Footer(
                     rel="noreferrer noopener"
                     target={`${socials.openLinkInNewTab ? "_blank" : "_self"}`}
                     href={socials.link}
-                    title={`Go to ${socials.link}`}
+                    aria-label={`Go to ${socials.link}`}
                   >
                     <img
                       loading="lazy"
-                      alt={`Go to ${socials.link}`}
+                      alt="Social Media Logo"
                       src={socials.image}
                     />
                   </a>
