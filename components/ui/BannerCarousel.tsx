@@ -1,22 +1,50 @@
-import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/fashion/islands/SliderJS.tsx";
 import { Picture, Source } from "deco-sites/std/components/Picture.tsx";
 import { useId } from "preact/hooks";
 import { headerHeight } from "../header/constants.ts";
+import type { HTML } from "deco-sites/std/components/types.ts";
+import Quilltext from "deco-sites/std/components/QuillText.tsx";
 
 import type {
   Image as LiveImage,
   Video as LiveVideo,
 } from "deco-sites/std/components/types.ts";
 
+export type Video = {
+  source: LiveVideo;
+};
+
+export type SourceItem = LiveImage | Video;
+
+export type VerticalAlignment = "top" | "center" | "bottom";
+export type HorizontalAlignment = "left" | "center" | "right";
+
+export type OverContent = {
+  content: HTML;
+  verticalAlignment: VerticalAlignment;
+  horizontalAlignment: HorizontalAlignment;
+};
+
 export interface Banner {
-  /** @description desktop otimized image */
-  desktop: LiveImage | LiveVideo;
-  /** @description mobile otimized image */
-  mobile: LiveImage | LiveVideo;
-  /** @description Check this if this is a video */
-  isVideo: boolean;
+  /** @description desktop optimized source */
+  desktop: {
+    /**
+     * @title Over-image content
+     * @description allows custom html content over the image (only works for images)
+     */
+    overContent?: OverContent[];
+    source: SourceItem;
+  };
+  /** @description mobile optimized source */
+  mobile: {
+    /**
+     * @title Over-image content
+     * @description allows custom html content over the image (only works for images)
+     */
+    overContent?: OverContent[];
+    source: SourceItem;
+  };
   /** @description Image's alt text */
   alt: string;
   /** @description when user clicks on the image, go to this link */
@@ -36,69 +64,156 @@ export interface Props {
   interval?: number;
 }
 
+const isVideo = (item: SourceItem): item is Video =>
+  // deno-lint-ignore no-explicit-any
+  typeof (item as any).source === "string";
+
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
   const {
     alt,
     mobile,
     desktop,
     href,
-    isVideo,
   } = image;
 
+  const getContentAlignment = (
+    vertical: VerticalAlignment,
+    horizontal: HorizontalAlignment,
+  ) => {
+    let top = "0";
+    let left = "0";
+    let transform = "none";
+
+    switch (vertical) {
+      case "top":
+        break;
+      case "center":
+        top = "50%";
+        transform = "translateY(-50%)";
+        break;
+      case "bottom":
+        top = "100%";
+        transform = "translateY(-100%)";
+        break;
+    }
+
+    switch (horizontal) {
+      case "left":
+        break;
+      case "center":
+        left = "50%";
+        transform += " translateX(-50%)";
+        break;
+      case "right":
+        left = "100%";
+        transform += " translateX(-100%)";
+        break;
+    }
+
+    return { left, top, transform };
+  };
+
   return (
-    <a
-      href={href ?? "#"}
-      aria-label={`Go to ${href}`}
-      class="relative overflow-y-hidden w-full hover:opacity-95"
-    >
-      {isVideo
-        ? (
-          <>
+    <>
+      {/* Desktop View */}
+      <a
+        href={href ?? "#"}
+        aria-label={`Go to ${href}`}
+        class="hidden lg:block relative overflow-y-hidden w-full hover:opacity-95"
+      >
+        {isVideo(desktop.source)
+          ? (
             <video
-              class="lg:hidden pointer-events-none w-full "
+              class="pointer-events-none w-full"
               autoPlay
               loop
               muted
               preload={lcp ? "auto" : "none"}
             >
-              <source src={mobile} type="video/mp4" />
+              <source src={desktop.source.source} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          )
+          : (
+            <>
+              <Picture preload={lcp}>
+                <Source
+                  fetchPriority={lcp ? "high" : "auto"}
+                  src={desktop.source}
+                  width={1440}
+                />
+                <img
+                  class="object-cover w-full"
+                  loading={lcp ? "eager" : "lazy"}
+                  src={desktop.source}
+                  alt={alt}
+                />
+              </Picture>
+              {desktop.overContent &&
+                desktop.overContent.map((overContent) => (
+                  <div
+                    style={getContentAlignment(
+                      overContent.verticalAlignment,
+                      overContent.horizontalAlignment,
+                    )}
+                    class="absolute w-max"
+                  >
+                    <Quilltext html={overContent.content} />
+                  </div>
+                ))}
+            </>
+          )}
+      </a>
+      {/* Mobile View */}
+      <a
+        href={href ?? "#"}
+        aria-label={`Go to ${href}`}
+        class="block lg:hidden relative overflow-y-hidden w-full hover:opacity-95"
+      >
+        {isVideo(mobile.source)
+          ? (
             <video
-              class="hidden lg:block pointer-events-none w-full"
+              class="pointer-events-none w-full "
               autoPlay
               loop
               muted
               preload={lcp ? "auto" : "none"}
             >
-              <source src={desktop} type="video/mp4" />
+              <source src={mobile.source.source} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </>
-        )
-        : (
-          <Picture preload={lcp}>
-            <Source
-              media="(max-width: 1023px)"
-              fetchPriority={lcp ? "high" : "auto"}
-              src={mobile}
-              width={360}
-            />
-            <Source
-              media="(min-width: 1024px)"
-              fetchPriority={lcp ? "high" : "auto"}
-              src={desktop}
-              width={1440}
-            />
-            <img
-              class="object-cover w-full"
-              loading={lcp ? "eager" : "lazy"}
-              src={desktop}
-              alt={alt}
-            />
-          </Picture>
-        )}
-    </a>
+          )
+          : (
+            <>
+              <Picture preload={lcp}>
+                <Source
+                  fetchPriority={lcp ? "high" : "auto"}
+                  src={mobile.source}
+                  width={360}
+                />
+                <img
+                  class="object-cover w-full"
+                  loading={lcp ? "eager" : "lazy"}
+                  src={mobile.source}
+                  alt={alt}
+                />
+              </Picture>
+              {mobile.overContent &&
+                mobile.overContent.map((overContent) => (
+                  <div
+                    style={getContentAlignment(
+                      overContent.verticalAlignment,
+                      overContent.horizontalAlignment,
+                    )}
+                    class="absolute w-max"
+                  >
+                    <Quilltext html={overContent.content} />
+                  </div>
+                ))}
+            </>
+          )}
+      </a>
+    </>
   );
 }
 

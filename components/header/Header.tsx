@@ -7,7 +7,6 @@ import type { LoaderReturnType } from "$live/types.ts";
 import type { Product, Suggestion } from "deco-sites/std/commerce/types.ts";
 import { AvailableIcons } from "deco-sites/fashion/components/ui/Icon.tsx";
 
-import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 
@@ -34,7 +33,6 @@ export interface Props {
     srcDesktop: Image;
     alt: string;
   };
-  alerts: string[];
   /** @title Search Bar */
   searchbar?: SearchbarProps;
   /** @title Header side buttons */
@@ -95,7 +93,6 @@ function Header(
   {
     logo,
     navButtons,
-    alerts,
     searchbar: _searchbar,
     products,
     navAlignment,
@@ -212,11 +209,10 @@ function Header(
         )}
       <header
         id="main-header"
-        class={`w-full z-50 hover:bg-white`}
+        class={`w-full z-50 top-0 hover:bg-white`}
         onMouseEnter={() => isHeaderHovered.value = true}
         onMouseLeave={() => isHeaderHovered.value = false}
       >
-        <Alert alerts={alerts} />
         <Navbar
           alignment={navAlignment}
           navButtons={navButtons}

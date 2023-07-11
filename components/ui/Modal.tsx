@@ -15,26 +15,33 @@ if (IS_BROWSER && typeof window.HTMLDialogElement === "undefined") {
 
 export type Props = JSX.IntrinsicElements["dialog"] & {
   title?: string;
-  mode?: "sidebar-right" | "sidebar-left" | "center";
+  mode?: "sidebar-right" | "sidebar-left" | "center" | "side-minicart";
   onClose?: () => Promise<void> | void;
   loading?: "lazy" | "eager";
 };
 
 const dialogStyles = {
   "sidebar-right": "animate-slide-left",
+  "side-minicart": "animate-slide-left",
   "sidebar-left": "animate-slide-right",
   center: "animate-fade-in",
+  "sidebar-left-close": "-translate-x-full",
+  "sidebar-right-close": "translate-x-full",
+  "side-minicart-close": "translate-x-full",
+  "center-close": "",
 };
 
 const sectionStyles = {
   "sidebar-right": "justify-end",
   "sidebar-left": "justify-start",
+  "side-minicart": "justify-end",
   center: "justify-center items-center",
 };
 
 const containerStyles = {
-  "sidebar-right": "h-full w-full sm:max-w-lg",
-  "sidebar-left": "h-full w-full sm:max-w-lg",
+  "sidebar-right": "h-full w-full lg:max-w-[400px]",
+  "sidebar-left": "h-full w-full lg:max-w-[400px]",
+  "side-minicart": "h-full w-[85%] max-w-[400px]",
   center: "",
 };
 
@@ -55,7 +62,6 @@ const Modal = ({
       document.getElementsByTagName("body").item(0)?.classList.remove(
         "no-scroll",
       );
-      ref.current?.open === true && ref.current.close();
     } else if (open === true) {
       document.getElementsByTagName("body").item(0)?.classList.add(
         "no-scroll",
@@ -65,17 +71,26 @@ const Modal = ({
     }
   }, [open]);
 
+  const handleCloseDialog = () => {
+    ref.current?.classList.add(dialogStyles[`${mode}-close`]);
+    setTimeout(() => {
+      ref.current?.classList.remove(dialogStyles[`${mode}-close`]);
+      onClose?.();
+      ref.current?.close();
+    }, 200);
+  };
+
   return (
     <dialog
       {...props}
       ref={ref}
-      class={`bg-transparent p-0 m-0 max-w-full w-full max-h-full h-full backdrop-opacity-50 ${
+      class={`bg-transparent p-0 m-0 max-w-full w-full max-h-full h-full backdrop-opacity-50 transition-transform duration-200 ${
         dialogStyles[mode]
       } ${props.class ?? ""}`}
       onClick={(e) =>
         (e.target as HTMLDialogElement).tagName === "SECTION" && onClose?.()}
       // @ts-expect-error - This is a bug in types.
-      onClose={onClose}
+      onClose={handleCloseDialog}
     >
       <section
         class={`w-full h-full flex bg-transparent ${sectionStyles[mode]}`}
@@ -83,19 +98,37 @@ const Modal = ({
         <div
           class={`bg-base-100 flex flex-col max-h-full ${
             containerStyles[mode]
-          }`}
+          } relative`}
         >
-          <header class="flex px-3 py-3 justify-between items-center">
+          <header
+            class={`flex px-3 py-3 justify-between items-center relative ${
+              mode === "side-minicart" && "max-h-[58px]"
+            }`}
+          >
             {title && (
-              <h1>
-                <span class="font-medium text-2xl">{title}</span>
+              <h1
+                class={`${
+                  mode === "side-minicart" &&
+                  "order-2 lg:order-1 mx-auto"
+                }`}
+              >
+                <span class="font-medium text-4xl">{title}</span>
               </h1>
             )}
             <Button
-              class="btn btn-ghost bg-transparent hover:bg-transparent ml-auto h-auto min-h-0 w-[34px] p-0"
-              onClick={onClose}
+              class={`btn btn-ghost bg-transparent hover:bg-transparent h-auto min-h-0 w-[34px] p-0 ${
+                mode === "side-minicart"
+                  ? "order-1 lg:order-2 ml-0 lg:absolute lg:right-3 lg:top-1/2 lg:-translate-y-1/2"
+                  : "ml-auto"
+              }`}
+              onClick={handleCloseDialog}
             >
-              <Icon id="XMark" width={34} height={20} strokeWidth={1} />
+              <Icon
+                id="XMark"
+                width={mode === "side-minicart" ? 30 : 34}
+                height={mode === "side-minicart" ? 30 : 20}
+                strokeWidth={1}
+              />
             </Button>
           </header>
           <div class="overflow-y-auto flex-grow flex flex-col">

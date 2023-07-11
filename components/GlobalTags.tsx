@@ -14,10 +14,10 @@ function GlobalTags() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-.ql-editor {
-  padding: 0 !important;
-}
-`,
+            .ql-editor {
+              padding: 0 !important;
+            }
+            `,
         }}
       />
 
