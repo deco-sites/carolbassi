@@ -1,5 +1,3 @@
-import { useSignal } from "@preact/signals";
-import { useEffect } from "preact/hooks";
 import Modals from "deco-sites/fashion/islands/HeaderModals.tsx";
 import type { Image } from "deco-sites/std/components/types.ts";
 import type { EditableProps as SearchbarProps } from "deco-sites/fashion/components/search/Searchbar.tsx";
@@ -103,115 +101,14 @@ function Header(
     onScrollTransparencyLevel,
   }: Props,
 ) {
-  const isHeaderHovered = useSignal(false);
   const searchbar = { ..._searchbar, products, suggestions };
-  const isHomePage = globalThis?.location?.pathname === "/";
-
-  /* Set header position fixed on Home page */
-  const setHeaderPosition = () => {
-    const header = document.querySelector("header");
-
-    if (header) {
-      if (isHomePage) {
-        header.style.position = "fixed";
-      } else {
-        header.style.position = "relative";
-      }
-    }
-  };
-
-  useEffect(() => {
-    /* Set header position fixed on Home page */
-    setHeaderPosition();
-  }, []);
-
-  useEffect(() => {
-    const header = document.querySelector("header");
-
-    if (!header) return;
-
-    const onScroll = () => {
-      if (globalThis.scrollY > 32) {
-        const isDesktop = window?.matchMedia("(min-width: 1024px)")?.matches;
-
-        header.style.position = "fixed";
-
-        if (isHomePage) {
-          if (isDesktop) {
-            header.style.backgroundColor = `rgba(255,255,255,${
-              (100 - (onScrollTransparencyLevel?.desktop ?? 100)) / 100
-            })`;
-          } else {
-            header.style.backgroundColor = `rgba(255,255,255,${
-              (100 - (onScrollTransparencyLevel?.mobile ?? 100)) / 100
-            })`;
-          }
-        }
-      } else {
-        header.style.backgroundColor = isHeaderHovered.value ? "white" : "";
-        setHeaderPosition();
-      }
-    };
-
-    if (isHeaderHovered.value) {
-      if (header) {
-        header.style.backgroundColor = "white";
-        return;
-      }
-    } else {
-      onScroll();
-    }
-
-    globalThis.addEventListener("scroll", onScroll, { passive: true });
-    return () => globalThis.removeEventListener("scroll", onScroll);
-  }, [isHeaderHovered.value]);
 
   return (
     <>
-      {isHomePage
-        ? (
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-            header#main-header {
-              min-height: ${headerHeight};
-              background-color: ${
-                transparent
-                  ? `rgba(255,255,255,${
-                    (100 - (transparencyLevel?.mobile ?? 100)) / 100
-                  })`
-                  : "white"
-              };
-            }
-            
-            ${
-                transparent && `
-            @media screen and (min-width: 1024px) {
-              header#main-header {
-                background-color: rgba(255,255,255,${
-                  (100 - (transparencyLevel?.desktop ?? 100)) / 100
-                })`
-              }
-          `,
-            }}
-          />
-        )
-        : (
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-                  header#main-header {
-                    background-color: white;
-                  }
-              `,
-            }}
-          />
-        )}
       <header
         id="main-header"
+        style={{ minHeight: headerHeight }}
         class={`w-full z-50 top-0 hover:bg-white`}
-        onMouseEnter={() => isHeaderHovered.value = true}
-        onMouseLeave={() => isHeaderHovered.value = false}
       >
         <Navbar
           alignment={navAlignment}
@@ -229,6 +126,117 @@ function Header(
           }}
         />
       </header>
+
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function headerStuffs() {
+              const header = document.querySelector("header#main-header");
+              const isHomePage = window.location.pathname === "/";
+
+              const setHeaderPosition = () => {
+                // header should be fixed on Home page
+                if (header) {
+                  if (isHomePage) {
+                    header.style.position = "fixed";
+                  } else {
+                    header.style.backgroundColor = "white";
+                    header.style.position = "relative";
+                  }
+                }
+              };
+              
+              setHeaderPosition();
+
+              const onScroll = () => {
+                // add onScrollTransparencyLevel for mobile and desktop
+                if (!isHomePage) {
+                  if (window.scrollY > 32) {
+                    header.style.position = "fixed";
+                  } else {
+                    header.style.position = "relative";
+                  }
+
+                  header.style.backgroundColor = "white";
+                  return;
+                };
+
+                const isDesktop = window?.matchMedia("(min-width: 1024px)")?.matches;
+                const isHovering = header.matches(":hover");
+
+                if (isHovering) return;
+
+                if (window.scrollY > 32) {
+                  if (isDesktop) {
+                    header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (onScrollTransparencyLevel?.desktop ?? 100)) / 100
+          })";
+                  } else {
+                    header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (onScrollTransparencyLevel?.mobile ?? 100)) / 100
+          })";
+                  }
+                } else {
+                  if (!${transparent}) {
+                    header.style.backgroundColor = "white";
+                  } else {
+                    if (isDesktop) {
+                      header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (transparencyLevel?.desktop ?? 100)) / 100
+          })";
+                    } else {
+                      header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (transparencyLevel?.mobile ?? 100)) / 100
+          })";
+                    }
+                  }
+                }
+              }
+
+              window.addEventListener("scroll", onScroll, { passive: true });
+
+              // add hover background without transparency
+              header.addEventListener("mouseenter", () => {
+                header.style.backgroundColor = "white";
+              });
+
+              header.addEventListener("mouseleave", () => {
+                const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+                if (!${transparent} || !isHomePage) {
+                  return header.style.backgroundColor = "white";
+                }
+                
+                // check if we scrolled down first
+                if (window.scrollY > 32) {
+                  if (isDesktop) {
+                    header.style.backgroundColor = "rgba(255,255,255,${(
+            (100 - (onScrollTransparencyLevel?.desktop ?? 100)) / 100
+          )})";
+                  } else {
+                    header.style.backgroundColor = "rgba(255,255,255,${((100 - (
+            onScrollTransparencyLevel?.mobile ?? 100
+          )) / 100)})";
+                  }
+
+                  return;
+                }
+
+                if (isDesktop) {
+                  header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (transparencyLevel?.desktop ?? 100)) / 100
+          })";
+                } else {
+                  header.style.backgroundColor = "rgba(255,255,255,${
+            (100 - (transparencyLevel?.mobile ?? 100)) / 100
+          })";
+                }
+              })
+
+            })();
+      `,
+        }}
+      />
     </>
   );
 }
