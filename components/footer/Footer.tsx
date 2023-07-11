@@ -209,8 +209,13 @@ function Footer(
                     rel="noreferrer noopener"
                     target={`${socials.openLinkInNewTab ? "_blank" : "_self"}`}
                     href={socials.link}
+                    title={`Go to ${socials.link}`}
                   >
-                    <img src={socials.image} />
+                    <img
+                      loading="lazy"
+                      alt={`Go to ${socials.link}`}
+                      src={socials.image}
+                    />
                   </a>
                 ))}
               </div>
