@@ -89,18 +89,14 @@ function SliderProductShowcase({ page }: { page: ProductDetailsPage }) {
           {images.map((img, index) => (
             <Slider.Item
               index={index}
-              class="carousel-item min-w-[100vw] sm:min-w-[40vw]"
+              class="min-w-[100vw] sm:min-w-[40vw]"
             >
-              <Image
+              <img
                 class="w-full"
                 sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio: ASPECT_RATIO }}
                 src={img.url!}
                 alt={img.alternateName}
-                width={WIDTH}
-                height={HEIGHT}
                 // Preload LCP image for better web vitals
-                preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
               />
             </Slider.Item>
@@ -116,6 +112,7 @@ function SliderProductShowcase({ page }: { page: ProductDetailsPage }) {
                   src={img.url!}
                   alt={img.alternateName}
                   width={WIDTH}
+                  height={611}
                   preload={index === 0}
                   loading={index === 0 ? "eager" : "lazy"}
                   onMouseLeave={handleMouseLeave}
@@ -134,20 +131,21 @@ function SliderProductShowcase({ page }: { page: ProductDetailsPage }) {
             ))}
           </ul>
         </div>
+
+        {/* Dots */}
+        <ul class="flex justify-center gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:hidden">
+          {images.map((_, index) => (
+            <li class="carousel-item">
+              <Slider.Dot index={index}>
+                <div class="pt-4">
+                  <div class="w-[10px] h-[10px] rounded-full bg-neutral group-disabled:bg-info" />
+                </div>
+              </Slider.Dot>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Dots */}
-      <ul class="flex justify-center gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:hidden">
-        {images.map((_, index) => (
-          <li class="carousel-item">
-            <Slider.Dot index={index}>
-              <div class="pt-4">
-                <div class="w-[10px] h-[10px] rounded-full bg-neutral group-disabled:bg-info" />
-              </div>
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
       <SliderJS rootId={id}></SliderJS>
     </>
   );

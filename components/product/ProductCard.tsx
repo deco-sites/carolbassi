@@ -5,7 +5,7 @@ import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
 import { useVariantPossibilities } from "deco-sites/fashion/sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
-import { sendEventOnClick } from "deco-sites/fashion/sdk/analytics.tsx";
+import { SendEventOnClick } from "$store/sdk/analytics.tsx";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 
 interface Props {
@@ -42,6 +42,7 @@ function ProductCard(
     offers,
     isVariantOf,
   } = product;
+  const id = `product-card-${productID}`;
   const name = isVariantOf?.name ?? product.name;
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
@@ -67,8 +68,23 @@ function ProductCard(
       class="card card-compact group w-full rounded-none max-w-[433px] mx-auto lg:mx-0"
       data-deco="view-product"
       id={`product-card-${productID}`}
-      {...sendEventOnClick(clickEvent)}
     >
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_item" as const,
+          params: {
+            item_list_name: itemListName,
+            items: [
+              mapProductToAnalyticsItem({
+                product,
+                price,
+                listPrice,
+              }),
+            ],
+          },
+        }}
+      />
       <figure
         class="relative rounded-lg"
         style={{ aspectRatio: `${width} / ${height}` }}
