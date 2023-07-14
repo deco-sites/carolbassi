@@ -27,7 +27,7 @@ function AddToCartButton(
     <Button
       data-deco="add-to-cart"
       {...props}
-      class="w-full h-[59px] bg-base-100 text-primary text-lg font-normal normal-case rounded-none border-solid border-[1px] border-black"
+      class="w-full h-[59px] bg-base-100 text-primary text-lg font-normal normal-case rounded-none border-solid border-[1px] border-black sm:p-0"
     >
       Adicionar ao carrinho
     </Button>
