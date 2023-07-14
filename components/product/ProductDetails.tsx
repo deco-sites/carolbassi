@@ -6,6 +6,7 @@ import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import TabLayout from "deco-sites/fashion/islands/TabLayout.tsx";
+import SliderProductShowcase from "deco-sites/fashion/islands/SliderProductShowcase.tsx";
 import Image from "deco-sites/std/components/Image.tsx";
 import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/fashion/components/ui/SliderJS.tsx";
@@ -245,84 +246,16 @@ function Details({
    */
   if (variant === "slider") {
     return (
-      <>
-        <div
-          id={id}
-          class="grid grid-cols-1 lg2:ml-[55px]"
-        >
-          {/* Image Slider */}
-          <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1">
-            <Slider class="carousel gap-6 sm:hidden">
-              {images.map((img, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item min-w-[100vw] sm:min-w-[40vw]"
-                >
-                  <Image
-                    class="w-full"
-                    sizes="(max-width: 640px) 100vw, 40vw"
-                    style={{ aspectRatio: ASPECT_RATIO }}
-                    src={img.url!}
-                    alt={img.alternateName}
-                    width={WIDTH}
-                    height={HEIGHT}
-                    // Preload LCP image for better web vitals
-                    preload={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
+      <div class="grid grid-cols-1 sm:flex lg2:ml-[55px] lg2:px-4 xl:px-1">
+        <SliderProductShowcase page={page} />
 
-            <div class="hidden sm:block">
-              <ul class="flex flex-wrap">
-                {images.map((img, index) => (
-                  <li class="max-w-[414px] m-1">
-                    <Image
-                      class="w-full"
-                      sizes="(max-width: 414px) 100vw, 40vw"
-                      style={{ aspectRatio: ASPECT_RATIO }}
-                      src={img.url!}
-                      alt={img.alternateName}
-                      width={WIDTH}
-                      height={HEIGHT}
-                      preload={index === 0}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-              <ProductImageZoom
-                images={images}
-                width={1280}
-                height={1280 * HEIGHT / WIDTH}
-              />
-            </div>
-          </div>
-
-          {/* Dots */}
-          <ul class="flex justify-center gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:hidden">
-            {images.map((_, index) => (
-              <li class="carousel-item">
-                <Slider.Dot index={index}>
-                  <div class="pt-4">
-                    <div class="w-[10px] h-[10px] rounded-full bg-neutral group-disabled:bg-info" />
-                  </div>
-                </Slider.Dot>
-              </li>
-            ))}
-          </ul>
-
-          {/* Product Info */}
-          <div class="max-w-[473px] w-full justify-self-center px-4 sm:px-[30px] sm:col-start-3 sm:col-span-1 sm:row-start-1">
+        {/* Product Info */}
+        <div class="sm:w-[33%] md:w-full lg2:w-[33%] flex">
+          <div class="max-w-[473px] md:p-0 md:mx-[30px] lg2:mx-0 lg2:mr-[100px] md:mt-[50px] lg2:mt-0 w-full justify-self-center px-4 sm:px-4 sm:col-start-3 sm:col-span-1 sm:row-start-1">
             <ProductInfo page={page} />
           </div>
         </div>
-        <SliderJS rootId={id}></SliderJS>
-      </>
+      </div>
     );
   }
 
@@ -374,7 +307,7 @@ function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
     : maybeVar;
 
   return (
-    <div class="py-0 sm:py-10">
+    <div class="py-0">
       {page ? <Details page={page} variant={variant} /> : <NotFound />}
     </div>
   );
