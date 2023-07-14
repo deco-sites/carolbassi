@@ -124,7 +124,6 @@ function SliderProductShowcase({ page }: { page: ProductDetailsPage }) {
                     backgroundImage: `url(${img.url!})`,
                     backgroundSize: "200%",
                     backgroundPosition: "center",
-                    maxHeight: "611px",
                   }}
                 />
               </li>
