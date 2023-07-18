@@ -74,7 +74,7 @@ function ProductCard(
 
   return (
     <div
-      class={`card card-compact group w-full rounded-none lg:mx-0 ${
+      class={`group w-full rounded-none lg:mx-0 ${
         variant == "withoutSlider"
           ? `max-w-[683px] mx-0`
           : `max-w-[433px] mx-auto`
@@ -99,7 +99,7 @@ function ProductCard(
         }}
       />
       <figure
-        class="relative rounded-lg"
+        class="relative rounded-lg block"
         style={{ aspectRatio: `${width} / ${height}` }}
       >
         {/* Wishlist button */}
@@ -119,7 +119,11 @@ function ProductCard(
             alt={front.alternateName}
             width={width}
             height={height}
-            class="absolute transition-opacity w-full opacity-100 group-hover:opacity-0"
+            class={`absolute transition-opacity w-full opacity-100 group-hover:opacity-0 ${
+              variant === "withoutSlider"
+                ? `rounded-none`
+                : `rounded-t-lg md:rounded-t-[0.2rem]`
+            }`}
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
