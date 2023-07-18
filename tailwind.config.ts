@@ -42,6 +42,7 @@ export default {
       },
       boxShadow: {
         "minicart-footer": "0 0 12px rgba(0,0,0,.15)",
+        "orderby": "4px 4px 8px 0 rgba(0,0,0,.2)",
       },
       lineHeight: {
         "base": "1.15",
