@@ -35,17 +35,23 @@ function GoCheckoutButton(
     body.appendChild(scrollButton);
 
     const handleScroll = () => {
-      const button = document.querySelector(
-        "[data-fixed-button]",
-      ) as HTMLElement;
-      const rect = button.getBoundingClientRect();
-      const bodyRect = document.body.getBoundingClientRect();
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
       const scrollButton = document.querySelector(
         ".scrollButton",
       ) as HTMLElement;
 
-      if (window.scrollY > rect.top - bodyRect.top) {
-        scrollButton.style.display = "block";
+      if (!isDesktop) {
+        const button = document.querySelector(
+          "[data-fixed-button]",
+        ) as HTMLElement;
+        const rect = button.getBoundingClientRect();
+        const bodyRect = document.body.getBoundingClientRect();
+
+        if (window.scrollY > rect.top - bodyRect.top) {
+          scrollButton.style.display = "block";
+        } else {
+          scrollButton.style.display = "none";
+        }
       } else {
         scrollButton.style.display = "none";
       }
