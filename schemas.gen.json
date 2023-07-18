@@ -9877,6 +9877,11 @@
             },
             {
               "type": "string",
+              "const": "OrderList",
+              "default": "OrderList"
+            },
+            {
+              "type": "string",
               "const": "ArrowsPointingOut",
               "default": "ArrowsPointingOut"
             }
@@ -10127,6 +10132,11 @@
               "type": "string",
               "const": "FilledCart",
               "default": "FilledCart"
+            },
+            {
+              "type": "string",
+              "const": "OrderList",
+              "default": "OrderList"
             },
             {
               "type": "string",
@@ -10644,6 +10654,11 @@
                 },
                 {
                   "type": "string",
+                  "const": "OrderList",
+                  "default": "OrderList"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut",
                   "default": "ArrowsPointingOut"
                 }
@@ -10827,6 +10842,11 @@
                   "type": "string",
                   "const": "FilledCart",
                   "default": "FilledCart"
+                },
+                {
+                  "type": "string",
+                  "const": "OrderList",
+                  "default": "OrderList"
                 },
                 {
                   "type": "string",
@@ -11016,6 +11036,11 @@
                 },
                 {
                   "type": "string",
+                  "const": "OrderList",
+                  "default": "OrderList"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut",
                   "default": "ArrowsPointingOut"
                 }
@@ -11199,6 +11224,11 @@
                   "type": "string",
                   "const": "FilledCart",
                   "default": "FilledCart"
+                },
+                {
+                  "type": "string",
+                  "const": "OrderList",
+                  "default": "OrderList"
                 },
                 {
                   "type": "string",
