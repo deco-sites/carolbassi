@@ -1,9 +1,6 @@
 import Image from "deco-sites/std/components/Image.tsx";
-import Avatar from "deco-sites/fashion/components/ui/Avatar.tsx";
-import WishlistIcon from "deco-sites/fashion/islands/WishlistButton.tsx";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
-import { useVariantPossibilities } from "deco-sites/fashion/sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { SendEventOnClick } from "$store/sdk/analytics.tsx";
 import type { Product } from "deco-sites/std/commerce/types.ts";
@@ -54,10 +51,10 @@ function ProductCard(
   const id = `product-card-${productID}`;
   const name = isVariantOf?.name ?? product.name;
   const productGroupID = isVariantOf?.productGroupID;
+
   const [front, back] = images ?? [];
   const { listPrice, price } = useOffer(offers);
-  const possibilities = useVariantPossibilities(product);
-  const variants = Object.entries(Object.values(possibilities)[0] ?? {});
+
   const clickEvent = {
     name: "select_item" as const,
     params: {
@@ -140,21 +137,6 @@ function ProductCard(
             decoding="async"
           />
         </a>
-        {/* SKU Selector */}
-        {
-          /* <figcaption class="glass card-body card-actions absolute bottom-0 left-0 w-full transition-opacity opacity-0 group-hover:opacity-100">
-          <ul class="flex justify-center items-center gap-2 w-full">
-            {variants.map(([value, [link]]) => (
-              <a href={link}>
-                <Avatar
-                  variant={link === url ? "active" : "default"}
-                  content={value}
-                />
-              </a>
-            ))}
-          </ul>
-        </figcaption> */
-        }
       </figure>
       {/* Prices & Name */}
       <div class={variant == "withoutSlider" ? `p-0` : `card-body`}>
