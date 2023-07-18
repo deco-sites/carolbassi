@@ -78,6 +78,7 @@
               "./islands/SearchNotFound.tsx",
               "./islands/ShippingSimulation.tsx",
               "./islands/SliderJS.tsx",
+              "./islands/SliderProductShowcase.tsx",
               "./islands/TabLayout.tsx",
               "./islands/WishlistButton.tsx",
               "$live/handlers/devPage.ts",
@@ -14364,6 +14365,22 @@
         }
       }
     },
+    "Li9pc2xhbmRzL1NsaWRlclByb2R1Y3RTaG93Y2FzZS50c3g=": {
+      "title": "./islands/SliderProductShowcase.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/SliderProductShowcase.tsx"
+          ],
+          "default": "./islands/SliderProductShowcase.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL1RhYkxheW91dC50c3g=": {
       "title": "./islands/TabLayout.tsx",
       "type": "object",
@@ -16255,6 +16272,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1NsaWRlckpTLnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1NsaWRlclByb2R1Y3RTaG93Y2FzZS50c3g="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1RhYkxheW91dC50c3g="

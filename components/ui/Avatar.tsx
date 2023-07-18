@@ -16,8 +16,7 @@ const colors: Record<string, string> = {
   "vermelha": "bg-[#FF0000] ring-[#FF0000]",
 
   // Color variants - only applied when no color as content is passed
-  "active":
-    "bg-base-100 text-primary ring-neutral-focus border-2 border-solid border-primary",
+  "active": "bg-base-100 text-primary ring-neutral-focus",
   "disabled": "bg-neutral-content text-neutral",
   "default": "bg-base-100 text-neutral-content",
 };
@@ -45,8 +44,13 @@ function Avatar({ content, variant = "default" }: Props) {
         <span class="text-base text-primary font-normal">
           {colors[content] ? "" : content}
         </span>
-        <div class={"rounded-lg border-1 border-solid border-primary absolute"}>
-        </div>
+        {variant === "active" &&
+          (
+            <div
+              class={"rounded-lg border-2 border-solid border-primary absolute inset-[-0.25rem]"}
+            >
+            </div>
+          )}
       </div>
     </div>
   );
