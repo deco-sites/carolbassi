@@ -11743,13 +11743,28 @@
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0U2hlbGYudHN4@Props": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": "string",
-          "title": "Title"
-        },
-        "subTitle": {
-          "type": "string",
-          "title": "Sub Title"
+        "titles": {
+          "type": "object",
+          "properties": {
+            "titleMobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Title Mobile"
+            },
+            "subTitleMobile": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Sub Title Mobile"
+            },
+            "titleDesktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Title Desktop"
+            },
+            "subTitleDesktop": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Sub Title Desktop"
+            }
+          },
+          "required": [],
+          "title": "Titles"
         },
         "products": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
@@ -11789,13 +11804,29 @@
           },
           "required": [],
           "title": "Hide Props"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "default",
+              "default": "default"
+            },
+            {
+              "type": "string",
+              "const": "withoutSlider",
+              "default": "withoutSlider"
+            }
+          ],
+          "type": "string",
+          "title": "Variant"
         }
       },
       "required": [
-        "title",
-        "subTitle",
+        "titles",
         "products",
-        "hideProps"
+        "hideProps",
+        "variant"
       ],
       "title": "deco-sites/carolbassi/components/product/ProductShelf.tsx@Props"
     },

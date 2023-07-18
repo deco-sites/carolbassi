@@ -28,8 +28,7 @@ interface Props {
 
 const variants = {
   active: "",
-  disabled:
-    `relative after:absolute after:left-0 after:top-1/2 after:h-[1px] after:bg-red-800 after:w-full after:block after:-rotate-45 after:content-[""]`,
+  disabled: `product-disabled`,
   default: "",
 };
 
@@ -41,7 +40,7 @@ function Avatar({ content, variant = "default" }: Props) {
           colors[content] ?? colors[variant]
         } ${variants[variant]}`}
       >
-        <span class="text-base text-primary font-normal">
+        <span class="text-base text-[#3f3f40] font-normal">
           {colors[content] ? "" : content}
         </span>
         {variant === "active" &&

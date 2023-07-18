@@ -8,10 +8,16 @@ import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/product
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import type { LoaderReturnType } from "$live/types.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";
+import type { HTML } from "deco-sites/std/components/types.ts";
+import Quilltext from "deco-sites/std/components/QuillText.tsx";
 
 export interface Props {
-  title: string;
-  subTitle: string;
+  titles: {
+    titleMobile?: HTML;
+    subTitleMobile?: HTML;
+    titleDesktop?: HTML;
+    subTitleDesktop?: HTML;
+  };
   products: LoaderReturnType<Product[] | null>;
   itemsPerPage?: number;
 
@@ -20,13 +26,14 @@ export interface Props {
     hidePrice?: boolean;
     hideListPrice?: boolean;
   };
+  variant: "default" | "withoutSlider";
 }
 
 function ProductShelf({
-  title,
-  subTitle,
+  titles,
   products,
   hideProps,
+  variant = "default",
 }: Props) {
   const id = useId();
 
@@ -34,11 +41,77 @@ function ProductShelf({
     return null;
   }
 
+  if (variant === "withoutSlider") {
+    return (
+      <>
+        {/* Mobile View for title */}
+        <div class="my-7 lg:mt-[78px] lg:mb-[73px] text-center row-start-1 col-span-full md:hidden">
+          <p class="">
+            {titles.titleMobile && <Quilltext html={titles.titleMobile} />}
+          </p>
+          <p class="">
+            {titles.subTitleMobile && (
+              <Quilltext html={titles.subTitleMobile} />
+            )}
+          </p>
+        </div>
+
+        {/* Desktop View for title */}
+        <div class="hidden md:block my-7 lg:mt-[78px] lg:mb-[73px] text-center row-start-1 col-span-full">
+          <p class="">
+            {titles.titleDesktop && <Quilltext html={titles.titleDesktop} />}
+          </p>
+          <p class="">
+            {titles.subTitleDesktop && (
+              <Quilltext html={titles.subTitleDesktop} />
+            )}
+          </p>
+        </div>
+
+        <div>
+          <ul class="max-w-[1280px] mx-auto list-none flex flex-col lg:flex-row justify-between">
+            {products?.map((product, index) => (
+              <li class="w-full mb-5 lg:w-[32%]">
+                <ProductCard
+                  width={683}
+                  height={1024}
+                  variant="withoutSlider"
+                  hideProps={hideProps}
+                  product={product}
+                  itemListName={titles.titleMobile}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <div class="my-7 lg:mt-[78px] lg:mb-[73px] text-center row-start-1 col-span-full">
-        <p class="font-bold text-xl lg:text-3xl">{title}</p>
-        <p class="font-medium text-base lg:text-xl">{subTitle}</p>
+      {/* Mobile View for title */}
+      <div class="my-7 lg:mt-[78px] lg:mb-[73px] text-center row-start-1 col-span-full md:hidden">
+        <p class="">
+          {titles.titleMobile && <Quilltext html={titles.titleMobile} />}
+        </p>
+        <p class="">
+          {titles.subTitleMobile && <Quilltext html={titles.subTitleMobile} />}
+        </p>
+      </div>
+
+      {/* Desktop View for title */}
+      <div class="hidden md:block my-7 lg:mt-[78px] lg:mb-[73px] text-center row-start-1 col-span-full">
+        <p class="">
+          {titles.titleDesktop && <Quilltext html={titles.titleDesktop} />}
+        </p>
+        <p class="">
+          {titles.subTitleDesktop && (
+            <Quilltext
+              html={titles.subTitleDesktop}
+            />
+          )}
+        </p>
       </div>
       <div
         id={id}
@@ -53,7 +126,7 @@ function ProductShelf({
               <ProductCard
                 hideProps={hideProps}
                 product={product}
-                itemListName={title}
+                itemListName={titles.titleDesktop}
               />
             </Slider.Item>
           ))}
@@ -64,7 +137,7 @@ function ProductShelf({
           event={{
             name: "view_item_list",
             params: {
-              item_list_name: title,
+              item_list_name: titles.titleDesktop,
               items: products.map((product) =>
                 mapProductToAnalyticsItem({
                   product,
