@@ -24,6 +24,8 @@ interface Props {
     hidePrice?: boolean;
     hideListPrice?: boolean;
   };
+
+  variant?: "default" | "withoutSlider";
 }
 
 const relative = (url: string) => {
@@ -32,8 +34,15 @@ const relative = (url: string) => {
 };
 
 function ProductCard(
-  { product, preload, itemListName, width = 309, height = 464, hideProps }:
-    Props,
+  {
+    product,
+    preload,
+    itemListName,
+    width = 309,
+    height = 464,
+    hideProps,
+    variant = "default",
+  }: Props,
 ) {
   const {
     url,
@@ -65,7 +74,11 @@ function ProductCard(
 
   return (
     <div
-      class="card card-compact group w-full rounded-none max-w-[433px] mx-auto lg:mx-0"
+      class={`card card-compact group w-full rounded-none lg:mx-0 ${
+        variant == "withoutSlider"
+          ? `max-w-[683px] mx-0`
+          : `max-w-[433px] mx-auto`
+      }`}
       data-deco="view-product"
       id={`product-card-${productID}`}
     >
@@ -140,11 +153,13 @@ function ProductCard(
         }
       </figure>
       {/* Prices & Name */}
-      <div class="card-body">
+      <div class={variant == "withoutSlider" ? `p-0` : `card-body`}>
         <h2
           class={`${
             hideProps?.hideName ? "hidden" : "block"
-          } card-title whitespace-nowrap overflow-hidden`}
+          } card-title whitespace-nowrap overflow-hidden ${
+            variant == "withoutSlider" && `text-lg font-normal text-[#3f4040]`
+          }`}
         >
           {name}
         </h2>
@@ -159,7 +174,9 @@ function ProductCard(
           <span
             class={`${
               hideProps?.hidePrice ? "hidden" : "block"
-            } text-secondary`}
+            } text-secondary ${
+              variant == "withoutSlider" && `text-lg font-normal text-secondary`
+            }`}
           >
             {formatPrice(price, offers!.priceCurrency!)}
           </span>

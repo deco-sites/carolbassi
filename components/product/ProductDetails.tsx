@@ -251,7 +251,7 @@ function Details({
 
         {/* Product Info */}
         <div class="sm:w-[33%] md:w-full lg2:w-[33%] flex mx-auto mt-[20px] sm:mx-0 sm:mt-0">
-          <div class="max-w-[473px] md:p-0 md:mx-[30px] lg2:mx-0 lg2:mr-[100px] md:mt-[50px] lg2:mt-0 w-full justify-self-center px-4 sm:px-4 sm:col-start-3 sm:col-span-1 sm:row-start-1">
+          <div class="max-w-[473px] md:p-0 md:mx-[30px] lg2:mx-0 lg2:mr-[100px] md:mt-[50px] lg2:mt-0 w-full justify-self-center px-4 sm:px-4 sm:col-start-3 sm:col-span-1 sm:row-start-1 h-fit sticky top-0">
             <ProductInfo page={page} />
           </div>
         </div>

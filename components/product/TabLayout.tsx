@@ -47,7 +47,7 @@ function TabLayout({ description, characteristics }: Props) {
 
   return (
     <div class="">
-      <ul class="relative mx-2 mt-[30px] flex sm:flex-col md:flex-row justify-between text-xl md:text-2xl text-primary border-b-2 border-b-[rgba(0,0,0,.3)] border-b-solid">
+      <ul class="cursor-pointer relative mx-2 mt-[30px] flex sm:flex-col md:flex-row justify-between text-xl md:text-2xl text-primary border-b-2 border-b-[rgba(0,0,0,.3)] border-b-solid">
         <li
           class={`${
             activeTab === "tab1" ? activeTabStyles : deactiveTabStyles
