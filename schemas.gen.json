@@ -4591,7 +4591,7 @@
       },
       "title": "317e51338592f612f17f8c85f9af713e&ad83154033839adf63ba95275604b2a0&omitdmFyaWF0aW9ucw==Item[]"
     },
-    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct": {
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct&c1b4224b28c287e92393a7f82a39f1d9": {
       "allOf": [
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct"
@@ -4627,22 +4627,22 @@
           ]
         }
       ],
-      "title": "92100be21019d5c0aec367c6d4b4b608&IProduct"
+      "title": "IProduct&c1b4224b28c287e92393a7f82a39f1d9"
     },
-    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]": {
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct&c1b4224b28c287e92393a7f82a39f1d9[]": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct"
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct&c1b4224b28c287e92393a7f82a39f1d9"
       },
-      "title": "92100be21019d5c0aec367c6d4b4b608&IProduct[]"
+      "title": "IProduct&c1b4224b28c287e92393a7f82a39f1d9[]"
     },
-    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]|null": {
+    "ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct&c1b4224b28c287e92393a7f82a39f1d9[]|null": {
       "anyOf": [
         {
           "$ref": "#/definitions/Resolvable"
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@92100be21019d5c0aec367c6d4b4b608&IProduct[]"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvcGFja3MvdnRleC90eXBlcy50cw==@IProduct&c1b4224b28c287e92393a7f82a39f1d9[]"
         },
         {
           "type": "null"
@@ -11708,6 +11708,10 @@
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0RGV0YWlscy50c3g=@Props": {
       "type": "object",
       "properties": {
+        "similars": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
+          "title": "Similars"
+        },
         "page": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductDetailsPage|null",
           "title": "Page"
@@ -11736,6 +11740,7 @@
         }
       },
       "required": [
+        "similars",
         "page"
       ],
       "title": "deco-sites/carolbassi/components/product/ProductDetails.tsx@Props"
