@@ -119,7 +119,11 @@ function ProductCard(
             alt={front.alternateName}
             width={width}
             height={height}
-            class="absolute transition-opacity w-full opacity-100 group-hover:opacity-0 rounded-t-lg md:rounded-t-[0.2rem]"
+            class={`absolute transition-opacity w-full opacity-100 group-hover:opacity-0 ${
+              variant === "withoutSlider"
+                ? `rounded-none`
+                : `rounded-t-lg md:rounded-t-[0.2rem]`
+            }`}
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
