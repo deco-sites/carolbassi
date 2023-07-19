@@ -112,13 +112,13 @@ function Sort({ variant, sortOptions }: Props) {
           width={15}
           height={8}
           src={asset("/arrow-carol.webp")}
-          class="block ml-4"
+          class="block ml-4 rotate-180"
         />
       </button>
       <div
         class={`absolute ${
           open.value ? "block" : "hidden"
-        } top-[35px] bg-white z-30 right-0 min-w-[180px] shadow-orderby`}
+        } top-[35px] bg-white z-30 right-0 min-w-[180px] shadow-orderby border-solid border-[.125rem] border-[#e3e4e6]`}
       >
         {sortOptions.map(({ value, label }) => (
           <button

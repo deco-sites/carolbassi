@@ -11,11 +11,10 @@ interface Props extends UseAddToCartProps {
    * @description Product id
    */
   sellerId: string;
-  similars: Product[] | null;
 }
 
 function GoCheckoutButton(
-  { skuId, sellerId, discount, price, productGroupId, name, similars }: Props,
+  { skuId, sellerId, discount, price, productGroupId, name }: Props,
 ) {
   const props = useAddToCart({
     skuId,
@@ -26,8 +25,6 @@ function GoCheckoutButton(
     name,
     goCheckout: true,
   });
-
-  // console.log(similars);
 
   const [isCentered, setIsCentered] = useState(false);
 

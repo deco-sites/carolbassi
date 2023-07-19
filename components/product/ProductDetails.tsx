@@ -109,7 +109,6 @@ function ProductInfo(
               {seller && (
                 <>
                   <GoCheckoutButton
-                    similars={similars}
                     skuId={productID}
                     sellerId={seller}
                     price={price ?? 0}

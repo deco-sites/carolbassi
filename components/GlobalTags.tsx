@@ -35,6 +35,17 @@ function GlobalTags() {
               margin: auto;
               cursor: pointer;
             }
+
+            .breadcrumbs-line>ol>li+:before, .breadcrumbs-line>ul>li+:before {
+              border-top: none;
+              border-right: none;
+              transform: none;
+              opacity: 1;
+              border-bottom: 1px solid #666;
+              width: 5px;
+              color: transparent;
+              margin: 0 7px 5px 7px;
+            }
             `,
         }}
       />
