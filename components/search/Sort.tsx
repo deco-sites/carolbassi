@@ -118,7 +118,7 @@ function Sort({ variant, sortOptions }: Props) {
       <div
         class={`absolute ${
           open.value ? "block" : "hidden"
-        } top-[35px] bg-white z-30 right-0 min-w-[180px] shadow-orderby`}
+        } top-[35px] bg-white z-30 right-0 min-w-[180px] shadow-orderby border-solid border-[.125rem] border-[#e3e4e6]`}
       >
         {sortOptions.map(({ value, label }) => (
           <button
