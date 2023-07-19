@@ -24,7 +24,10 @@ function SearchControls(
   return (
     <div class="flex relative flex-col justify-between mb-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-8 sm:border-b sm:border-[rgba(0,0,0,.25)]">
       <div class="flex flex-row items-center mt-5 sm:p-0 mb-2 sm:m-0 border-b border-[rgba(0,0,0,.3)] sm:border-none">
-        <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+        <Breadcrumb
+          itemListElement={breadcrumb?.itemListElement}
+          style="line"
+        />
         {records && (
           <span class="block sm:hidden ml-auto text-xl text-[rgba(0,0,0,.5)]">
             {records} <span class="text-xs">itens</span>
