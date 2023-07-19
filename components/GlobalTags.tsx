@@ -36,7 +36,7 @@ function GlobalTags() {
               cursor: pointer;
             }
 
-            .breadcrumbs>ol>li+:before, .breadcrumbs>ul>li+:before {
+            .breadcrumbs-line>ol>li+:before, .breadcrumbs-line>ul>li+:before {
               border-top: none;
               border-right: none;
               transform: none;
