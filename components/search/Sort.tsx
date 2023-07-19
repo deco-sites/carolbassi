@@ -112,7 +112,7 @@ function Sort({ variant, sortOptions }: Props) {
           width={15}
           height={8}
           src={asset("/arrow-carol.webp")}
-          class="block ml-4"
+          class="block ml-4 rotate-180"
         />
       </button>
       <div
