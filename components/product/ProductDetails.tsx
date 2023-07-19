@@ -1,15 +1,11 @@
 import { useId } from "preact/hooks";
 import AddToCartButton from "deco-sites/fashion/islands/AddToCartButton.tsx";
 import GoCheckoutButton from "deco-sites/fashion/islands/GoCheckoutButton.tsx";
-import ShippingSimulation from "deco-sites/fashion/islands/ShippingSimulation.tsx";
 import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
-import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import TabLayout from "deco-sites/fashion/islands/TabLayout.tsx";
 import SliderProductShowcase from "deco-sites/fashion/islands/SliderProductShowcase.tsx";
 import Image from "deco-sites/std/components/Image.tsx";
-import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
-import SliderJS from "deco-sites/fashion/components/ui/SliderJS.tsx";
 import OutOfStock from "deco-sites/fashion/islands/OutOfStock.tsx";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
@@ -17,14 +13,14 @@ import { SendEventOnLoad } from "deco-sites/fashion/sdk/analytics.tsx";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import type { ProductDetailsPage } from "deco-sites/std/commerce/types.ts";
 import type { LoaderReturnType } from "$live/types.ts";
+import type { Product } from "deco-sites/std/commerce/types.ts";
 
 import ProductSelector from "./ProductVariantSelector.tsx";
-import ProductImageZoom from "deco-sites/fashion/islands/ProductImageZoom.tsx";
-import WishlistButton from "../wishlist/WishlistButton.tsx";
 
 export type Variant = "front-back" | "slider" | "auto";
 
 export interface Props {
+  similars: LoaderReturnType<Product[] | null>;
   page: LoaderReturnType<ProductDetailsPage | null>;
   /**
    * @title Product view
@@ -53,11 +49,13 @@ function NotFound() {
   );
 }
 
-function ProductInfo({ page }: { page: ProductDetailsPage }) {
+function ProductInfo(
+  { page, similars }: Props,
+) {
   const {
     breadcrumbList,
     product,
-  } = page;
+  } = page!;
   const {
     description,
     productID,
@@ -101,7 +99,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
         : null}
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
-        <ProductSelector product={product} />
+        <ProductSelector product={product} similars={similars} />
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
@@ -111,6 +109,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
               {seller && (
                 <>
                   <GoCheckoutButton
+                    similars={similars}
                     skuId={productID}
                     sellerId={seller}
                     price={price ?? 0}
@@ -236,8 +235,9 @@ const useStableImages = (product: ProductDetailsPage["product"]) => {
 function Details({
   page,
   variant,
-}: { page: ProductDetailsPage; variant: Variant }) {
-  const { product } = page;
+  similars,
+}: Props) {
+  const { product } = page!;
   const id = `product-image-gallery:${useId()}`;
   const images = useStableImages(product);
 
@@ -251,12 +251,12 @@ function Details({
   if (variant === "slider") {
     return (
       <div class="grid grid-cols-1 sm:flex lg2:ml-[55px] lg2:px-4 xl:px-1">
-        <SliderProductShowcase page={page} />
+        <SliderProductShowcase page={page!} />
 
         {/* Product Info */}
         <div class="sm:w-[33%] md:w-full lg2:w-[33%] flex mx-auto mt-[20px] sm:mx-0 sm:mt-0">
           <div class="max-w-[473px] md:p-0 md:mx-[30px] lg2:mx-0 lg2:mr-[100px] md:mt-[50px] lg2:mt-0 w-full justify-self-center px-4 sm:px-4 sm:col-start-3 sm:col-span-1 sm:row-start-1 h-fit sticky top-0">
-            <ProductInfo page={page} />
+            <ProductInfo variant={variant} similars={similars} page={page} />
           </div>
         </div>
       </div>
@@ -292,13 +292,13 @@ function Details({
 
       {/* Product Info */}
       <div class="px-4 sm:pr-0 sm:pl-6">
-        <ProductInfo page={page} />
+        <ProductInfo similars={similars} variant={variant} page={page} />
       </div>
     </div>
   );
 }
 
-function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
+function ProductDetails({ page, similars, variant: maybeVar = "auto" }: Props) {
   /**
    * Showcase the different product views we have on this template. In case there are less
    * than two images, render a front-back, otherwhise render a slider
@@ -312,7 +312,9 @@ function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
 
   return (
     <div class="py-0">
-      {page ? <Details page={page} variant={variant} /> : <NotFound />}
+      {page
+        ? <Details page={page} similars={similars} variant={variant} />
+        : <NotFound />}
     </div>
   );
 }

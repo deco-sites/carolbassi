@@ -4,16 +4,18 @@ import {
   useAddToCart,
 } from "deco-sites/fashion/sdk/useAddToCart.ts";
 import { useEffect, useState } from "preact/hooks";
+import type { Product } from "deco-sites/std/commerce/types.ts";
 
 interface Props extends UseAddToCartProps {
   /**
    * @description Product id
    */
   sellerId: string;
+  similars: Product[] | null;
 }
 
 function GoCheckoutButton(
-  { skuId, sellerId, discount, price, productGroupId, name }: Props,
+  { skuId, sellerId, discount, price, productGroupId, name, similars }: Props,
 ) {
   const props = useAddToCart({
     skuId,
@@ -24,6 +26,8 @@ function GoCheckoutButton(
     name,
     goCheckout: true,
   });
+
+  // console.log(similars);
 
   const [isCentered, setIsCentered] = useState(false);
 
