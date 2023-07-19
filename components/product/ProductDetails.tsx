@@ -76,6 +76,7 @@ function ProductInfo(
       {/* Breadcrumb */}
       <Breadcrumb
         itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
+        breadcrumbSmallFont={true}
       />
       {/* Code and name */}
       <div class="mt-4 sm:mt-1">
@@ -310,7 +311,7 @@ function ProductDetails({ page, similars, variant: maybeVar = "auto" }: Props) {
     : maybeVar;
 
   return (
-    <div class="py-0">
+    <div class="py-0 lg:mt-[65px]">
       {page
         ? <Details page={page} similars={similars} variant={variant} />
         : <NotFound />}
