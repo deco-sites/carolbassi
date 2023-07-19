@@ -116,10 +116,10 @@ function ProductCard(
             alt={front.alternateName}
             width={width}
             height={height}
-            class={`absolute transition-opacity w-full opacity-100 group-hover:opacity-0 ${
+            class={`absolute transition-opacity w-full opacity-100 group-hover:md:opacity-0 ${
               variant === "withoutSlider"
                 ? `rounded-none`
-                : `rounded-t-lg md:rounded-t-[0.2rem]`
+                : `rounded-t-[0.5rem] md:rounded-[0.3rem]`
             }`}
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
@@ -131,7 +131,7 @@ function ProductCard(
             alt={back?.alternateName ?? front.alternateName}
             width={width}
             height={height}
-            class="absolute transition-opacity w-full opacity-0 group-hover:opacity-100"
+            class="absolute transition-opacity w-full opacity-0 group-hover:md:opacity-100 rounded-b-[0.3rem]"
             sizes="(max-width: 640px) 50vw, 20vw"
             loading="lazy"
             decoding="async"
@@ -139,7 +139,14 @@ function ProductCard(
         </a>
       </figure>
       {/* Prices & Name */}
-      <div class={variant == "withoutSlider" ? `p-0` : `card-body`}>
+      <div
+        class={variant == "withoutSlider"
+          ? `p-0`
+          : `card-body ${
+            hideProps?.hideName && hideProps?.hideListPrice &&
+            hideProps?.hidePrice && "hidden"
+          }`}
+      >
         <h2
           class={`${
             hideProps?.hideName ? "hidden" : "block"
