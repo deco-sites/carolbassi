@@ -22,13 +22,14 @@ const colors: Record<string, string> = {
 };
 
 interface Props {
-  variant?: "active" | "disabled" | "default";
+  variant?: "active" | "disabled" | "disabledActive" | "default";
   content: string;
 }
 
 const variants = {
   active: "",
   disabled: `product-disabled`,
+  disabledActive: `product-disabled text-neutral`,
   default: "",
 };
 
@@ -43,13 +44,14 @@ function Avatar({ content, variant = "default" }: Props) {
         <span class="text-base text-[#3f3f40] font-normal">
           {colors[content] ? "" : content}
         </span>
-        {variant === "active" &&
-          (
+        {variant === "active" || variant === "disabledActive"
+          ? (
             <div
               class={"rounded-lg border-2 border-solid border-primary absolute inset-[-0.25rem]"}
             >
             </div>
-          )}
+          )
+          : null}
       </div>
     </div>
   );

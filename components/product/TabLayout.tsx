@@ -11,9 +11,9 @@ function TabLayout({ description, characteristics }: Props) {
   function productDescription() {
     return (
       <div class="mt-4">
-        <span class="text-sm text-primary font-light tracking-[.02em]">
+        <span class="w-[90%] block text-[15px] text-primary font-light tracking-[.02em]">
           {description && (
-            <div class="w-[90%] ml-[-4px] sm:ml-[9px]">{description}</div>
+            <div class="w-[91%] ml-[-4px] sm:ml-[9px]">{description}</div>
           )}
         </span>
       </div>
