@@ -23,14 +23,23 @@ function VariantSelector({ product, product: { url } }: Props) {
                   },
                 );
 
-                let variant: "active" | "disabled" | "default" = "default";
+                let variant:
+                  | "active"
+                  | "disabled"
+                  | "disabledActive"
+                  | "default" = "default";
 
                 if (offer) {
                   const { availability } = useOffer(offer?.offers);
+                  const selected = link === url;
 
-                  if (availability !== "https://schema.org/InStock") {
+                  if (
+                    availability !== "https://schema.org/InStock" && selected
+                  ) {
+                    variant = "disabledActive";
+                  } else if (availability !== "https://schema.org/InStock") {
                     variant = "disabled";
-                  } else if (link === url) {
+                  } else if (selected) {
                     variant = "active";
                   }
                 } else {

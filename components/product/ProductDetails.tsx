@@ -88,13 +88,17 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
         </h1>
       </div>
       {/* Prices */}
-      <div class="mt-2 px-1">
-        <div class="flex flex-row gap-2 items-center">
-          <span class="font-medium text-[26px] text-primary">
-            {formatPrice(price, offers!.priceCurrency!)}
-          </span>
-        </div>
-      </div>
+      {availability === "https://schema.org/InStock"
+        ? (
+          <div class="mt-2 px-1">
+            <div class="flex flex-row gap-2 items-center">
+              <span class="font-medium text-[26px] text-primary">
+                {formatPrice(price, offers!.priceCurrency!)}
+              </span>
+            </div>
+          </div>
+        )
+        : null}
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
         <ProductSelector product={product} />

@@ -14,6 +14,7 @@ function Notify({ productID }: Props) {
   const loading = useSignal(false);
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -34,6 +35,7 @@ function Notify({ productID }: Props) {
       if (!emailRegex) return false;
 
       await notifyme({ skuId: productID, name, email });
+      setShowSuccess(true);
       setShowError(false);
     } catch {
       setShowError(true);
@@ -75,6 +77,13 @@ function Notify({ productID }: Props) {
       >
         Avise-Me Quando Chegar
       </button>
+      {showSuccess && (
+        <>
+          <h4 class="text-base top-full text-primary">
+            E-mail cadastrado com sucesso
+          </h4>
+        </>
+      )}
     </form>
   );
 }

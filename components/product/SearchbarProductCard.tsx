@@ -19,7 +19,7 @@ interface Props {
 
 const relative = (url: string) => {
   const link = new URL(url);
-  return `${link.pathname}${link.search}`;
+  return `${link.pathname}`;
 };
 
 function SearchbarProductCard(
