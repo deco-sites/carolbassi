@@ -60,7 +60,7 @@ function Navbar({ logo, navButtons, items, searchbar, alignment }: {
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden relative lg:flex flex-row justify-between items-center w-full px-[46px]">
+      <div class="hidden relative lg:flex flex-row justify-between items-center w-full px-[46px] lg:mb-[34px] lg:pt-[34px]">
         <div class="flex w-full items-center">
           <a href="/" aria-label="Store logo" class="block">
             <Image
