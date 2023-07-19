@@ -27,7 +27,7 @@ interface Props {
 
 const relative = (url: string) => {
   const link = new URL(url);
-  return `${link.pathname}${link.search}`;
+  return `${link.pathname}`;
 };
 
 function ProductCard(
@@ -96,7 +96,7 @@ function ProductCard(
         }}
       />
       <figure
-        class="relative rounded-lg block"
+        class="card card-compact relative rounded-lg block"
         style={{ aspectRatio: `${width} / ${height}` }}
       >
         {/* Wishlist button */}
