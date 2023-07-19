@@ -34,6 +34,7 @@ function Result({
           sortOptions={sortOptions}
           filters={filters}
           breadcrumb={breadcrumb}
+          records={pageInfo.records!}
           displayFilter={variant === "drawer"}
         />
 
