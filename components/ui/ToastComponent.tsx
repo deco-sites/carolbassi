@@ -28,7 +28,7 @@ function ToastComponent({ toast }: { toast: Toast }) {
   return (
     <div
       ref={ref}
-      className={`text-white p-4 flex flex-row items-start bg-black transition-transform translate-y-full will-change-transform duration-150 delay-0`}
+      className={`text-white p-4 flex flex-row items-start bg-black transition-transform translate-y-full will-change-transform duration-150 delay-0 lg:max-w-[512px] lg:rounded-[0.25rem] lg:m-8 lg:items-center`}
     >
       <span>{toast.message}</span>
       <button

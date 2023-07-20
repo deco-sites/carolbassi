@@ -63,7 +63,7 @@ function ShippingContent({ simulation }: {
           </span>
         </li>
       ))}
-      <span class="text-base-300">
+      <span class="text-primary">
         Os prazos de entrega começam a contar a partir da confirmação do
         pagamento e podem variar de acordo com a quantidade de produtos na
         sacola.

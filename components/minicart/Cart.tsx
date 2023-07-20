@@ -50,7 +50,7 @@ function Cart() {
   if (isCartEmpty) {
     return (
       <div class="flex flex-col justify-center items-center h-full gap-6 border-t border-[rgba(0,0,0,.13)]">
-        <span class="hidden lg:block font-normal text-base">
+        <span class="hidden lg:block font-light text-base font-sans-serif text-base-300">
           Seu carrinho está vazio {":("}
         </span>
         <span class="block lg:hidden text-warning-content">
@@ -100,7 +100,7 @@ function Cart() {
   }, [cart.value]);
 
   return (
-    <div class="flex flex-col h-full w-full border-t border-info">
+    <div class="flex flex-col h-full w-full border-t border-[#d5e6ef]">
       <div class="absolute top-[15px] left-[15px] hidden lg:block">
         <Icon
           id="ShoppingCart"
@@ -131,9 +131,11 @@ function Cart() {
       {/* Cart Footer */}
       <footer class="shadow-minicart-footer bg-[hsla(0,0%,96.9%,.6)] pb-[50px] pt-4">
         {/* Subtotal */}
-        <div class="pt-2 flex lg:hidden flex-col mx-3 gap-2 lg:mx-6">
-          <div class="w-full flex justify-between">
-            <span class="text-base font-semibold">Subtotal</span>
+        <div class="lg:pt-2 flex flex-col mx-3 gap-2 lg:mx-6">
+          <div class="w-full flex justify-between items-center mt-2 lg:mt-0 text-base-300">
+            <span class="text-base lg:text-lg font-semibold lg:font-light">
+              Subtotal
+            </span>
             <span class="text-base">
               {subtotal
                 ? formatPrice(subtotal / 100, currencyCode!, locale)
@@ -141,37 +143,46 @@ function Cart() {
             </span>
           </div>
           {discounts < 0 && (
-            <div class="flex justify-between items-center">
-              <span class="text-base font-semibold">Descontos</span>
-              <span class="text-base">
+            <div class="flex justify-between items-center text-base-300">
+              <span class="text-base font-semibold block lg:hidden">
+                Descontos
+              </span>
+              <span class="text-[22px] font-medium hidden lg:block">
+                Entrega
+              </span>
+              <span class="text-base font-light hidden lg:block">
+                A calcular
+              </span>
+              <span class="text-base block lg:hidden">
                 {formatPrice(discounts / 100, currencyCode!, locale)}
               </span>
             </div>
           )}
         </div>
         {/* Total */}
-        <div class="pt-2 flex flex-col justify-end items-end gap-2 mx-3 lg:mx-6">
-          <div class="flex justify-between items-center w-full">
-            <span class="block lg:hidden font-semibold text-xl pb-4">
+        <div class="pt-3 flex lg:hidden flex-col justify-end items-end gap-2 mx-3 pb-4">
+          <div class="flex justify-between items-center w-full text-base-300">
+            <span class="block font-semibold text-xl">
               Total
             </span>
-            <span class="hidden lg:block font-semibold lg:font-normal text-base lg:text-lg">
-              Subtotal
-            </span>
-            <span class="text-xl lg:text-base text-primary-content">
+            <span class="text-xl lg:text-base">
               {formatPrice(total / 100, currencyCode!, locale)}
             </span>
           </div>
         </div>
-
-        <div class="pt-2 hidden lg:flex flex-col justify-end items-end gap-2 mx-3 lg:mx-6">
-          <div class="flex justify-between items-center w-full">
-            <span class="text-[22px]">Entrega</span>
-            <span class="text-base text-primary-content">
-              A calcular
-            </span>
+        {discounts >= 0 && (
+          <div class="pt-3 pb-4 hidden lg:flex flex-col justify-end items-end gap-2 mx-3 lg:mx-6">
+            <div class="flex justify-between items-center w-full">
+              <span class="block font-medium text-[22px] text-primary">
+                Total
+              </span>
+              <span class="font-medium text-[22px] text-primary">
+                {formatPrice(total / 100, currencyCode!, locale)}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
+
         <div class="px-3 lg:px-6 my-2">
           <a
             class="inline-block w-full"
