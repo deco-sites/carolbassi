@@ -41,6 +41,10 @@ export interface Props {
    * @description Check this option when this banner is the biggest image on the screen for image optimizations
    */
   preload?: boolean;
+  /**
+   * @default true
+   */
+  useMarginTop?: boolean;
 }
 
 const isVideo = (item: SourceItem): item is Video =>
@@ -85,13 +89,24 @@ function getContentAlignment(
 }
 
 function ImageOrVideo(
-  { desktop, mobile, alt = "", href = "#!", preload = false }: Props,
+  {
+    desktop,
+    mobile,
+    alt = "",
+    href = "#!",
+    preload = false,
+    useMarginTop = true,
+  }: Props,
 ) {
   return (
     <>
       {/* Mobile view */}
       {mobile && mobile.source && (
-        <div class="block lg:hidden mt-[60px] relative">
+        <div
+          class={`block lg:hidden ${
+            useMarginTop ? "mt-[60px]" : "mt-0"
+          } relative`}
+        >
           <a
             href={href}
             aria-label={`Go to ${href}`}
