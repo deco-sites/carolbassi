@@ -108,6 +108,7 @@
               "deco-sites/carolbassi/sections/Header.tsx",
               "deco-sites/carolbassi/sections/Highlights.tsx",
               "deco-sites/carolbassi/sections/ImageOrVideo.tsx",
+              "deco-sites/carolbassi/sections/Institucional.tsx",
               "deco-sites/carolbassi/sections/LinkTree.tsx",
               "deco-sites/carolbassi/sections/ProductDetails.tsx",
               "deco-sites/carolbassi/sections/ProductShelf.tsx",
@@ -11601,10 +11602,69 @@
           ],
           "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
           "title": "Preload"
+        },
+        "useMarginTop": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": "true",
+          "title": "Use Margin Top"
         }
       },
       "required": [],
       "title": "deco-sites/carolbassi/components/ui/ImageOrVideo.tsx@Props"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@FooterLink": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Content"
+        },
+        "href": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Href"
+        }
+      },
+      "required": [],
+      "title": "FooterLink"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@FooterLink[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@FooterLink"
+      },
+      "title": "FooterLink[]"
+    },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "mainContent": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Main Content"
+        },
+        "image": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "title": "Image"
+        },
+        "footerLinks": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@FooterLink[]",
+          "title": "Footer Links"
+        },
+        "footerBottom": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+          "title": "Footer Bottom"
+        }
+      },
+      "required": [],
+      "title": "deco-sites/carolbassi/components/institucional/Institucional.tsx@Props"
     },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvdWkvTGlua1RyZWUudHN4@Link": {
       "type": "object",
@@ -15005,6 +15065,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0luc3RpdHVjaW9uYWwudHN4": {
+      "title": "deco-sites/carolbassi/sections/Institucional.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/carolbassi/sections/Institucional.tsx"
+          ],
+          "default": "deco-sites/carolbassi/sections/Institucional.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0xpbmtUcmVlLnRzeA==": {
       "title": "deco-sites/carolbassi/sections/LinkTree.tsx",
       "type": "object",
@@ -16422,6 +16503,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0ltYWdlT3JWaWRlby50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0luc3RpdHVjaW9uYWwudHN4"
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL3NlY3Rpb25zL0xpbmtUcmVlLnRzeA=="
