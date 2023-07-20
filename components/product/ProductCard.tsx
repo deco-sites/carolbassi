@@ -160,7 +160,7 @@ function ProductCard(
           <span
             class={`${
               hideProps?.hideListPrice ? "hidden" : "block"
-            } line-through text-base-300 text-xs`}
+            } line-through text-primary text-xs`}
           >
             {formatPrice(listPrice, offers!.priceCurrency!)}
           </span>

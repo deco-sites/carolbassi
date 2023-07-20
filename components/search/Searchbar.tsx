@@ -210,7 +210,7 @@ function Searchbar({
                 >
                   Nenhum resultado encontrado
                 </span>
-                <span class="text-center text-base-300">
+                <span class="text-center text-primary">
                   Vamos tentar de outro jeito? Verifique a ortografia ou use um
                   termo diferente
                 </span>

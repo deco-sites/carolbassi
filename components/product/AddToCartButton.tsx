@@ -14,6 +14,7 @@ interface Props extends UseAddToCartProps {
 function AddToCartButton(
   { skuId, sellerId, discount, price, productGroupId, name }: Props,
 ) {
+
   const props = useAddToCart({
     skuId,
     sellerId,

@@ -34,6 +34,9 @@ export default {
         xs: "415px",
         lg2: "1180px",
       },
+      fontFamily: {
+        "sans-serif": "sans-serif",
+      },
       gridTemplateRows: {
         "8": "repeat(8, minmax(0, 1fr))",
       },
