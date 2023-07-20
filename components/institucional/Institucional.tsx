@@ -34,8 +34,8 @@ function FooterInstitucional({ footerLinks, footerBottom }: FooterProps) {
         </div>
       </div>
 
-      <div class="mt-[15px] py-[17px] border-b-[1px] border-t-[1px] border-solid border-[#eee]">
-        <div class="px-2 sm:px-4 mx-[30px] text-primary-content">
+      <div class="mt-[15px] py-[17px] border-b-[1px] border-t-[1px] border-solid border-[#eee] lg:mb-[94px]">
+        <div class="px-2 sm:px-4 mx-[30px] lg:mx-0 lg:flex lg:justify-center text-primary-content">
           {footerBottom && <Quilltext html={footerBottom} />}
         </div>
       </div>
