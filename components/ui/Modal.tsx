@@ -88,7 +88,8 @@ const Modal = ({
         dialogStyles[mode]
       } ${props.class ?? ""}`}
       onClick={(e) =>
-        (e.target as HTMLDialogElement).tagName === "SECTION" && onClose?.()}
+        (e.target as HTMLDialogElement).tagName === "SECTION" &&
+        handleCloseDialog()}
       onClose={handleCloseDialog}
     >
       <section
@@ -111,15 +112,18 @@ const Modal = ({
                   "order-2 lg:order-1 mx-auto"
                 }`}
               >
-                <span class="font-medium text-4xl">{title}</span>
+                <span class="font-medium text-4xl text-primary-content">
+                  {title}
+                </span>
               </h1>
             )}
             <Button
               class={`btn btn-ghost bg-transparent hover:bg-transparent h-auto min-h-0 w-[34px] p-0 ${
                 mode === "side-minicart"
-                  ? "order-1 lg:order-2 ml-0 lg:absolute lg:right-3 lg:top-1/2 lg:-translate-y-1/2"
+                  ? "order-1 lg:order-2 ml-0 lg:absolute lg:right-3 lg:top-1/2 lg:-translate-y-1/2 lg:pl-1 lg:pb-1"
                   : "ml-auto"
               }`}
+              title="Close dialog"
               onClick={handleCloseDialog}
             >
               <Icon

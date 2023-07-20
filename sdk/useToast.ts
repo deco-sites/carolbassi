@@ -12,14 +12,26 @@ interface ToastOptions {
 
 const toasts = signal<Toast[]>([]);
 
-const createToast = (message: string, options?: ToastOptions) => {
+const createToast = (
+  { message, options, openDelay = 0 }: {
+    message: string;
+    options?: ToastOptions;
+    openDelay?: number;
+  },
+) => {
   const toast: Toast = {
     id: Date.now().toString(),
     message,
     duration: options?.duration || 4000,
   };
 
-  toasts.value = [...toasts.value, toast];
+  const create = () => toasts.value = [...toasts.value, toast];
+
+  if (openDelay !== 0) {
+    setTimeout(create, openDelay);
+  } else {
+    create();
+  }
 };
 
 const removeToast = (id: string) => {

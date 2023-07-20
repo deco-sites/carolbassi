@@ -11,7 +11,7 @@ import type {
   Item as SkuVTEX,
   LegacyItem as LegacySkuVTEX,
 } from "deco-sites/std/packs/vtex/types.ts";
-import { useCallback, useEffect } from "preact/hooks";
+import { useCallback } from "preact/hooks";
 
 declare global {
   interface Window {
@@ -111,7 +111,7 @@ function CartItem({ index, realSku }: Props) {
           {item.additionalInfo.brandName}
         </span>
         <a
-          class="block text-primary text-base lg:text-[15px] font-semibold lg:font-normal lg:min-h-[39px] max-w-[209px]"
+          class="block text-primary-content text-base lg:text-[15px] font-semibold lg:font-normal lg:min-h-[39px] max-w-[209px]"
           href={detailUrl}
         >
           <span>{realSku?.productName || name}</span>
@@ -134,9 +134,10 @@ function CartItem({ index, realSku }: Props) {
               quantity={quantity}
               onChange={withLoading(async (_quantity) => {
                 if (_quantity > AvailableQuantity) {
-                  createToast(
-                    `A quantidade desejada para o item ${name} não está disponível`,
-                  );
+                  createToast({
+                    message:
+                      `A quantidade desejada para o item ${name} não está disponível`,
+                  });
                   return;
                 }
 
@@ -169,7 +170,7 @@ function CartItem({ index, realSku }: Props) {
               {formatPrice(listPrice / 100, currencyCode!, locale)}
             </span>
           )}
-          <span class="text-primary-content text-base">
+          <span class="text-primary-content text-base leading-[18px]">
             {isGift ? "Grátis" : formatPrice(
               (sellingPrice / 100) * quantity,
               currencyCode!,
