@@ -1,4 +1,5 @@
 import { asset } from "$fresh/runtime.ts";
+import Icon from "deco-sites/carolbassi/components/ui/Icon.tsx";
 import type { ComponentChildren } from "preact";
 
 interface Props {
@@ -6,13 +7,14 @@ interface Props {
   handleOpen: () => void;
   label: string;
   children: ComponentChildren;
+  _class?: string;
 }
 
-function Dropdown({ children, label, open, handleOpen }: Props) {
+function Dropdown({ children, label, open, handleOpen, _class = "" }: Props) {
   return (
-    <div class="relative">
+    <div class={`relative ${_class}`}>
       <button
-        class="text-lg text-primary-content cursor-pointer inline-block"
+        class="w-full sm:w-auto text-lg text-primary sm:text-primary-content cursor-pointer flex justify-between sm:inline-block"
         onClick={handleOpen}
       >
         {label}
@@ -21,17 +23,24 @@ function Dropdown({ children, label, open, handleOpen }: Props) {
           height={8}
           alt="Arrow indicator"
           src={asset("/arrow-carol.webp")}
-          class={`inline-block mx-4 transition-all duration-200 ease-in ${
+          class={`hidden sm:inline-block mx-4 transition-all duration-200 ease-in ${
             open && "rotate-180"
           }`}
+        />
+        <Icon
+          id="ChevronDown"
+          width={18}
+          height={18}
+          strokeWidth={1}
+          class={`block sm:hidden ${open && "rotate-180"}`}
         />
       </button>
 
       <div
-        class={`absolute z-30 top-[calc(100%+17px)] w-[183px] overflow-y-auto break-words bg-white pt-[11px] pb-[22px] px-5 transition-all duration-200 ease-linear ${
+        class={`sm:absolute z-30 top-[calc(100%+17px)] w-full sm:w-[183px] break-words bg-white transition-[max-height] duration-200 ease-linear pt-[14px] sm:pt-[11px] ${
           open
-            ? "visible max-h-[350px] py-[11px] px-5"
-            : "invisible pointer-events-none max-h-0 p-0"
+            ? "max-h-[350px] pb-[22px] px-5 overflow-y-auto"
+            : "pointer-events-none max-h-0 pb-0 px-5 overflow-y-hidden"
         }`}
       >
         {children}

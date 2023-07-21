@@ -76,14 +76,33 @@ function SearchControls(
 
       <Modal
         loading="lazy"
-        title="Filtrar"
+        title="Filtros"
         mode="sidebar-right"
         open={filterModalOpen.value}
         onClose={() => {
           filterModalOpen.value = false;
         }}
       >
-        <Filters filters={filters} />
+        <div class="flex flex-col h-full">
+          <div class="h-[calc(100%-125px)] overflow-y-auto">
+            <Filters filters={filters} />
+          </div>
+
+          <div class="flex flex-col mt-auto h-[125px] px-3 sm:hidden">
+            <button
+              class="bg-white text-primary border border-solid border-black h-[42px] mb-[7px]"
+              onClick={() => filterModalOpen.value = false}
+            >
+              Limpar Filtro
+            </button>
+            <button
+              class="bg-info text-primary h-[42px]"
+              onClick={() => filterModalOpen.value = false}
+            >
+              Filtrar
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

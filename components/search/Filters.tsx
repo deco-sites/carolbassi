@@ -24,13 +24,22 @@ function ValueItem(
     <a href={url} class="flex items-center gap-2">
       <div
         aria-checked={selected}
-        class={`absolute left-3 w-4 h-4 border border-solid border-black ${
+        class={`relative left-0 sm:absolute sm:left-3 w-3 h-3 sm:w-4 sm:h-4 border border-solid border-[#828282] sm:border-black ${
           selected && "bg-black text-white"
         }`}
       >
-        {selected && <Icon id="CheckMark" width={12} height={12} />}
+        {selected && (
+          <Icon
+            id="CheckMark"
+            width={12}
+            height={12}
+            class="absolute -left-[1px] -top-[2px] sm:relative sm:left-0 sm:top-1/2 sm:-translate-y-1/2"
+          />
+        )}
       </div>
-      <span class="ml-4 text-sm lowercase">{label}</span>
+      <span class="ml-[3px] sm:ml-4 text-primary-content text-base sm:text-sm uppercase sm:lowercase">
+        {label}
+      </span>
     </a>
   );
 }
@@ -40,7 +49,7 @@ function FilterValues({ key, values }: FilterToggle) {
   const showMore = useSignal(false);
 
   return (
-    <ul class={`flex flex-wrap gap-2 flex-col`}>
+    <ul class={`flex flex-wrap gap-[11px] sm:gap-2 flex-col`}>
       {firstValues.map((item) => {
         if (key === "price") {
           const range = parseRange(item.value);
@@ -93,12 +102,24 @@ function Filters({ filters }: Props) {
         .map((filter, index) =>
           filter.key !== "price" && (
             <Dropdown
+              _class={`transition-[height] duration-200 ease-linear px-3 ${
+                opens.value[index] ? "h-full sm:h-auto" : "h-[23px] sm:h-auto"
+              } py-3 sm:py-0`}
               key={filter.key}
               open={opens.value[index]}
               handleOpen={() => {
-                const newOpens = new Array(filters.length - 1).fill(false);
-                newOpens[index] = !opens.value[index];
-                opens.value = newOpens;
+                const isDesktop =
+                  window.matchMedia("(min-width: 640px)").matches;
+
+                if (isDesktop) {
+                  const newOpens = new Array(filters.length - 1).fill(false);
+                  newOpens[index] = !opens.value[index];
+                  opens.value = newOpens;
+                } else {
+                  const newOpens = [...opens.value];
+                  newOpens[index] = !opens.value[index];
+                  opens.value = newOpens;
+                }
               }}
               label={filter.label}
             >
