@@ -70,6 +70,7 @@ function ProductInfo(
   const characteristics = isVariantOf?.additionalProperty?.find((prop) =>
     prop.name === "Especificação"
   )?.value;
+  const showListPrice = price! < listPrice!;
 
   return (
     <>
@@ -91,6 +92,11 @@ function ProductInfo(
         ? (
           <div class="mt-2 px-1">
             <div class="flex flex-row gap-2 items-center">
+              {showListPrice && (
+                <span class="line-through text-primary-content text-lg">
+                  {formatPrice(listPrice, offers!.priceCurrency!)}
+                </span>
+              )}
               <span class="font-medium text-[26px] text-primary">
                 {formatPrice(price, offers!.priceCurrency!)}
               </span>
