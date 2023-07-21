@@ -39,7 +39,7 @@ const sectionStyles = {
 };
 
 const containerStyles = {
-  "sidebar-right": "h-full w-full lg:max-w-[400px]",
+  "sidebar-right": "h-full w-[85%] max-w-[400px]",
   "sidebar-left": "h-full w-full lg:max-w-[400px]",
   "side-minicart": "h-full w-[85%] max-w-[400px]",
   center: "",
@@ -57,20 +57,6 @@ const Modal = ({
   const lazy = useSignal(false);
   const ref = useRef<HTMLDialogElement>(null);
 
-  useEffect(() => {
-    if (open === false) {
-      document.getElementsByTagName("body").item(0)?.classList.remove(
-        "no-scroll",
-      );
-    } else if (open === true) {
-      document.getElementsByTagName("body").item(0)?.classList.add(
-        "no-scroll",
-      );
-      ref.current?.open === false && ref.current.showModal();
-      lazy.value = true;
-    }
-  }, [open]);
-
   const handleCloseDialog = () => {
     ref.current?.classList.add(dialogStyles[`${mode}-close`]);
     setTimeout(() => {
@@ -79,6 +65,21 @@ const Modal = ({
       ref.current?.close();
     }, 200);
   };
+
+  useEffect(() => {
+    if (open === false) {
+      document.getElementsByTagName("body").item(0)?.classList.remove(
+        "no-scroll",
+      );
+      handleCloseDialog();
+    } else if (open === true) {
+      document.getElementsByTagName("body").item(0)?.classList.add(
+        "no-scroll",
+      );
+      ref.current?.open === false && ref.current.showModal();
+      lazy.value = true;
+    }
+  }, [open]);
 
   return (
     <dialog
