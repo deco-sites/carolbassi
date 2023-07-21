@@ -67,6 +67,8 @@
               "deco-sites/std/loaders/vtex/user.ts",
               "deco-sites/std/loaders/vtex/wishlist.ts",
               "./islands/AddToCartButton.tsx",
+              "./islands/Dropdown.tsx",
+              "./islands/Filters.tsx",
               "./islands/GoCheckoutButton.tsx",
               "./islands/HeaderButton.tsx",
               "./islands/HeaderModals.tsx",
@@ -9883,6 +9885,11 @@
             },
             {
               "type": "string",
+              "const": "CheckMark",
+              "default": "CheckMark"
+            },
+            {
+              "type": "string",
               "const": "ArrowsPointingOut",
               "default": "ArrowsPointingOut"
             }
@@ -10138,6 +10145,11 @@
               "type": "string",
               "const": "OrderList",
               "default": "OrderList"
+            },
+            {
+              "type": "string",
+              "const": "CheckMark",
+              "default": "CheckMark"
             },
             {
               "type": "string",
@@ -10660,6 +10672,11 @@
                 },
                 {
                   "type": "string",
+                  "const": "CheckMark",
+                  "default": "CheckMark"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut",
                   "default": "ArrowsPointingOut"
                 }
@@ -10848,6 +10865,11 @@
                   "type": "string",
                   "const": "OrderList",
                   "default": "OrderList"
+                },
+                {
+                  "type": "string",
+                  "const": "CheckMark",
+                  "default": "CheckMark"
                 },
                 {
                   "type": "string",
@@ -11042,6 +11064,11 @@
                 },
                 {
                   "type": "string",
+                  "const": "CheckMark",
+                  "default": "CheckMark"
+                },
+                {
+                  "type": "string",
                   "const": "ArrowsPointingOut",
                   "default": "ArrowsPointingOut"
                 }
@@ -11230,6 +11257,11 @@
                   "type": "string",
                   "const": "OrderList",
                   "default": "OrderList"
+                },
+                {
+                  "type": "string",
+                  "const": "CheckMark",
+                  "default": "CheckMark"
                 },
                 {
                   "type": "string",
@@ -11922,23 +11954,6 @@
         "page": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductListingPage|null",
           "title": "Page"
-        },
-        "variant": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "aside",
-              "default": "aside"
-            },
-            {
-              "type": "string",
-              "const": "drawer",
-              "default": "drawer"
-            }
-          ],
-          "type": "string",
-          "description": "Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products",
-          "title": "Variant"
         },
         "columns": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0R2FsbGVyeS50c3g=@Columns",
@@ -14275,6 +14290,38 @@
         }
       }
     },
+    "Li9pc2xhbmRzL0Ryb3Bkb3duLnRzeA==": {
+      "title": "./islands/Dropdown.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/Dropdown.tsx"
+          ],
+          "default": "./islands/Dropdown.tsx"
+        }
+      }
+    },
+    "Li9pc2xhbmRzL0ZpbHRlcnMudHN4": {
+      "title": "./islands/Filters.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/Filters.tsx"
+          ],
+          "default": "./islands/Filters.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL0dvQ2hlY2tvdXRCdXR0b24udHN4": {
       "title": "./islands/GoCheckoutButton.tsx",
       "type": "object",
@@ -16356,6 +16403,12 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL0FkZFRvQ2FydEJ1dHRvbi50c3g="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL0Ryb3Bkb3duLnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL0ZpbHRlcnMudHN4"
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL0dvQ2hlY2tvdXRCdXR0b24udHN4"

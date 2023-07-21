@@ -1,6 +1,6 @@
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
-import Filters from "deco-sites/fashion/components/search/Filters.tsx";
+import Filters from "deco-sites/carolbassi/islands/Filters.tsx";
 import Sort from "deco-sites/fashion/components/search/Sort.tsx";
 import Modal from "deco-sites/fashion/components/ui/Modal.tsx";
 import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
@@ -11,12 +11,11 @@ import type { ProductListingPage } from "deco-sites/std/commerce/types.ts";
 type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
   & {
-    displayFilter?: boolean;
     records?: number;
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions, records }: Props,
+  { filters, breadcrumb, sortOptions, records }: Props,
 ) {
   const filterModalOpen = useSignal(false);
   const orderByModalOpen = useSignal(false);
@@ -37,9 +36,7 @@ function SearchControls(
 
       <div class="flex flex-row items-center justify-between sm:gap-4 sm:border-none">
         <Button
-          class={displayFilter
-            ? "btn-ghost"
-            : "bg-info hover:bg-info active:bg-info h-auto min-h-[31px] rounded-none text-sm font-normal text-primary w-[49%] flex gap-5 items-center capitalize justify-center sm:hidden"}
+          class={"bg-info hover:bg-info active:bg-info h-auto min-h-[31px] rounded-none text-sm font-normal text-primary w-[49%] flex gap-5 items-center capitalize justify-center sm:hidden"}
           onClick={() => {
             filterModalOpen.value = true;
           }}

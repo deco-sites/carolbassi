@@ -1,4 +1,4 @@
-import Filters from "deco-sites/fashion/components/search/Filters.tsx";
+import Filters from "deco-sites/carolbassi/islands/Filters.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import SearchControls from "deco-sites/fashion/islands/SearchControls.tsx";
 import { SendEventOnLoad } from "deco-sites/fashion/sdk/analytics.tsx";
@@ -12,10 +12,6 @@ import type { ProductListingPage } from "deco-sites/std/commerce/types.ts";
 export interface Props {
   page: LoaderReturnType<ProductListingPage | null>;
   /**
-   * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
-   */
-  variant?: "aside" | "drawer";
-  /**
    * @description Number of products per line on grid
    */
   columns: Columns;
@@ -23,7 +19,6 @@ export interface Props {
 
 function Result({
   page,
-  variant,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
 
@@ -35,19 +30,17 @@ function Result({
           filters={filters}
           breadcrumb={breadcrumb}
           records={pageInfo.records!}
-          displayFilter={variant === "drawer"}
         />
 
-        <div class="flex flex-row">
-          {variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
-            </aside>
-          )}
-          <div class="flex-grow">
-            <ProductGallery products={products} />
+        {filters.length > 0 && (
+          <div class="hidden sm:flex w-full mt-11 ml-1 mb-[30px]">
+            <h5 class="text-xl text-primary-content mr-5">Filtros</h5>
+
+            <Filters filters={filters} />
           </div>
-        </div>
+        )}
+
+        <ProductGallery products={products} />
 
         <div class="flex justify-center my-4">
           <div class="btn-group">
