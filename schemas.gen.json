@@ -11686,6 +11686,21 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
           "title": "Image"
         },
+        "secondaryContent": {
+          "type": "object",
+          "properties": {
+            "secondaryContent": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
+              "title": "Secondary Content"
+            },
+            "secondaryImage": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+              "title": "Secondary Image"
+            }
+          },
+          "required": [],
+          "title": "Secondary Content"
+        },
         "footerLinks": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9jYXJvbGJhc3NpL2NvbXBvbmVudHMvaW5zdGl0dWNpb25hbC9JbnN0aXR1Y2lvbmFsLnRzeA==@FooterLink[]",
           "title": "Footer Links"
@@ -11693,6 +11708,43 @@
         "footerBottom": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML",
           "title": "Footer Bottom"
+        },
+        "menuItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "link": {
+                "type": "string",
+                "title": "Link"
+              },
+              "itemName": {
+                "type": "string",
+                "title": "Item Name"
+              }
+            },
+            "required": [
+              "link",
+              "itemName"
+            ]
+          },
+          "title": "Menu Items"
+        },
+        "imageMobileLocation": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "Below Content",
+              "default": "Below Content"
+            },
+            {
+              "type": "string",
+              "const": "Above Content",
+              "default": "Above Content"
+            }
+          ],
+          "type": "string",
+          "title": "Image Mobile Location"
         }
       },
       "required": [],
